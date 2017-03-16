@@ -1,0 +1,547 @@
+<div class="app-head app-head--game app-head--game-top mdl-shadow--2dp mdl-cell mdl-cell--12-col">
+    <div profile-game player="player2"></div>
+</div>
+
+<div class="app-game__board app-game__board--{{ colorGame }} app-element mdl-shadow--2dp mdl-cell mdl-cell--12-col" game-to-png>
+    <div ng-repeat="number in numbers" class="app-game__row">
+        <div 
+            ng-repeat="letter in letters" 
+            ng-init="position = letter + number" 
+            ng-class="{'last-turn': isLastTurn(position), 'is-check': isCheck(position) }" 
+            id="{{position}}" 
+            class="app-game__box"
+            data-game-box>
+            <div class="app-game__box-content">
+                <span ng-if="game.pieces[position]" class="app-game__piece" piece-draggable data-position="{{ position }}">
+                    <img ng-src="../images/game-1/{{ game.pieces[position].name }}-{{ game.pieces[position].color }}.svg"
+                         class="app-game__piece-image app__no-drag">
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="app-head app-head--game app-head--game-bottom mdl-shadow--2dp mdl-cell mdl-cell--12-col">
+    <div profile-game player="player1"></div>
+</div>
+
+<div class="mdl-shadow--2dp mdl-cell mdl-cell--12-col" ng-if="isPlayer() && !game.finish">
+    <table class="app-table app-table--game app-table--game-actions">
+        <tbody>
+            <tr>
+                <td>
+                    <button ng-disabled="!possibleResign()"
+                            show-modal="#modal-resign" 
+                            class="app-button mdl-button mdl-js-button">
+                            {{ 'resign'|translate }}
+                    </button>
+                </td>
+                <td>
+                    <button ng-disabled="!possibleOfferDraw()"
+                            show-modal="#modal-offer-draw" 
+                            class="app-button mdl-button mdl-js-button">
+                            {{ 'offer_draw'|translate }}
+                    </button>
+                </td>
+                <td>
+                    <button ng-disabled="!possibleDraw()"
+                            show-modal="#modal-possible-draw" 
+                            class="app-button mdl-button mdl-js-button">
+                            {{ 'null'|translate }}
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div ng-if="game.played.length" 
+     class="app-game__played--phone mdl-shadow--2dp mdl-cell mdl-cell--12-col">
+    <div ng-if="game.finish"
+         class="app-game__played--phone-actions">
+        <button ng-disabled="turn.prev === null"
+                ng-click="replay(turn.prev)"
+                class="mdl-button mdl-js-button mdl-button--icon">
+            <i class="material-icons">chevron_left</i>
+        </button>
+        <button ng-disabled="turn.next === null"
+                ng-click="replay(turn.next)"
+                class="mdl-button mdl-js-button mdl-button--icon">
+            <i class="material-icons">chevron_right</i>
+        </button>
+    </div>
+    <div class="app-game__played--phone-notations"
+         ng-class="{'has-actions': game.finish}"
+         scroll-game="played"
+         scroll-game-active="lastTurn"
+         scroll-game-active-parent
+         scroll-game-direction="left">
+        <table class="app-table app-table--game app-table--game-played-phone mdl-data-table mdl-js-data-table">
+            <tbody>
+                    <tr>
+                        <td ng-repeat="play in played">
+                            {{ $index + 1 }}.
+                            <span class="app-game__played--phone-notation"
+                                  ng-class="{'is-active': lastTurn === play.white.index }"
+                                  ng-click="replay(play.white.index)"
+                                  data-scroll-game-active="{{ play.white.index }}">
+                                {{ play.white.notation }}
+                            </span>
+                            <span class="app-game__played--phone-notation"
+                                  ng-if="play.black" 
+                                  ng-click="replay(play.black.index)"
+                                  ng-class="{'is-active': lastTurn === play.black.index }"
+                                  data-scroll-game-active="{{ play.black.index }}">
+                                {{ play.black.notation }}
+                            </span>
+                        </td>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div ng-if="game" 
+     class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col">
+    <div class="app-game__infos">
+        <i class="app-icon material-icons">{{ game.type === 'blitz' ? 'flash_on' : 'timer' }}</i>
+        <span>{{ game.type | translate }}</span>
+        <i class="app-icon material-icons">schedule</i>
+        <span>{{ game.time / 60000 }} + {{ game.increment / 1000 }}</span>
+        <i ng-if="game.finish" class="app-icon material-icons">games</i>
+        <span ng-if="game.finish">{{ game.result.print }}</span>
+        <span ng-if="game.finish">({{ game.result.name | translate }})</span>
+        <i class="app-icon material-icons">today</i>
+        <span>{{ game.startTime|localeDateTime }}</span>
+        <div ng-if="game.finish" 
+             class="app-game__played-actions">
+            <button ng-disabled="turn.first === null"
+                    ng-click="replay(turn.first)"
+                    class="mdl-button mdl-js-button mdl-button--icon">
+                <i class="material-icons">first_page</i>
+            </button>
+            <button ng-disabled="turn.prev === null"
+                    ng-click="replay(turn.prev)"
+                    class="mdl-button mdl-js-button mdl-button--icon">
+                <i class="material-icons">chevron_left</i>
+            </button>
+            <button ng-disabled="turn.next === null"
+                    ng-click="replay(turn.next)"
+                    class="mdl-button mdl-js-button mdl-button--icon">
+                <i class="material-icons">chevron_right</i>
+            </button>
+            <button ng-disabled="turn.last === null"
+                    ng-click="replay(turn.last)"
+                    class="mdl-button mdl-js-button mdl-button--icon">
+                <i class="material-icons">last_page</i>
+            </button>
+        </div>
+    </div>
+    <table class="app-table app-table--game app-table--game-stats mdl-data-table mdl-js-data-table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>{{ 'win' | translate }}</th>
+                <th>{{ 'draw' | translate }}</th>
+                <th>{{ 'lose'|translate }}</th>
+                <th>%</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td ng-class="{'app-text__bold app-text__selected': game.result.value === 1}">{{ 'white' | translate }}</td>
+                <td ng-class="{'app-text__bold app-text__positive': game.result.value === 1}">{{ getPoints(game.white, game.black, 1) | relativeNumber }}</td>
+                <td ng-class="{'app-text__bold': game.result.value === 0}">{{ getPoints(game.white, game.black, 0.5) | relativeNumber }}</td>
+                <td ng-class="{'app-text__bold app-text__negative': game.result.value === 2}">{{ getPoints(game.white, game.black, 0) | relativeNumber }}</td>
+                <td ng-init="percentage = getPercentage(game.white, game.black)">{{ percentage }}%</td>
+            </tr>
+            <tr>
+                <td ng-class="{'app-text__bold app-text__selected': game.result.value === 2}">{{ 'black' | translate }}</td>
+                <td ng-class="{'app-text__bold app-text__positive': game.result.value === 2}">{{ getPoints(game.black, game.white, 1) | relativeNumber }}</td>
+                <td ng-class="{'app-text__bold': game.result.value === 0}">{{ getPoints(game.black, game.white, 0.5) | relativeNumber }}</td>
+                <td ng-class="{'app-text__bold app-text__negative': game.result.value === 1}">{{ getPoints(game.black, game.white, 0) | relativeNumber }}</td>
+                <td>{{ 100 - percentage }}%</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="app-game__toggle app-game__toggle--played mdl-shadow--2dp" 
+     ng-class="{'show' : showPlayed || showPlayedPhone }">
+    <div class="app-game__toggle-head"
+         ng-click="togglePlayed()">
+        
+        <i class="app-game__toggle-icon app-game__toggle-icon--description material-icons">description</i> 
+        <i class="app-game__toggle-icon app-game__toggle-icon--action material-icons">
+            {{ showPlayed ? 'keyboard_arrow_down' : 'keyboard_arrow_up'}}
+        </i>
+
+        <table class="app-table app-table--game app-table--game-played mdl-data-table mdl-js-data-table">
+            <thead>
+                <tr>
+                    <th class="app-table--game-played-index"></th>
+                    <th class="app-table--game-played-white">{{ 'white'|translate }}</th>
+                    <th class="app-table--game-played-black">{{ 'black'|translate }}</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="app-game__toggle-content"
+         ng-class="{'app-game__toggle-content--actions': game.finish }"
+         ng-show="showPlayed"
+         scroll-game="played"
+         scroll-game-active="lastTurn"
+         scroll-game-show="showPlayed">
+        <table class="app-table app-table--game app-table--game-played mdl-data-table mdl-js-data-table">
+            <tbody>
+                <tr ng-repeat="play in played">
+                    <td class="app-table--game-played-index">{{ $index + 1 }}</td>
+                    <td class="app-table--game-played-notation app-table--game-played-white"
+                        ng-class="{'app__clickable': game.finish, 'is-active': lastTurn === play.white.index }"
+                        ng-click="replay(play.white.index)"
+                        data-scroll-game-active="{{ play.white.index }}">
+                        {{ play.white.notation }}
+                    </td>
+                    <td class="app-table--game-played-time app-table--game-played-white"
+                        ng-class="{'app__clickable': game.finish, 'is-active': lastTurn === play.white.index }"
+                        ng-click="replay(play.white.index)">
+                        {{ play.white.time }}'
+                    </td>
+                    <td class="app-table--game-played-notation app-table--game-played-black" 
+                        ng-class="{'app__clickable': game.finish, 'is-active': lastTurn === play.black.index }"
+                        ng-click="replay(play.black.index)"
+                        data-scroll-game-active="{{ play.black.index }}">
+                        <span ng-if="play.black.notation">{{ play.black.notation }}</span>
+                    </td>
+                    <td class="app-table--game-played-time app-table--game-played-black"
+                        ng-class="{'app__clickable': game.finish, 'is-active': lastTurn === play.black.index }"
+                        ng-click="replay(play.black.index)">
+                        <span ng-if="play.black.time">{{ play.black.time }}'</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div ng-if="game.finish" class="app-game__toggle--played-actions">
+            <button ng-disabled="turn.first === null"
+                    ng-click="replay(turn.first)"
+                    class="mdl-button mdl-js-button mdl-button--icon">
+                <i class="material-icons">first_page</i>
+            </button>
+            <button ng-disabled="turn.prev === null"
+                    ng-click="replay(turn.prev)"
+                    class="mdl-button mdl-js-button mdl-button--icon">
+                <i class="material-icons">chevron_left</i>
+            </button>
+            <button ng-disabled="turn.next === null"
+                    ng-click="replay(turn.next)"
+                    class="mdl-button mdl-js-button mdl-button--icon">
+                <i class="material-icons">chevron_right</i>
+            </button>
+            <button ng-disabled="turn.last === null"
+                    ng-click="replay(turn.last)"
+                    class="mdl-button mdl-js-button mdl-button--icon">
+                <i class="material-icons">last_page</i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div ng-hide="game.archived" 
+     class="app-game__toggle app-game__toggle--messages mdl-shadow--2dp" 
+     ng-class="{'show' :  showMessages || showMessagesPhone }">
+    <div class="app-game__toggle-head app-game__toggle-head--messages"
+         ng-click="toggleMessages()">
+        
+        <span class="app-game__toggle-icon app-game__toggle-icon--description">
+            <i class="material-icons">chat</i>
+            <span class="app-game__toggle-count" ng-if="unreadMessages">{{ unreadMessages }}</span>
+        </span>
+        <i class="app-game__toggle-icon app-game__toggle-icon--action material-icons">
+            {{ showMessages ? 'keyboard_arrow_down' : 'keyboard_arrow_up'}}
+        </i>
+    </div>
+    <div class="app-game__toggle-content app-game__toggle-content--messages"
+         ng-show="showMessages"
+         scroll-game="messages"
+         scroll-game-show="showMessages">
+         <div ng-repeat="message in messages" class="app-game__messages">
+            <div class="app-game__message" ng-class="{'app-game__message--user': message.uid === user.uid, 'app-game__message--next': message.uid === messages[$index - 1].uid }">
+                <div class="app-game__message-avatar">
+                    <img avatar ng-src="{{ message.avatar }}">
+                </div>
+                <div class="app-game__message-content">
+                    <div class="app-game__message-message">{{ message.message }}</div>
+                    <div class="app-game__message-infos">{{ message.name }} {{ getLocaleTime(message.time) }}</div>
+                </div>
+            </div>
+         </div>
+    </div>
+    <form ng-submit="sendMessage()" ng-show="showMessages">
+         <div class="app-game__toggle-textfield">
+            <input placeholder="..." ng-model="message">
+        </div>
+    </form>
+</div>
+
+<div class="app-game__toggle app-game__toggle--phone mdl-shadow--2dp" 
+     ng-hide="showMessagesPhone || showPlayedPhone"
+     ng-class="{'app-game__toggle--phone-archived': game.archived }">
+    <div class="app-game__toggle-head app-game__toggle-head--phone">
+        <div ng-hide="game.archived" class="app-game__toggle-icon--phone" ng-click="toggleMessages(true)">
+            <i class="app-game__toggle-icon material-icons">chat</i>
+            <span class="app-game__toggle-count" ng-if="unreadMessages">{{ unreadMessages }}</span>
+        </div>
+        <div class="app-game__toggle-icon--phone" ng-click="togglePlayed(true)">
+            <i class="app-game__toggle-icon material-icons">description</i>
+        </div>
+        <div class="app-game__toggle-icon--phone" ng-hide="user.gid" show-modal="#modal-create-game">
+            <i class="app-game__toggle-icon material-icons">games</i>
+        </div>
+        <div ng-if="game.finish" show-modal="#modal-finish-game" class="app-game__toggle-icon--phone">
+            <i class="app-game__toggle-icon material-icons">flag</i>
+        </div>
+        <div ng-if="!game.finish" ng-click="setSound()" class="app-game__toggle-icon--phone">
+            <i class="app-game__toggle-icon material-icons">{{ sound ? 'volume_up' : 'volume_off'}}</i>
+        </div>
+        <div class="app-game__toggle-icon--phone" ng-class="{'is-active': showColors}" data-colors-game>
+            <div ng-repeat="color in colorsGame"
+                 class="app-game__toggle-icon--color"
+                 ng-click="setColorGame(color)">
+                <span class="app-button app-button--color app-button--color-{{ color }}"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="app-button__fixed app-button__fixed--more app-button__fixed--game app-button__fixed--color"
+     ng-class="{'is-active': showColors}"
+     ng-hide="hideFixedButton"
+     data-colors-game>
+    <button type="button"
+            ng-repeat="color in colorsGame"
+            ng-click="setColorGame(color)"
+            ng-class="{'app-button--show': !$index }"
+            class="app-button app-button--color app-button--color-{{ color }} mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+    </button>
+</div>
+
+<div ng-hide="hideFixedButton"
+     class="app-button__fixed app-button__fixed--game app-button__fixed--action">
+    <button class="app-button app-button--show mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"
+            ng-hide="game.finish"
+            ng-click="setSound();">
+        <i class="material-icons">{{ sound ? 'volume_up' : 'volume_off'}}</i>
+    </button>
+    <button class="app-button app-button--show mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"
+            ng-hide="!game.finish"
+            show-modal="#modal-finish-game">
+        <i class="material-icons">flag</i>
+    </button>
+</div>
+
+<div ng-if="isPlayer()">
+    <div id="modal-response-draw" 
+         class="app-modal app-modal--game app-modal__bg" 
+         role="dialog" 
+         aria-hidden="true"
+         modal-game
+         data-modal
+         modal-close-bg>
+        <div class="app-modal__dialog">
+            <div class="app-modal__content">
+                <h4 class="app-modal__title">{{ player2.name }} {{ 'offers_a_draw'|translate }}</h4>
+                <div class="app-modal__actions">
+                    <button modal-close 
+                            type="reset" 
+                            class="mdl-button mdl-button--raised">
+                            {{ 'cancel'|translate }}
+                    </button>
+                    <button modal-close 
+                            ng-click="acceptDraw()"
+                            type="button" 
+                            class="mdl-button mdl-button--raised mdl-button--colored">
+                            {{ 'ok'|translate }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-possible-draw"
+         class="app-modal app-modal--game app-modal__bg" 
+         role="dialog" 
+         aria-hidden="true"
+         modal-game
+         data-modal
+         modal-close-bg>
+        <div class="app-modal__dialog">
+            <div class="app-modal__content">
+                <h4 class="app-modal__title">{{ 'draw'|translate }} ?</h4>
+                <div class="app-modal__actions">
+                    <button modal-close 
+                            type="reset" 
+                            class="mdl-button mdl-button--raised">
+                            {{ 'cancel'|translate }}
+                    </button>
+                    <button modal-close 
+                            ng-click="acceptDraw()"
+                            type="button" 
+                            class="mdl-button mdl-button--raised mdl-button--colored">
+                            {{ 'ok'|translate }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-offer-draw" 
+         class="app-modal app-modal--game app-modal__bg" 
+         role="dialog" 
+         aria-hidden="true"
+         modal-game
+         data-modal
+         modal-close-bg>
+        <div class="app-modal__dialog">
+            <div class="app-modal__content">
+                <h4 class="app-modal__title">{{ 'offer_draw'|translate }} ?</h4>
+                <div class="app-modal__actions">
+                    <button modal-close 
+                            type="reset" 
+                            class="mdl-button mdl-button--raised">
+                            {{ 'cancel'|translate }}
+                    </button>
+                    <button modal-close 
+                            ng-click="offerDraw()"
+                            type="button" 
+                            class="mdl-button mdl-button--raised mdl-button--colored">
+                            {{ 'ok'|translate }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-resign" 
+         class="app-modal app-modal--game app-modal__bg" 
+         role="dialog" 
+         aria-hidden="true"
+         modal-game
+         data-modal
+         modal-close-bg>
+        <div class="app-modal__dialog">
+            <div class="app-modal__content">
+                <h4 class="app-modal__title">{{ 'resign'|translate }} ?</h4>
+                <div class="app-modal__actions">
+                    <button modal-close 
+                            type="reset" 
+                            class="mdl-button mdl-button--raised">
+                            {{ 'cancel'|translate }}
+                    </button>
+                    <button modal-close 
+                            ng-click="resign()" 
+                            type="button" 
+                            class="mdl-button mdl-button--raised mdl-button--colored">
+                            {{ 'ok'|translate }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-promotion" 
+         class="app-modal app-modal--game app-modal__bg"
+         role="dialog" 
+         aria-hidden="true"
+         modal-game
+         data-modal>
+        <div class="app-modal__dialog">
+            <div class="app-modal__content">
+                <div class="app-promotion__icon"
+                     ng-repeat="piece in ['queen', 'rook', 'knight', 'bishop']">
+                    <div class="app-game__box-content">
+                        <a href 
+                           class="app-game__icon app-game__icon--{{ piece }}" 
+                           modal-close 
+                           data-icon="{{ piece }}">
+                           <img ng-src="../images/game-1/{{ piece }}-{{ getPlayerColor() }}.svg"
+                             class="app-game__piece-image">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal-finish-game" 
+     class="app-modal app-modal__bg"
+     role="dialog" 
+     aria-hidden="true"
+     data-modal
+     modal-close-bg>
+    <div class="app-modal__dialog app-modal__dialog--head">
+        <a href modal-close class="app-modal__close">
+            <i class="material-icons">clear</i>
+        </a>
+        <div class="app-modal__head">{{ 'game_over'|translate }}</div>
+        <div class="app-modal__content app__text-center">
+
+            <div ng-if="game.finish">
+                <div class="app-modal__title">{{ game.result.name|translate }}</div>
+
+                <div class="app-game__result mdl-grid">
+                    <div class="app-game__result-color app-game__result-color--white">
+                        <div class="app-game__result-player">
+                            <span class="app-game__result-name">{{ game.white.name }}</span>
+                        </div>
+                        <div class="app-game__result-icon" ng-class="{'is-winner': game.white.isWinner}">
+                            <i ng-if="game.white.isWinner" class="material-icons">star</i>
+                            <img src="../images/game-1/queen-white.svg">
+                            <i ng-if="game.white.isWinner" class="material-icons">star</i>
+                        </div>
+                        <div class="app-game__result-points">
+                            {{ game.white.points }} 
+                            <span class="app-game__result-points-add"
+                                  ng-class="{'app-text__positive': game.white.resultPoints > 0, 'app-text__negative': game.white.resultPoints < 0 }">
+                                {{ game.white.resultPoints | relativeNumber }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="app-game__result-color app-game__result-color--black">
+                        <div class="app-game__result-player">
+                            <span class="app-game__result-name">{{ game.black.name }}</span>
+                        </div>
+                        <div class="app-game__result-icon" ng-class="{'is-winner': game.black.isWinner}">
+                            <i ng-if="game.black.isWinner" class="material-icons">star</i>
+                            <img src="../images/game-1/queen-black.svg">
+                            <i ng-if="game.black.isWinner" class="material-icons">star</i>
+                        </div>
+                        <div class="app-game__result-points">
+                            {{ game.black.points }}
+                            <span class="app-game__result-points-add"
+                                  ng-class="{'app-text__positive': game.black.resultPoints > 0, 'app-text__negative': game.black.resultPoints < 0 }">
+                                {{ game.black.resultPoints | relativeNumber }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div share="shareResultData"></div>
+            </div>
+
+            <div class="app-game__result-link">
+                <button modal-close
+                        ng-if="!game.archived && isPlayer()"
+                        ng-click="rematch()"
+                        class="app-button mdl-button mdl-button--colored mdl-button--raised mdl-js-button mdl-js-ripple-effect">
+                    {{ 'rematch' | translate }}
+                </button>
+                <button modal-close show-modal="#modal-create-game"
+                        class="app-button mdl-button mdl-button--colored mdl-button--raised mdl-js-button mdl-js-ripple-effect">
+                    {{ 'create_game' | translate }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

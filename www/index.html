@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
+    
+    <link rel="shortcut icon" href="/images/favicon.ico">
+
+    <link href="css/material/material.min.css" rel="stylesheet">
+    <link href="css/material/icon.css" rel="stylesheet" >
+    <link href="css/style.css" rel="stylesheet">
+    <link ng-if="lang === 'ar'" href="css/style-ar.css" rel="stylesheet">
+
+    <title>Hello World</title>
+</head>
+
+<body>
+    <div ng-show="loading" class="app-loading">
+        <div ng-hide="disconnectMultiSocket || unauthorized" class="app-loader mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+        <i ng-show="disconnectMultiSocket" 
+            ng-click="reconnect()"
+            ng-bind="'play_arrow'"
+            class="app__clickable app__action material-icons">
+        </i>
+        <i ng-show="unauthorized"
+           ng-bind="'remove_circle'" 
+           class="app__action material-icons">
+        </i>
+    </div>
+
+    <div id="modal-connect" 
+         class="app-modal app-modal--login app-modal__bg" 
+         role="dialog" 
+         aria-hidden="true">
+        <div class="app-modal__content">
+            <div class="app-modal__logo">
+                <span class="app-logo">
+                    <span class="app-logo__icon"></span>
+                    <span class="app-logo__text" ng-bind="'name'|translate"></span>
+                </span>
+            </div>
+            <div class="app-login__content-button">
+                <button class="app-login__button app-login__button--facebook" ng-click="facebookLogin()">
+                    {{ 'login_with_facebook' | translate }}
+                </button>
+            </div>
+            <div class="app-login__content-button">
+                <button class="app-login__button app-login__button--google" ng-click="googleLogin()">
+                    {{ 'login_with_google' | translate }}
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-container"></div>
+
+    <div class="app-layout mdl-layout mdl-js-layout mdl-layout--fixed-header" 
+         ng-show="!loading" 
+         ng-class="{'is-user-game': user.gid, 'is-game': isGame, 'is-toggle': isToggle }"
+         data-layout>
+         
+        <header class="app-header mdl-layout__header">
+            <div class="app-header__row mdl-layout__header-row">
+                <a href="/" class="app-title app-logo">
+                    <span class="app-logo__icon"></span>
+                    <span class="app-logo__text" ng-bind="'name'|translate"></span>
+                </a>
+
+                <!-- Add spacer, to align navigation to the right in desktop -->
+                <div class="app-header-spacer mdl-layout-spacer"></div>
+          
+                <!-- Navigation -->
+                <div class="app-navigation__container">
+                    <nav class="app-navigation mdl-navigation">
+                        <a class="app-navigation__link mdl-navigation__link mdl-typography--text-uppercase"
+                           ng-class="{'selected': currentRoute === 'home'}"
+                           href="/"
+                           ng-bind="'home'|translate">
+                        </a>
+                        <a class="app-navigation__link mdl-navigation__link mdl-typography--text-uppercase"
+                           ng-class="{'selected': currentRoute === 'ranking'}"
+                           href="/ranking"
+                           ng-bind="'ranking'|translate">
+                        </a>
+                        <a class="app-navigation__link mdl-navigation__link mdl-typography--text-uppercase"
+                           ng-class="{'selected': currentRoute === 'trophies'}"
+                           href="/trophies"
+                           ng-bind="'trophies.title'|translate">
+                        </a>
+                        <a ng-if="challenges.length"
+                           class="app-navigation__link mdl-navigation__link"
+                           show-modal="#modal-challenges"
+                           title="{{ 'challenges' | translate }}"
+                           href>
+                            <i class="app-icon material-icons"
+                               ng-class="{'app-badge mdl-badge mdl-badge--overlap': !!challenges.length}"
+                               data-badge="{{ challenges.length }}">games</i>
+                        </a>
+                        <div class="app-header-spacer app-header-spacer--1024 mdl-layout-spacer"></div>
+                        <button type="button"
+                                class="app-button app-button--create-game mdl-button"
+                                ng-hide="user.gid"
+                                show-modal="#modal-create-game">
+                            {{ 'create_game' | translate }}
+                        </button>
+                        <a ng-href="/profile/{{ user.uid }}"
+                           class="app-navigation__profile">
+                            <div class="app-navigation__profile-infos app-navigation__profile-infos--blitz"
+                                 title="{{ 'blitz'|translate }}">
+                                <i class="app-icon material-icons">flash_on</i>
+                                <span class="app-navigation__profile-infos-points">
+                                    {{ user.blitz.points }}
+                                </span>
+                            </div>
+                            <div class="app-navigation__profile-infos" 
+                                 title="{{ 'rapid'|translate }}">
+                                <i class="app-icon material-icons">timer</i>
+                                <span class="app-navigation__profile-infos-points">
+                                    {{ user.rapid.points }}
+                                </span>
+                            </div>
+                            <div class="app-navigation__profile-avatar">
+                                <img avatar
+                                     class="app-avatar app-avatar--navigation" 
+                                     ng-src="{{ user.avatar }}">
+                            </div>
+                        </a>
+                    </nav>
+                </div>
+                <div class="app-header__mobile">
+                    <span class="app-mobile__title mdl-layout-title">
+                        <span class="app-logo__text" ng-bind="title|translate"></span>
+                    </span>
+                    <a ng-if="challenges.length"
+                       class="app-header__mobile-link"
+                       show-modal="#modal-challenges"
+                       title="{{ 'challenges' | translate }}"
+                       href>
+                        <i class="app-icon material-icons"
+                           ng-class="{'app-badge mdl-badge mdl-badge--overlap': !!challenges.length}"
+                           data-badge="{{ challenges.length }}">games</i>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <div class="app-drawer mdl-layout__drawer">
+            <span class="app-layout-title mdl-layout-title">
+                <a ng-href="/profile/{{ user.uid }}"
+                   ng-click="closeDrawer()"
+                   class="app-navigation__profile">
+                    <div class="app-navigation__profile-user">
+                        <img avatar
+                            class="app-avatar app-avatar--navigation" 
+                            ng-src="{{ user.avatar }}">
+                        <span class="app-navigation__profile-name">
+                            {{ user.name }}
+                        </span>
+                    </div>
+                    <div class="app-navigation__profile-infos app-navigation__profile-infos--blitz"
+                         title="{{ 'blitz'|translate }}">
+                        <i class="app-icon material-icons">flash_on</i>
+                        <span class="app-navigation__profile-infos-points">
+                            {{ user.blitz.points }}
+                        </span>
+                    </div>
+                    <div class="app-navigation__profile-infos" 
+                         title="{{ 'points'|translate }} ({{ 'rapid'|translate }})">
+                        <i class="app-icon material-icons">timer</i>
+                        <span class="app-navigation__profile-infos-points">
+                            {{ user.rapid.points }}
+                        </span>
+                    </div>
+                </a>
+            </span>
+            <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" 
+                   href="/" 
+                   ng-click="closeDrawer()">
+                    <i class="material-icons" role="presentation">home</i>
+                    {{ 'home' | translate }}
+                </a>
+                <a class="mdl-navigation__link" 
+                   href="/ranking"
+                   ng-click="closeDrawer()">
+                    <i class="material-icons" role="presentation">looks_one</i>
+                    {{ 'ranking' | translate }}
+                </a>
+                <a class="mdl-navigation__link" 
+                   href="/trophies"
+                   ng-click="closeDrawer()">
+                    <i class="material-icons" role="presentation">star</i>
+                    {{ 'trophies.title' | translate }}
+                </a>
+                <a class="mdl-navigation__link" 
+                   href
+                   ng-click="closeDrawer()"
+                   show-modal="#modal-create-game">
+                    <i class="material-icons">games</i>
+                    {{ 'create_game' | translate }}
+                </a>
+                <a class="mdl-navigation__link" 
+                   href
+                   ng-click="closeDrawer()"
+                   show-modal="#modal-settings">
+                    <i class="material-icons">settings</i>
+                    {{ 'settings' | translate }}
+                </a>
+                <a class="mdl-navigation__link" 
+                   href
+                   ng-click="closeDrawer(); inviteFriends()">
+                    <i class="material-icons">person_add</i>
+                    {{ 'invite' | translate }}
+                </a>
+                <a class="mdl-navigation__link" 
+                   href
+                   ng-if="!isFacebookApp"
+                   ng-click="closeDrawer(); logout()">
+                    <i class="material-icons" role="presentation">power_settings_new</i>
+                    {{ 'logout' | translate }}
+                </a>
+            </nav>
+        </div>
+
+        <div class="app-content mdl-layout__content">
+            <a name="top"></a>
+            <div class="app-grid mdl-grid" ng-if="ready" ng-view></div>
+            <footer class="app-footer">
+                <a id="fanpage" href="https://www.facebook.com/ChessCommunity" target="_blank">{{ 'fanpage' | translate }}</a>
+            </footer>
+        </div>
+
+        <div class="app-button__fixed app-button__fixed--more app-button__fixed--desktop" 
+             ng-hide="isGame"
+             ng-class="{'app-button__fixed--pagination': pages, 'is-active': showMore }">
+             <button show-button 
+                    type="button"
+                    ng-click="showMore = true"
+                    class="app-button app-button--show mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+                <i class="material-icons">add</i>
+            </button>
+            <button type="button"
+                    class="app-button mdl-button mdl-js-button mdl-button--fab"
+                    show-modal="#modal-create-game">
+                <i class="material-icons">games</i>
+            </button>
+            <button type="button"
+                    class="app-button mdl-button mdl-js-button mdl-button--fab"
+                    show-modal="#modal-settings">
+                <i class="material-icons">settings</i>
+            </button>
+            <button type="button"
+                    class="app-button mdl-button mdl-js-button mdl-button--fab"
+                    ng-click="inviteFriends()">
+                <i class="material-icons">person_add</i>
+            </button>
+            <button type="button"
+                    class="app-button mdl-button mdl-js-button mdl-button--fab"
+                    ng-if="!isFacebookApp"
+                    ng-click="logout()">
+                <i class="material-icons">power_settings_new</i>
+            </button>
+            <button hide-button 
+                    type="button"
+                    ng-click="showMore = false"
+                    class="app-button app-button--hide mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+                <i class="material-icons">clear</i>
+            </button>
+        </div>
+
+        <div class="app-button__fixed app-button__fixed--mobile" 
+             ng-hide="isGame"
+             ng-class="{'app-button__fixed--pagination': pages}">
+            <button class="app-button app-button--show mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"
+                    show-modal="#modal-create-game">
+                <i class="material-icons">games</i>
+            </button>
+        </div>
+
+        <div class="app-pagination app-pagination--fixed" pagination></div>
+
+        <modal-challenges></modal-challenges>
+        <modal-settings></modal-settings>
+        <modal-profile></modal-profile>
+        <modal-trophy></modal-trophy>
+        <modal-create-game></modal-create-game>
+    </div>
+
+    <div id="fb-root"></div>
+
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="lib/jquery.min.js"></script>
+    <script src="lib/jquery-ui.min.js"></script>
+    <script src="lib/progress-bar.min.js"></script>
+    <script src="lib/material.min.js"></script>
+    <script src="lib/angular.min.js"></script>
+    <script src="lib/angular-route.min.js"></script>
+    <script src="lib/angular-cookies.min.js"></script>
+    <script src="lib/html2image.min.js"></script>
+
+    <script src="cordova.js"></script>
+
+    <script src="app/app.js"></script>
+
+    <script src="socket.io/socket.io.js"></script>
+
+    <script src="chess.js"></script>
+    <script src="utils.js"></script>
+
+    <script src="app/app.js"></script>
+
+    <script src="app/global/global.module.js"></script>
+
+    <script src="app/facebook/facebook.module.js"></script>
+
+    <script src="app/google/google.module.js"></script>
+
+    <script src="app/components/components.module.js"></script>
+    <script src="app/components/components.services.js"></script>
+    <script src="app/components/components.directives.js"></script>
+
+    <script src="app/game/game.module.js"></script>
+    <script src="app/game/game.controllers.js"></script>
+    <script src="app/game/game.directives.js"></script>
+
+    <script src="app/home/home.module.js"></script>
+    <script src="app/home/home.controllers.js"></script>
+
+    <script src="app/ranking/ranking.module.js"></script>
+    <script src="app/ranking/ranking.controllers.js"></script>
+
+    <script src="app/trophies/trophies.module.js"></script>
+    <script src="app/trophies/trophies.controllers.js"></script>
+
+    <script src="app/profile/profile.module.js"></script>
+    <script src="app/profile/profile.controllers.js"></script>
+
+    <script type="text/javascript">
+        document.addEventListener('deviceready', function() {
+            angular.bootstrap(document, ['app']);
+        }, false);
+    </script>
+</body>
+
+</html>

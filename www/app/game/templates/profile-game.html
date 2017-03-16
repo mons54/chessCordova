@@ -1,0 +1,55 @@
+<div class="app-profile app-profile--game element">
+    <div class="app-game__timer">
+        <div class="app-game__time" 
+             ng-class="{'app-game__time--danger': isPlayerTurn(player) && player.time < 10000, 'app-game__time--turn': isPlayerTurn(player) }">
+            {{ formatTime(player.time) }}
+        </div>
+        <div ng-if="!game.finish"
+             class="app-game__time app-game__time-turn"
+             ng-class="{'app-game__time--danger': isPlayerTurn(player) && player.timeTurn < 10000, 'app-game__time--turn': isPlayerTurn(player)}">
+            {{ formatTime(player.timeTurn) }}
+        </div>
+    </div>
+
+    <div ng-class="{'app-profile__show-pieces': hasLostPieces(player.lostPieces) }">
+        <div class="app-game__player-avatar">
+            <a show-profile="player.uid" href>
+                <i ng-if="player.isWinner" class="app-icon app-icon--star material-icons">star</i>
+                <img avatar 
+                     class="app-avatar app-profile__avatar" 
+                     ng-src="{{ player.avatar }}">
+                <i ng-if="player.isWinner" class="app-icon app-icon--star material-icons">star</i>
+            </a>
+        </div>
+        <div class="app-profile__name">
+            <i ng-if="player.isWinner" class="app-icon app-icon--star material-icons">star</i>
+            <a href show-profile="player.uid">{{ player.name }}</a>
+            <i ng-if="player.isWinner" class="app-icon app-icon--star material-icons">star</i>
+            <span ng-if="player.resultPoints"
+                  class="app-profile--game-points"
+                  ng-class="{'app-text__positive': player.resultPoints > 0, 'app-text__negative': player.resultPoints < 0 }">
+                {{ player.resultPoints | relativeNumber }}
+            </span>
+        </div>
+        <div class="app-profile__info app-profile__info--blitz" title="{{ 'blitz'|translate }}">
+            <i class="app-icon material-icons">flash_on</i>
+            <div class="app-profile__info-content app-profile__info-content--points" title="{{ 'points'|translate }} ({{ 'blitz'|translate }})">
+                {{ player.points }}
+            </div>
+            <div class="app-profile__info-content app-profile__info-content--ranking" title="{{ 'ranking'|translate }} ({{ 'blitz'|translate }})">
+                <i class="app-icon material-icons">equalizer</i>
+                {{ player.ranking | number }}
+            </div>
+        </div>
+        <div class="app-game__lost-pieces">
+            <span ng-repeat="(name, number) in player.lostPieces"
+                  class="app-game__lost-pieces-group app-game__lost-pieces-group--{{ name }}">
+                <span ng-if="number > 0"
+                      ng-repeat="i in getLostPieces(number)"
+                      class="app-game__lost-piece">
+                    <img ng-src="../images/game-1/{{ name }}-{{ player.color }}.svg">
+                </span>
+            </span>
+        </div>
+    </div>
+</div>
