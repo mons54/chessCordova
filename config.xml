@@ -101,4 +101,7 @@
     <plugin name="com.a42.cordova.googleplaygame" spec="https://github.com/ptgamr/cordova-google-play-game.git">
         <variable name="APP_ID" value="241448993510-5860ln6qoa9a1iov1t3j6uirsvhlerbb.apps.googleusercontent.com" />
     </plugin>
+    <plugin name="cordova-android-support-v4" spec="~4.0.0">
+        <variable name="APP_ID" value="241448993510-5860ln6qoa9a1iov1t3j6uirsvhlerbb.apps.googleusercontent.com" />
+    </plugin>
 </widget>
