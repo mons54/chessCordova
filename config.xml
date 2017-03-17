@@ -98,7 +98,7 @@
         <variable name="APP_ID" value="1687859708170830" />
         <variable name="APP_NAME" value="Chess" />
     </plugin>
-    <plugin name="cordova-plugin-googleplus" spec="~5.1.1">
-        <variable name="REVERSED_CLIENT_ID" value="241448993510-5860ln6qoa9a1iov1t3j6uirsvhlerbb.apps.googleusercontent.com" />
+    <plugin name="cordova-plugin-play-games-services" spec="~1.0.0">
+        <variable name="APP_ID" value="241448993510-5860ln6qoa9a1iov1t3j6uirsvhlerbb.apps.googleusercontent.com" />
     </plugin>
 </widget>
