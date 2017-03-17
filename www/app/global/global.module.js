@@ -544,7 +544,7 @@ service('translator', ['$rootScope', '$http', 'languages', function($rootScope, 
                 return;
             }
 
-            $http.get('/json/dictionaries/' + lang + '.json')
+            $http.get('json/dictionaries/' + lang + '.json')
             .then(function (response) {
                 this.lang = lang;
                 this.data = response.data;

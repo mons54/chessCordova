@@ -1,0 +1,163 @@
+{
+    "name":"Schach",
+    "title": "Online-Schach",
+    "description":"Spielen Partie Schach gegen andere Spieler. Vergleichen Sie Ihre Ergebnisse mit anderen Spielern und erkämpfen Sie sich einen Platz in der Rangliste.",
+    "home":"Home",
+    "ranking":"Rangliste",
+    "top100": "Top 100",
+    "blitz": "Blitz",
+    "rapid": "Schnell",
+    "classical": "Klassisch",
+    "invite":"Freunde einladen",
+    "points":"Wertungszahl",
+    "games": "Spiele",
+    "challengers":"Challengers",
+    "challenges": "Herausforderungen",
+    "challenge": "Herausforderung",
+    "players": "Spieler",
+    "players_online": "{n} Spieler online",
+    "games_in_play": "{n} laufende Spiele",
+    "time":"Zeit",
+    "minutes":"Minuten",
+    "seconds": "Sekunden",
+    "color":"Farbe",
+    "white":"weiß",
+    "black":"Schwarz",
+    "random": "Zufällige",
+    "min":"Mini",
+    "max":"Maxi",
+    "winner":"Gewinner",
+    "game_over":"Game Over",
+    "mat":"Schachmatt",
+    "pat":"Patt",
+    "null":"Remis",
+    "offer_draw":"Remis anbieten",
+    "offers_a_draw":"bietet ein Remis",
+    "resign":"Aufgeben",
+    "ok":"Bestätigen",
+    "cancel":"Abbrechen",
+    "reset": "Reset",
+    "settings": "Einstellungen",
+	"create_game":"Neue Partie",
+    "rematch": "Rematch",
+    "search": "Suche",
+    "win":"Sieg",
+    "lose":"Niederlage",
+    "draw":"Remis",
+    "wins":"Siege",
+    "losses":"Niederlagen",
+    "draws":"Remis",
+    "friends":"Freunde",
+    "favorites": "Favoriten",
+    "fanpage":"Fan Page",
+    "terms_service":"Nutzungsbedingungen",
+    "privacy_policy":"Datenschutz",
+    "login_with_facebook": "Mit Facebook anmelden",
+    "login_with_google": "Mit Google anmelden",
+    "logout": "Abmelden",
+    "trophies":{
+        "title":"Trophäen",
+        "content":{
+            "1":{
+                "title":"Neuling",
+                "description":"Spielen Sie 1 Partie"
+            },
+            "2":{
+                "title":"Lehrling",
+                "description":"Spielen Sie 100 Partien"
+            },
+            "3":{
+                "title":"Erfahren",
+                "description":"Spielen Sie 500 Partien"
+            },
+            "4":{
+                "title":"Spezialist",
+                "description":"Spielen Sie 2000 Partien"
+            },
+            "5":{
+                "title":"Veteran",
+                "description":"Spielen Sie 5000 Partien"
+            },
+            "6":{
+                "title":"Anfänger",
+                "description":"Gewinnen Sie 1 Partie"
+            },
+            "7":{
+                "title":"Wettbewerber",
+                "description":"Gewinnen Sie 50 Partien"
+            },
+            "8":{
+                "title":"Herausforderer",
+                "description":"Gewinnen Sie 250 Partien"
+            },
+            "9":{
+                "title":"Champion",
+                "description":"Gewinnen Sie 1000 Partien"
+            },
+            "10":{
+                "title":"Titan",
+                "description":"Gewinnen Sie 2500 Partien"
+            },
+            "11":{
+                "title":"Amateur",
+                "description":"Spielen Sie 5 Partien an einem Tag"
+            },
+            "12":{
+                "title":"Leidenschaftlich",
+                "description":"Spielen Sie 10 Partien an einem Tag"
+            },
+            "13":{
+                "title":"Liebhaber",
+                "description":"Spielen Sie 25 Partien an einem Tag"
+            },
+            "14":{
+                "title":"Fan",
+                "description":"Spielen Sie 50 Partien an einem Tag"
+            },
+            "15":{
+                "title":"Addict",
+                "description":"Spielen Sie 100 Partien an einem Tag"
+            },
+            "16":{
+                "title":"Gewinner",
+                "description":"Gewinne 2 Partien in Folge"
+            },
+            "17":{
+                "title":"Eroberer",
+                "description":"Gewinne 5 Partien in Folge"
+            },
+            "18":{
+                "title":"Gladiator",
+                "description":"Gewinne 10 Partien in Folge"
+            },
+            "19":{
+                "title":"Koloss",
+                "description":"Gewinne 15 Partien in Folge"
+            },
+            "20":{
+                "title":"Unbesiegbar",
+                "description":"Gewinne 20 Partien in Folge"
+            },
+            "21":{
+                "title":"Guter Spieler",
+                "description":"Erhalten Sie 1600 Punkte"
+            },
+            "22":{
+               "title":"Sehr guter Spieler",
+               "description":"Erhalten Sie 1800 Punkte"
+            },
+            "23":{
+               "title":"Experte",
+               "description":"Erhalten Sie 2000 Punkte"
+            },
+            "24":{
+               "title":"Schachmeister",
+               "description":"Erhalten Sie 2400 Punkte"
+            },
+            "25":{
+               "title":"Schachgroßmeister",
+               "description":"Erhalten Sie 2800 Punkte"
+            }
+        }
+    }
+}
