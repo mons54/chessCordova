@@ -94,6 +94,9 @@
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
+    <plugin name="cordova-plugin-play-games-services" spec="~1.0.0">
+        <variable name="APP_ID" value="241448993510-5860ln6qoa9a1iov1t3j6uirsvhlerbb.apps.googleusercontent.com" />
+    </plugin>
     <plugin name="cordova-plugin-facebook4" spec="~1.7.4">
         <variable name="APP_ID" value="1687859708170830" />
         <variable name="APP_NAME" value="Chess" />

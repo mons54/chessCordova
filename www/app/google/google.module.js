@@ -41,28 +41,6 @@ service('google', ['$rootScope', 'googleClientId', 'user', 'socket', 'translator
 
         /**
          * @ngdoc function
-         * @name #init
-         * @methodOf google.service:google
-         * @description
-         * Init app Google.
-         */
-        this.init = function () {
-            return gapi.client.init({
-                apiKey: 'AIzaSyDo-HJeI3NjUs4T0HVett5W2SBfeUcpIXY',
-                discoveryDocs: ['https://people.googleapis.com/$discovery/rest?version=v1'],
-                clientId: googleClientId,
-                scope: 'profile'
-            }).then(function(response) {
-                gapi.auth2.getAuthInstance().isSignedIn.listen(function() {
-                    self.setLoginStatus(self.handleLogin);
-                });
-            }, function (err) {
-                self.status = 'error';
-            });
-        };
-
-        /**
-         * @ngdoc function
          * @name #setLoginStatus
          * @methodOf google.service:google
          * @description
@@ -76,15 +54,16 @@ service('google', ['$rootScope', 'googleClientId', 'user', 'socket', 'translator
                 return;
             }
 
-            var isSignedIn = gapi.auth2.getAuthInstance().isSignedIn.get();
-            if (!isSignedIn) {
-                this.status = 'unknown';
-                delete this.auth;
-            } else {
-                this.status = 'connected';
-            }
+            googleplaygame.isSignedIn(function (response) {
+                if (!response.isSignedIn) {
+                    this.status = 'unknown';
+                    delete this.auth;
+                } else {
+                    this.status = 'connected';
+                }
 
-            callback(this);
+                callback(this);
+            });
         };
 
         /**
@@ -98,7 +77,10 @@ service('google', ['$rootScope', 'googleClientId', 'user', 'socket', 'translator
             if (this.status === 'connected') {
                 this.handleLogin();
             } else {
-                gapi.auth2.getAuthInstance().signIn();
+                googleplaygame.auth(function (response) {
+                    alert(response);
+                    this.setLoginStatus(this.handleLogin);
+                }.bind(this));
             }
         };
 

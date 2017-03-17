@@ -311,50 +311,15 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
             });
         };
 
-        facebookSetLoginStatus();
+        setLoginStatus();
 
         var modalConnect = modal('#modal-connect');
-
-        facebook.isFacebookApp = angular.element('html').data('facebook');
-
-        $rootScope.isFacebookApp = facebook.isFacebookApp;
-
-        if (!facebook.isFacebookApp && typeof gapi !== 'undefined' && gapi.load) {
-            gapi.load('client', function () {
-                google.init().then(googleSetLoginStatus);
-            });
-        }
 
         $rootScope.loading = true;
 
         initUser();
 
         translator.use(translator.navigator);
-        
-        (function(d, s, id){
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {return;}
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-
-        $window.twttr = (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0],
-            t = $window.twttr || {};
-            if (d.getElementById(id)) return t;
-            js = d.createElement(s);
-            js.id = id;
-            js.src = "https://platform.twitter.com/widgets.js";
-            fjs.parentNode.insertBefore(js, fjs);
-
-            t._e = [];
-            t.ready = function(f) {
-            t._e.push(f);
-            };
-
-            return t;
-        }(document, 'script', 'twitter-wjs'));
     }
 ]).
 
