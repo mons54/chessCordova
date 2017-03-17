@@ -12,7 +12,7 @@ angular.module('facebook', []).
  * @description
  * The redirect uri.
  */
-constant('facebookAppId', $('html').data('env') === 'dev' ? '1709923609297773' : '1687859708170830').
+constant('facebookAppId', '1687859708170830').
 
 /**
  * @ngdoc service
@@ -45,21 +45,6 @@ service('facebook', ['$rootScope', 'user', 'socket', 'facebookAppId',
 
         /**
          * @ngdoc function
-         * @name #init
-         * @methodOf facebook.service:facebook
-         * @description
-         * Init app Facebook.
-         */
-        this.init = function () {
-            FB.init({
-                appId: facebookAppId,
-                xfbml: true,
-                version: 'v2.8'
-            });
-        };
-
-        /**
-         * @ngdoc function
          * @name #setLoginStatus
          * @methodOf facebook.service:facebook
          * @description
@@ -67,7 +52,7 @@ service('facebook', ['$rootScope', 'user', 'socket', 'facebookAppId',
          * @param {function} callback Callback
          */
         this.setLoginStatus = function (callback) {
-            FB.getLoginStatus(function (response) {
+            facebookConnectPlugin.getLoginStatus(function (response) {
                 setLoginStatus(response);
                 callback(self);
             });
@@ -84,11 +69,10 @@ service('facebook', ['$rootScope', 'user', 'socket', 'facebookAppId',
             if (this.status === 'connected') {
                 this.handleLogin();
             } else {
-                FB.login(function (response) {
+                facebookConnectPlugin.login(['user_friends'], function (response) {
+                    alert(response);
                     setLoginStatus(response);
                     self.handleLogin();
-                }, {
-                    scope: 'user_friends'
                 });
             }
         };
@@ -103,9 +87,7 @@ service('facebook', ['$rootScope', 'user', 'socket', 'facebookAppId',
          */
         this.handleLogin = function () {
 
-            if (!this.isFacebookApp) {
-                user.setLogin(this.name);
-            }
+            user.setLogin(this.name);
             
             socket.connect();
 
@@ -115,7 +97,7 @@ service('facebook', ['$rootScope', 'user', 'socket', 'facebookAppId',
                         
             $rootScope.user.friends.push(this.auth.id);
 
-            FB.api('/me/friends?fields=installed,id,name', function (res) {
+            facebookConnectPlugin.api('/me/friends?fields=installed,id,name', function (res) {
                 angular.forEach(res.data, function (value) {
                     if (value.installed) {
                         $rootScope.user.friends.push(value.id);

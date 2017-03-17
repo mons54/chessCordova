@@ -94,10 +94,6 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
         };
 
         $rootScope.logout = function () {
-            if (facebook.isFacebookApp) {
-                return;
-            }
-
             logout();
         };
 
@@ -159,22 +155,13 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
 
             var login = user.getLogin();
 
-            if (facebook.isFacebookApp) {
-                login = facebook.name;
-            }
-
-            if (!facebook.isFacebookApp && (!login || login === service.name && service.status !== 'connected')) {
+            if (!login || login === service.name && service.status !== 'connected') {
                 modalConnect.show();
                 return;
             }
 
-
-            if (login === service.name) {
-                if (service.status === 'connected') {
-                    service.handleLogin();
-                } else if (facebook.isFacebookApp) {
-                    facebook.login();
-                }
+            if (login === service.name && service.status === 'connected') {
+                service.handleLogin();
             }
         }
 
@@ -192,7 +179,7 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
         socket.on('connect', function () {
             var login = user.getLogin();
 
-            if (facebook.isFacebookApp || (login === 'facebook' && facebook.auth)) {
+            if (login === 'facebook' && facebook.auth) {
                 socket.emit('facebookConnect', facebook.auth);
             } else if (login === 'google' && google.auth) {
                 socket.emit('googleConnect', google.auth);
@@ -324,12 +311,7 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
             });
         };
 
-        $window.fbAsyncInit = function () {
-
-            facebook.init();
-
-            facebookSetLoginStatus();
-        };
+        facebookSetLoginStatus();
 
         var modalConnect = modal('#modal-connect');
 
