@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "241448993510",
+    "project_id": "chess-156202"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:241448993510:android:aade44d9d3b3abb3",
+        "android_client_info": {
+          "package_name": "online.worldofchess.chess"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "241448993510-cqlllmhqmvd0emtiplvo5t1rbbevd2p3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "online.worldofchess.chess",
+            "certificate_hash": "35dc0891e89ed9fc93a8f8593c302005fec04456"
+          }
+        },
+        {
+          "client_id": "241448993510-5860ln6qoa9a1iov1t3j6uirsvhlerbb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQyIIRCp0gRO6oKf8zLJrubcnYu4yVNpE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
