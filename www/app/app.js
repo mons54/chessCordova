@@ -149,11 +149,15 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
 
         function callBackLoginStatus(service) {
 
+            alert(service.name)
+
             if (!service) {
                 return;
             }
 
             var login = user.getLogin();
+
+            alert(login)
 
             if (!login || login === service.name && service.status !== 'connected') {
                 modalConnect.show();
@@ -177,6 +181,7 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
         }
 
         socket.on('connect', function () {
+            alert('connect');
             var login = user.getLogin();
 
             if (login === 'facebook' && facebook.auth) {

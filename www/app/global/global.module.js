@@ -206,6 +206,7 @@ factory('socket', ['$timeout', function ($timeout) {
          */
         connect: function () {
             if (!socket) {
+                alert(typeof io)
                 socket = io.connect('https://www.worldofchess.online/');
             } else {
                 socket.connect();
