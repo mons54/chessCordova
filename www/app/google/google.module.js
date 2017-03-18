@@ -26,15 +26,12 @@ service('google', ['$rootScope', 'googleClientId', 'user', 'socket', 'translator
 
         this.name = 'google';
 
-        function setAuth (user) {
-
-            var profile = user.getBasicProfile();
-
+        function setAuth (data) {
             self.auth = {
-                accessToken: user.getAuthResponse().access_token,
-                id: user.getId(),
-                avatar: profile.Paa,
-                name: profile.ig,
+                accessToken: data.idToken,
+                id: data.userId,
+                avatar: data.imageUrl,
+                name: data.displayName,
                 lang: translator.navigator
             };
         }
@@ -58,9 +55,12 @@ service('google', ['$rootScope', 'googleClientId', 'user', 'socket', 'translator
                 webClientId: googleClientId,
                 scope: 'profile'
             }, function (response) {
-                alert('trySilentLogin response ' + response);
+                this.status = 'connected';
+                setAuth(response);
+                callback(this);
             }.bind(this), function (error) {
-                alert('trySilentLogin error' + error);
+                this.status = 'unknown';
+                callback(this);
             }.bind(this));
         };
 
@@ -79,9 +79,12 @@ service('google', ['$rootScope', 'googleClientId', 'user', 'socket', 'translator
                     webClientId: googleClientId,
                     scope: 'profile'
                 }, function (response) {
-                    alert('login response' + response);
+                    this.status = 'connected';
+                    setAuth(response);
+                    callback(this);
                 }.bind(this), function (error) {
-                    alert('login error' + error);
+                    this.status = 'unknown';
+                    callback(this);
                 }.bind(this));
             }
         };
@@ -95,7 +98,6 @@ service('google', ['$rootScope', 'googleClientId', 'user', 'socket', 'translator
          */
         this.handleLogin = function () {
             user.setLogin(self.name);
-            setAuth(gapi.auth2.getAuthInstance().currentUser.get());
             socket.connect();
         };
 
