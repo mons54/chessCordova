@@ -4,7 +4,3 @@ platforms/
 CONTRIBUTING.md
 plugins/
 hooks/
-www/res/
-www/spec/index.js
-www/spec/
-www/spec.html
