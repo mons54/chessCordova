@@ -54,8 +54,8 @@ service('facebook', ['$rootScope', 'user', 'socket', 'facebookAppId',
         this.setLoginStatus = function (callback) {
             facebookConnectPlugin.getLoginStatus(function (response) {
                 setLoginStatus(response);
-                callback(self);
-            });
+                callback(this);
+            }.bind(this));
         };
 
         /**

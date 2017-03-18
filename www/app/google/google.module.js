@@ -54,16 +54,14 @@ service('google', ['$rootScope', 'googleClientId', 'user', 'socket', 'translator
                 return;
             }
 
-            googleplaygame.isSignedIn(function (response) {
-                if (!response.isSignedIn) {
-                    this.status = 'unknown';
-                    delete this.auth;
-                } else {
-                    this.status = 'connected';
-                }
-
-                callback(this);
-            });
+            window.plugins.googleplus.trySilentLogin({
+                webClientId: googleClientId,
+                scope: 'profile'
+            }, function (response) {
+                alert('trySilentLogin response ' + response);
+            }.bind(this), function (error) {
+                alert('trySilentLogin error' + error);
+            }.bind(this));
         };
 
         /**
@@ -77,9 +75,13 @@ service('google', ['$rootScope', 'googleClientId', 'user', 'socket', 'translator
             if (this.status === 'connected') {
                 this.handleLogin();
             } else {
-                googleplaygame.auth(function (response) {
-                    alert(response);
-                    this.setLoginStatus(this.handleLogin);
+                window.plugins.googleplus.login({
+                    webClientId: googleClientId,
+                    scope: 'profile'
+                }, function (response) {
+                    alert('login response' + response);
+                }.bind(this), function (error) {
+                    alert('login error' + error);
                 }.bind(this));
             }
         };

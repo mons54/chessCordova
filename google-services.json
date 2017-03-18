@@ -13,21 +13,13 @@
       },
       "oauth_client": [
         {
-          "client_id": "241448993510-cqlllmhqmvd0emtiplvo5t1rbbevd2p3.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "online.worldofchess.chess",
-            "certificate_hash": "35dc0891e89ed9fc93a8f8593c302005fec04456"
-          }
-        },
-        {
           "client_id": "241448993510-5860ln6qoa9a1iov1t3j6uirsvhlerbb.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBQyIIRCp0gRO6oKf8zLJrubcnYu4yVNpE"
+          "current_key": "AIzaSyAp9M_i06uJUDkmB1UUQgCAEKLllN9dijw"
         }
       ],
       "services": {
