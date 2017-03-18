@@ -17,7 +17,7 @@ directive('profileGame', ['utils',
                 player: '='
             },
             replace: true,
-            templateUrl: '/app/game/templates/profile-game.html',
+            templateUrl: 'app/game/templates/profile-game.html',
             controller: 'profileGameCtrl'
         };
     }

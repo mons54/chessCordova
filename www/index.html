@@ -66,7 +66,7 @@
          
         <header class="app-header mdl-layout__header">
             <div class="app-header__row mdl-layout__header-row">
-                <a href="/" class="app-title app-logo">
+                <a href="#!/" class="app-title app-logo">
                     <span class="app-logo__icon"></span>
                     <span class="app-logo__text" ng-bind="'name'|translate"></span>
                 </a>
@@ -79,17 +79,17 @@
                     <nav class="app-navigation mdl-navigation">
                         <a class="app-navigation__link mdl-navigation__link mdl-typography--text-uppercase"
                            ng-class="{'selected': currentRoute === 'home'}"
-                           href="/"
+                           href="#!/"
                            ng-bind="'home'|translate">
                         </a>
                         <a class="app-navigation__link mdl-navigation__link mdl-typography--text-uppercase"
                            ng-class="{'selected': currentRoute === 'ranking'}"
-                           href="/ranking"
+                           href="#!/ranking"
                            ng-bind="'ranking'|translate">
                         </a>
                         <a class="app-navigation__link mdl-navigation__link mdl-typography--text-uppercase"
                            ng-class="{'selected': currentRoute === 'trophies'}"
-                           href="/trophies"
+                           href="#!/trophies"
                            ng-bind="'trophies.title'|translate">
                         </a>
                         <a ng-if="challenges.length"
@@ -108,7 +108,7 @@
                                 show-modal="#modal-create-game">
                             {{ 'create_game' | translate }}
                         </button>
-                        <a ng-href="/profile/{{ user.uid }}"
+                        <a ng-href="#!/profile/{{ user.uid }}"
                            class="app-navigation__profile">
                             <div class="app-navigation__profile-infos app-navigation__profile-infos--blitz"
                                  title="{{ 'blitz'|translate }}">
@@ -151,7 +151,7 @@
 
         <div class="app-drawer mdl-layout__drawer">
             <span class="app-layout-title mdl-layout-title">
-                <a ng-href="/profile/{{ user.uid }}"
+                <a ng-href="#!/profile/{{ user.uid }}"
                    ng-click="closeDrawer()"
                    class="app-navigation__profile">
                     <div class="app-navigation__profile-user">
@@ -180,19 +180,19 @@
             </span>
             <nav class="mdl-navigation">
                 <a class="mdl-navigation__link" 
-                   href="/" 
+                   href="#!/" 
                    ng-click="closeDrawer()">
                     <i class="material-icons" role="presentation">home</i>
                     {{ 'home' | translate }}
                 </a>
                 <a class="mdl-navigation__link" 
-                   href="/ranking"
+                   href="#!/ranking"
                    ng-click="closeDrawer()">
                     <i class="material-icons" role="presentation">looks_one</i>
                     {{ 'ranking' | translate }}
                 </a>
                 <a class="mdl-navigation__link" 
-                   href="/trophies"
+                   href="#!/trophies"
                    ng-click="closeDrawer()">
                     <i class="material-icons" role="presentation">star</i>
                     {{ 'trophies.title' | translate }}

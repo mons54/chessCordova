@@ -331,29 +331,29 @@ config(['$routeProvider', '$locationProvider',
         $routeProvider
         .when('/', {
             name : 'home',
-            templateUrl: '/app/home/templates/home.html',
+            templateUrl: 'app/home/templates/home.html',
             controller: 'homeCtrl'
         })
         .when('/game/:id', {
             name : 'game',
-            templateUrl: '/app/game/templates/game.html',
+            templateUrl: 'app/game/templates/game.html',
             controller: 'gameCtrl'
         })
         .when('/ranking', {
             name : 'ranking',
             title: 'ranking',
-            templateUrl: '/app/ranking/templates/ranking.html',
+            templateUrl: 'app/ranking/templates/ranking.html',
             controller: 'rankingCtrl'
         })
         .when('/trophies', {
             name : 'trophies',
             title: 'trophies.title',
-            templateUrl: '/app/trophies/templates/trophies.html',
+            templateUrl: 'app/trophies/templates/trophies.html',
             controller: 'trophiesCtrl'
         })
         .when('/profile/:id', {
             name : 'profile',
-            templateUrl: '/app/profile/templates/profile.html',
+            templateUrl: 'app/profile/templates/profile.html',
             controller: 'profileCtrl',
             reloadOnSearch: false
         })

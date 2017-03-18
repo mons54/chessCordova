@@ -73,7 +73,7 @@ factory('utils', ['$rootScope', '$filter', '$window', 'host',
              * Invite friend facebook
              */
             inviteFriends: function () {
-                FB.ui({
+                facebookConnectPlugin.showDialog({
                     method: 'apprequests',
                     title: $filter('translate')('title'),
                     message: $filter('translate')('description')

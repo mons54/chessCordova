@@ -45,7 +45,7 @@ directive('profileActions', ['$rootScope',
         return {
             restrict: 'E',
             replace: true,
-            templateUrl: '/app/profile/templates/profile-actions.html',
+            templateUrl: 'app/profile/templates/profile-actions.html',
             link: function (scope) {
 
                 scope.$watch('profile', function (profile) {
@@ -92,7 +92,7 @@ directive('modalProfile', ['$rootScope', 'socket', 'modal',
             restrict: 'E',
             replace: true,
             scope: true,
-            templateUrl: '/app/profile/templates/modal-profile.html',
+            templateUrl: 'app/profile/templates/modal-profile.html',
             link: function (scope, element) {
 
                 socket.on('profile', function (profile) {
@@ -154,7 +154,7 @@ directive('profileGame', ['$rootScope', 'socket', 'modal',
                 gameType: '=',
                 gameData: '='
             },
-            templateUrl: '/app/profile/templates/profile-game.html',
+            templateUrl: 'app/profile/templates/profile-game.html',
             link: function (scope, element, attrs) {
 
                 var colors = {

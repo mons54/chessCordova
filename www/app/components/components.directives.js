@@ -56,7 +56,7 @@ directive('modalSettings', ['$rootScope', '$timeout', 'socket', 'user', 'transla
             restrict: 'E',
             scope: true,
             replace: true,
-            templateUrl: '/app/components/templates/modal-settings.html',
+            templateUrl: 'app/components/templates/modal-settings.html',
             link: function (scope, element) {
 
                 var defaultValues;
@@ -193,7 +193,7 @@ directive('modalCreateGame', ['$rootScope', '$route', 'modal', 'socket', 'params
             restrict: 'E',
             scope: true,
             replace: true,
-            templateUrl: '/app/components/templates/modal-create-game.html',
+            templateUrl: 'app/components/templates/modal-create-game.html',
             link: function (scope, element) {
 
                 var pointsMin = paramsGame.pointsMin,
@@ -278,7 +278,7 @@ directive('gameChoices', function () {
             data: '=',
             model: '='
         },
-        templateUrl: '/app/components/templates/games-choices.html'
+        templateUrl: 'app/components/templates/games-choices.html'
     };
 }).
 
@@ -298,7 +298,7 @@ directive('modalChallenges', ['$rootScope', 'socket', 'modal', 'orderByFilter',
         return {
             restrict: 'E',
             replace: true,
-            templateUrl: '/app/components/templates/modal-challenges.html',
+            templateUrl: 'app/components/templates/modal-challenges.html',
             link: function (scope, element) {
 
                 scope.orderByFilter = {
@@ -348,7 +348,7 @@ directive('sortable', ['$rootScope', 'orderByFilter',
             scope: {
                 expression: '='
             },
-            templateUrl: '/app/components/templates/sortable.html',
+            templateUrl: 'app/components/templates/sortable.html',
             link: function (scope, element, attrs) {
                 var collection = scope.$parent[attrs.collection];
                 scope.icon = attrs.icon;
@@ -386,7 +386,7 @@ directive('elementToggle', [function () {
             collection: '=',
             hide: '='
         },
-        templateUrl: '/app/components/templates/element-toggle.html',
+        templateUrl: 'app/components/templates/element-toggle.html',
         link: function (scope, element, attrs) {
 
             if (scope.hide) {
@@ -407,7 +407,7 @@ directive('pagination', ['$rootScope', function ($rootScope) {
     return {
         restrict: 'A',
         scope: true,
-        templateUrl: '/app/components/templates/pagination.html',
+        templateUrl: 'app/components/templates/pagination.html',
         link: function (scope, element) {
 
             $rootScope.page = false;
@@ -439,7 +439,7 @@ directive('share', ['$window', '$filter', 'host', 'facebookAppId', 'googleClient
             scope: {
                 share: '=',
             },
-            templateUrl: '/app/components/templates/share.html',
+            templateUrl: 'app/components/templates/share.html',
             link: function(scope, element) {
 
                 var url = 'https://' + host;
@@ -477,11 +477,7 @@ directive('share', ['$window', '$filter', 'host', 'facebookAppId', 'googleClient
                 });
 
                 scope.facebook = function () {
-                    if (!FB) {
-                        return;
-                    }
-
-                    FB.ui({
+                    facebookConnectPlugin.showDialog({
                         method: 'feed',
                         redirect_uri: 'https://apps.facebook.com/' + facebookAppId,
                         link: scope.link,
