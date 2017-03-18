@@ -183,6 +183,9 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
                 socket.emit('facebookConnect', facebook.auth);
             } else if (login === 'google' && google.auth) {
                 socket.emit('googleConnect', google.auth);
+            } else if (!login) {
+                socket.disconnect();
+                modalConnect.show();
             }
         });
 
