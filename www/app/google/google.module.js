@@ -55,10 +55,12 @@ service('google', ['$rootScope', 'googleClientId', 'user', 'socket', 'translator
                 webClientId: googleClientId,
                 scope: 'profile'
             }, function (response) {
+                alert('trySilentLogin response ' + response)
                 this.status = 'connected';
                 setAuth(response);
                 callback(this);
             }.bind(this), function (error) {
+                alert('trySilentLogin error ' + error)
                 this.status = 'unknown';
                 callback(this);
             }.bind(this));
@@ -79,10 +81,12 @@ service('google', ['$rootScope', 'googleClientId', 'user', 'socket', 'translator
                     webClientId: googleClientId,
                     scope: 'profile'
                 }, function (response) {
+                    alert('login response ' + response)
                     this.status = 'connected';
                     setAuth(response);
                     callback(this);
                 }.bind(this), function (error) {
+                    alert('login error ' + error)
                     this.status = 'unknown';
                     callback(this);
                 }.bind(this));
