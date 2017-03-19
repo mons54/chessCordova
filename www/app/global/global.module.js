@@ -106,6 +106,10 @@ service('sound', ['$rootScope', 'user', function ($rootScope, user) {
             deplace: new Audio('/sounds/deplace.mp3'),
             capture: new Audio('/sounds/capture.mp3')
         };
+
+        angular.forEach(sounds, function (sound) {
+            sound.volume = 0.5;
+        });
     }
 
     function loadAll() {
