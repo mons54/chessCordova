@@ -301,8 +301,8 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
         $rootScope.isFavorite = function (uid) {
             return $rootScope.user.favorites && $rootScope.user.favorites.indexOf(uid) !== -1;
         };
-        
-        $window.onbeforeunload = function () {
+
+        document.addEventListener('pause', function() {
             $rootScope.$emit('unload');
             if ($rootScope.disconnectMultiSocket) {
                 return;
@@ -312,7 +312,7 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
                 colorGame: user.getColorGame(),
                 sound: user.getSound()
             });
-        };
+        }, false);
 
         setLoginStatus();
 
