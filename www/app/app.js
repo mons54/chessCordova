@@ -316,6 +316,11 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
             });
         }, false);
 
+        $window.onhashchange = function () {
+            hideModal();
+            closeDrawer();
+        };
+
         setLoginStatus();
 
         var modalConnect = modal('#modal-connect');
