@@ -282,7 +282,7 @@
 
 .app-card__profile-avatar {
   left: initial;
-  right: 32px;
+  right: 20px;
 }
 
 .app-profile__action {
@@ -297,12 +297,12 @@
 
 .app-profile__card-avatar {
   left: initial;
-  right: 60px;
+  right: 24px;
 }
 
 .app-profile__avatar {
   margin-right: 0;
-  margin-left: 10px;
+  margin-left: 12px;
 }
 
 .app-profile__game-content {
@@ -323,6 +323,15 @@
   float: left;
 }
 
+.app-profile__trophy { 
+  margin-left: 8px;
+  margin-right: 0;
+}
+
+.app-profile__trophy:nth-child(10n + 10) {
+  margin-left: 0;
+}
+
 .app-modal__close {
   right: inherit;
   left: 20px;
@@ -335,11 +344,6 @@
 
 .mdl-layout__header .mdl-layout__drawer-button {
   right: 0;
-}
-
-.app-mobile__title {
-  left: initial;
-  right: 55px;
 }
 
 .mdl-layout__drawer {
@@ -555,6 +559,11 @@
   text-align: left;
 }
 
+.app-profile--game-points-result {
+  margin-right: 2px;
+  margin-left: 0;
+}
+
 @media screen and (max-width: 1024px) {
 
   .app-header__row {
@@ -638,7 +647,7 @@
 @media (max-width: 839px) {
 
   .app-mobile__title {
-    left: initial;
+    left: 60px;
     right: 56px;
   }
 
@@ -693,30 +702,6 @@
   }
 }
 
-@media (max-width: 479px) {
-
-  .app-form__choices-colors button {
-    margin-left: 8px;
-  }
-
-  .app-head {
-    padding: 8px;
-  }
-
-  .app-head .app-button__create-game {
-    left: auto;
-  }
-
-  .app-table__sortable {
-    margin-left: -6px;
-    margin-right: 0;
-  }
-
-  .app-table__sortable:after {
-    margin-right: 0;
-  }
-}
-
 @media screen and (max-width: 599px) {
 
   .app-ranking__toggle-content .app-button:nth-child(2n +2) {
@@ -730,6 +715,11 @@
   .app-profile__action {
     right: initial;
     left: 8px;
+  }
+
+  .app-profile__trophy {
+    margin-left: 2%;
+    margin-right: 0;
   }
 
   .app-modal__close {
@@ -748,7 +738,7 @@
 
   .app-profile__card-avatar {
     left: initial;
-    right: 36px;
+    right: 8px;
   }
 
   .app-profile__stat:first-child {
@@ -814,5 +804,52 @@
     border-right: 1px solid rgba(0,0,0,.12);
     right: initial;
     left: 0;
+  }
+}
+
+@media (max-width: 479px) {
+
+  .app-profile--game-points-result {
+    margin-right: 0;
+  }
+  
+  .app-game__lost-pieces {
+    float: none;
+    direction: rtl;
+  }
+
+  .app-profile--game .app-profile__avatar {
+    margin-left: 4px;
+    margin-right: 0;
+  }
+
+  .app-form__choices-colors button {
+    margin-left: 8px;
+  }
+
+  .app-head {
+    padding: 8px;
+  }
+
+  .app-head .app-button__create-game {
+    left: auto;
+  }
+
+  .app-table__sortable {
+    margin-left: -6px;
+    margin-right: 0;
+  }
+
+  .app-table__sortable:after {
+    margin-right: 0;
+  }
+
+  .app-profile__trophy {
+    margin-right: 0;
+    margin-left: 5%;
+  }
+
+  .app-profile__trophy:nth-child(5n + 5) {
+    margin-left: 0;
   }
 }

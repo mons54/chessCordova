@@ -517,25 +517,6 @@ controller('gameCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$f
                 description: game.white.name + ' ' + game.white.points + ' · ' + game.result.print + ' · ' + game.black.name + ' ' + game.black.points,
                 link: '/game/' + game.id
             };
-
-            if (typeof domtoimage !== 'object') {
-                return;
-            }
-
-            $timeout(function() {
-                var div = $('<div/>').css({
-                    position: 'absolute',
-                    width: '300px',
-                    height: '300px'
-                }).addClass('app-game__board app-game__board--' + $scope.colorGame).append($('.app-game__board').clone().html()).appendTo($('body'));
-                
-                domtoimage.toPng(div[0]).
-                then(function (data) {
-                    $scope.shareResultData.picture = '/?data=' + encodeURIComponent(data.split(',')[1]);
-                    div.remove();
-                }, div.remove);
-
-            });
         }
 
         function getMessageId(message) {
@@ -639,17 +620,6 @@ controller('profileGameCtrl', ['$rootScope', '$scope', 'socket', 'utils',
 
         $scope.isPlayerTurn = function (player) {
             return $scope.game && $scope.game.turn === player.color;
-        };
-
-        $scope.hasLostPieces = function (lostPieces) {
-            if (typeof lostPieces === 'object') {
-                for (var i in lostPieces) {
-                    if (lostPieces[i]) {
-                        return true;
-                    }
-                }
-            }
-            return false;
         };
 
         $scope.getLostPieces = function(number) {

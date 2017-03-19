@@ -16,8 +16,32 @@
         </div>
         <div class="app-modal__content">
             <profile-actions></profile-actions>
-            <profile-game game-type="'blitz'" game-data="profile.blitz"></profile-game>
-            <profile-game game-type="'rapid'" game-data="profile.rapid"></profile-game>
+            <profile-game game-type="'blitz'" game-data="profile.blitz" uid="profile.uid" show-more="!user.gid"></profile-game>
+            <profile-game game-type="'rapid'" game-data="profile.rapid" uid="profile.uid" show-more="!user.gid"></profile-game>
+            <div class="app-profile__info-game">
+                <div class="app-profile__info-title">
+                    {{ 'trophies.title'|translate }}
+                    <a ng-if="!user.gid"
+                       ng-href="#!/profile/{{ profile.uid }}/#trophies"
+                       class="app-profile__info-more">
+                        <i class="material-icons">open_in_new</i>
+                    </a>
+                </div>
+                <div data-trophies class="app-profile__trophies">
+                    <div ng-repeat="trophy in profile.trophies"
+                         ng-class="{'no-trophy': trophy < 100 }"
+                         id="trophy-{{ $index }}"
+                         class="app-profile__trophy">
+                        <img ng-src="images/trophies/trophy-{{ $index + 1 }}.svg">
+                        <div class="mdl-tooltip mdl-tooltip--top" data-mdl-for="trophy-{{ $index }}">
+                            {{ 'trophies.content.' + ($index + 1) + '.title' | translate }} 
+                            · 
+                            {{ 'trophies.content.' + ($index + 1) + '.description' | translate }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div ng-if="!user.gid"
                  class="app-profile__more">
                 <a modal-close

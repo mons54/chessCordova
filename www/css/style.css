@@ -22,6 +22,14 @@ a {
   color: #fff;
 }
 
+*:focus {
+  outline: none;
+}
+
+.mdl-data-table tbody tr:hover {
+  background-color: inherit;
+}
+
 /* fix ie */
 .mdl-button--fab .material-icons {
   position: absolute;
@@ -51,6 +59,15 @@ a {
   -webkit-user-drag: none;
   -webkit-user-select: none;
   -ms-user-select: none;
+}
+
+.app__no-select {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 [show-profile] {
@@ -158,7 +175,7 @@ a {
 
 .app-login__button--facebook:before {
   border-right: #364e92 1px solid;
-  background: url('../images/icon_facebook.png') 6px 6px no-repeat;
+  background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_facebook.png') 6px 6px no-repeat;
 }
 
 .app-login__button--facebook:hover,
@@ -174,7 +191,7 @@ a {
 
 .app-login__button--google:before {
   border-right: #BB3F30 1px solid;
-  background: url('../images/icon_google.png') 6px 6px no-repeat;
+  background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_google.png') 6px 6px no-repeat;
 }
 
 .app-login__button--google:hover,
@@ -663,7 +680,7 @@ a {
   width: 40px;
   height: 40px;
   background-size: cover;
-  background-image: url(../images/logo.png);
+  background-image: url(/images/logo.png);
   border-radius: 50%;
 }
 
@@ -942,18 +959,18 @@ a {
 
 .app-profile__card-avatar {
   position: absolute;
-  top: 48px;
-  left: 60px;
+  top: 40px;
+  left: 24px;
   z-index: 10;
 }
 
 .app-modal--profile .app-modal__content {
-  padding-top: 32px;
+  padding-top: 28px;
 }
 
 .app-profile__action {
   position: absolute;
-  top: 24px;
+  top: 16px;
   right: 24px;
 }
 
@@ -1003,7 +1020,7 @@ a {
 
 .app-card__profile-avatar {
   position: absolute;
-  left: 32px;
+  left: 20px;
   top: 54px;
 }
 
@@ -1043,16 +1060,22 @@ a {
 .app-profile__name {
   font-weight: 700;
   font-size: 16px;
-  color: #795548;
   margin-bottom: 8px;
+  display: block;
+}
+
+.app-profile__name-text {
+  font-weight: 700;
+  display: inline-block;
+  vertical-align: bottom;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  display: block;
 }
 
 .app-profile__name a {
   display: inline-block;
+  color: inherit;
   font-weight: inherit;
 }
 
@@ -1067,14 +1090,19 @@ a {
   top: -2px;
 }
 
-.app-profile--game-points {
+.app-profile--game-points-result {
   margin-left: 2px;
   font-size: 14px;
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+.app-profile--game-points {
+  display: none;
 }
 
 .app-profile__info {
   display: inline-block;
-  margin-right: 6px;
   font-size: 15px;
   line-height: initial;
   font-weight: 700;
@@ -1137,6 +1165,14 @@ a {
 
 .app-profile__info-game {
   margin: 8px 0;
+}
+
+.app-profile__info-more {
+  position: relative;
+  top: 6px;
+  display: inline-block;
+  height: 24px;
+  line-height: 24px;
 }
 
 .app-profile__stats {
@@ -1312,6 +1348,27 @@ a {
   width: 100%;
   text-align: center;
   margin: 8px 0;
+}
+
+.app-profile__trophy {
+  display: inline-block;
+  width: 48px;
+  height: 48px;
+  margin-right: 8px;
+  margin-top: 8px;
+}
+
+.app-profile__trophy.no-trophy img {
+  opacity: 0.3;
+}
+
+.app-profile__trophy:nth-child(10n + 10) {
+  margin-right: 0;
+}
+
+.app-profile__trophy img {
+  width: 100%;
+  height: 100%;
 }
 
 .app-element__head {
@@ -2627,7 +2684,7 @@ a {
     vertical-align: middle;
   }
 
-  .app-profile--game .app-profile--game-points {
+  .app-profile--game .app-profile--game-points-result {
     display: block;
   }
 
@@ -2794,6 +2851,7 @@ a {
   .app-mobile__title {
     position: absolute;
     left: 56px;
+    right: 60px;
     top: 10px;
     transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
@@ -3091,6 +3149,10 @@ a {
   .app-button__fixed.app-button__fixed--game {
     bottom: 52px;
   }
+
+  .app-profile__name-text {
+    max-width: calc(100% - 340px);
+  }
 }
 
 @media screen and (min-width: 600px) {
@@ -3150,14 +3212,14 @@ a {
   }
 
   .app-card__profile-title {
-    height: 60px;
-    padding-bottom: 24px;
-    padding-top: 8px;
+    height: 40px;
+    padding-bottom: 0;
+    padding-top: 0;
   }
 
   .app-card__profile-title .app-profile__action {
-    top: 8px;
-    right: 8px;
+    top: 20px;
+    right: 20px;
   }
 
   .app-card__profile-actions .app-button {
@@ -3165,7 +3227,7 @@ a {
   }
 
   .app-card__profile-avatar {
-    top: 39px;
+    top: 20px;
   }
 
   .app-card__profile-avatar .app-avatar{
@@ -3176,10 +3238,15 @@ a {
   .app-card__profile-title-text {
     font-size: 16px;
     height: 24px;
+    display: none;
   }
 
   .app-card__profile-stats {
     padding: 0 8px;
+  }
+
+  .app-modal--profile .app-modal__content {
+    padding-top: 24px;
   }
 
   .app-profile__game-board {
@@ -3266,7 +3333,7 @@ a {
   }
 
   .app-profile__action {
-    top: 16px;
+    top: 12px;
     right: 8px;
   }
 
@@ -3529,8 +3596,8 @@ a {
   }
 
   .app-profile__card-avatar {
-    top: 40px;
-    left: 36px;
+    top: 32px;
+    left: 8px;
   }
 
   .app-profile__stat {
@@ -3550,6 +3617,17 @@ a {
   .app-profile__stat-desc {
     font-size: 8px;
     font-weight: normal;
+  }
+  
+  .app-profile__trophies {
+    padding: 0 1%;
+    width: 100%;
+  }
+  .app-profile__trophy {
+    width: 8%;
+    height: 8%;
+    margin-right: 2%;
+    margin-top: 2%;
   }
 
   .app-create-game__choices .app-button {
@@ -3700,28 +3778,50 @@ a {
   .app-profile--game .app-avatar {
     width: 32px;
     height: 32px;
-    border-radius: 3px;
   }
 
   .app-profile--game .app-profile__avatar {
-    margin-right: 9px;
+    margin-right: 4px;
   }
 
   .app-profile--game .app-profile__name {
     font-size: 13px;
     line-height: 14px;
     height: 14px;
-    max-width: 180px;
     margin-bottom: 0;
-    overflow: hidden;
+  }
+
+  .app-profile__name-text {
+    max-width: calc(100% - 184px);
   }
 
   .app-profile--game-points {
+    display: initial;
     font-size: 12px;
+  }
+
+  .app-profile--game-points-result {
+    font-size: 12px;
+    margin-left: 0;
   }
 
   .app-profile__name .app-icon--star {
     font-size: 12px;
+  }
+
+  .app-profile__trophies {
+    padding: 0;
+  }
+
+  .app-profile__trophy {
+    width: 16%;
+    height: 16%;
+    margin-right: 5%;
+    margin-top: 4%;
+  }
+
+  .app-profile__trophy:nth-child(5n + 5) {
+    margin-right: 0;
   }
 
   .app-head {
@@ -3754,19 +3854,14 @@ a {
     color: #DB4437;
   }
 
-  .app-game__lost-pieces {
-    display: none;
+  .app-profile--game .app-game__lost-pieces {
     direction: ltr;
     float: none;
     margin-top: 2px;
     margin-right: 0;
   }
 
-  .app-profile__show-pieces .app-game__lost-pieces {
-    display: block;
-  }
-
-  .app-profile__show-pieces .app-profile__info {
+  .app-profile--game .app-profile__info {
     display: none;
   }
 
