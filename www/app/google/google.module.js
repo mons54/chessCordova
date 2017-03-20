@@ -57,9 +57,11 @@ service('google', ['$rootScope', 'googleClientId', 'user', 'socket', 'translator
             }, function (response) {
                 this.status = 'connected';
                 setAuth(response);
+                alert('trySilentLogin response' + response)
                 callback(this);
             }.bind(this), function (error) {
                 this.status = 'unknown';
+                alert('trySilentLogin error' + error)
                 callback(this);
             }.bind(this));
         };
@@ -81,9 +83,11 @@ service('google', ['$rootScope', 'googleClientId', 'user', 'socket', 'translator
                 }, function (response) {
                     this.status = 'connected';
                     setAuth(response);
+                    alert('login response' + response)
                     callback(this);
                 }.bind(this), function (error) {
                     this.status = 'unknown';
+                    alert('login error' + error)
                     callback(this);
                 }.bind(this));
             }
