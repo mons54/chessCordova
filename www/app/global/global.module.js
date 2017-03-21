@@ -95,34 +95,18 @@ factory('utils', ['$rootScope', '$filter', '$window', 'host',
  */
 service('sound', ['$rootScope', 'user', function ($rootScope, user) {
 
-    var sounds,
-        sound = user.getSound();
-
     $rootScope.$watch('user.sound', function (value) {
         if (typeof value === 'boolean') {
             sound = value;
+            if (!sound) {
+                stopAll();
+            }
         }
     });
 
-    if (typeof Audio === 'function') {
-        sounds = {
-            timer: new Audio('/sounds/timer.mp3'),
-            deplace: new Audio('/sounds/deplace.mp3'),
-            capture: new Audio('/sounds/capture.mp3')
-        };
-
-        angular.forEach(sounds, function (sound) {
-            sound.volume = 0.5;
-        });
-    }
-
-    function loadAll() {
-        if (!sounds) {
-            return;
-        }
-
-        angular.forEach(sounds, function (value, name) {
-            value.load();
+    function stopAll() {
+        angular.forEach(sounds, function (value) {
+            value.stop();
         });
     }
 
@@ -133,34 +117,43 @@ service('sound', ['$rootScope', 'user', function ($rootScope, user) {
         }
 
         this.play = function () {
-            if (sound && this.isPaused()) {
+            if (sound && !this.isPlayed()) {
                 this.sound.play();
             }
             return this;
         };
 
         this.pause = function () {
-            if (sound && this.isPlayed()) {
+            if (this.isPlayed()) {
                 this.sound.pause();
             }
             return this;
         };
 
-        this.load = function () {
-            if (sound && this.sound) {
-                this.sound.load();
+        this.stop = function () {
+            if (this.isPlayed()) {
+                this.sound.stop();
             }
             return this;
         };
 
         this.isPlayed = function () {
-            return this.sound && !this.sound.paused;
-        };
-
-        this.isPaused = function () {
-            return this.sound && this.sound.paused;
+            return this.sound && this.sound.played;
         };
     }
+
+    function setStatus(status) {
+        this.played = status === Media.MEDIA_STARTING || status === Media.MEDIA_RUNNING;
+    }
+
+    var sounds,
+        sound = user.getSound();
+
+    sounds = {
+        timer: new Media('https://worldofchess.online/sounds/timer.mp3', null, null, setStatus),
+        deplace: new Media('https://worldofchess.online/sounds/deplace.mp3', null, null, setStatus),
+        capture: new Media('https://worldofchess.online/sounds/capture.mp3', null, null, setStatus)
+    };
 
     return {
         /**
