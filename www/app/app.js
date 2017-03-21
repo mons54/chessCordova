@@ -128,6 +128,7 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
         }
 
         function logout() {
+            $rootScope.loading = true;
             delete $rootScope.ready;
             user.setLogin(false);
             socket.disconnect();
