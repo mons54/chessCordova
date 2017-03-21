@@ -904,10 +904,6 @@ a {
   background-color: #f3f3f3;
 }
 
-.app-content.no-scroll {
-  overflow-y: hidden;
-}
-
 .app-grid {
   position: relative;
   max-width: 760px;
@@ -1794,6 +1790,12 @@ a {
 
 .ui-draggable-disabled {
     cursor: auto;
+}
+
+.app-layout.no-scroll,
+.app-content.no-scroll,
+.app-modal.no-scroll {
+  overflow-y: hidden;
 }
 
 .app-refresh {

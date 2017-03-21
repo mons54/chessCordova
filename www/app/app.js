@@ -325,7 +325,7 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
             pullToRefresh = 0,
             baseHeight = 0;
 
-        $('.app-modal, .app-content').bind('touchmove', function (e) {
+        function touchmove (e) {
             
             if ($(this).scrollTop() !== 0) {
                 return;
@@ -338,11 +338,11 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
             if (lastY && currentY > lastY && !$(this).hasClass('no-scroll')) {
                 $(this).addClass('no-scroll');
                 $('[data-pull-refresh]').removeClass('ng-hide');
-                if ($(this).hasClass('app-modal')) {
-                    $('[data-pull-refresh]').height(0).css('z-index', $(this).css('z-index') + 1);
-                } else {
+                if ($(this).hasClass('app-content')) {
                     baseHeight = $('header').height();
                     $('[data-pull-refresh]').height(baseHeight).css('z-index', $('header').css('z-index') - 1);
+                } else {
+                    $('[data-pull-refresh]').height(0).css('z-index', $(this).css('z-index') + 1);
                 }
             }
 
@@ -353,9 +353,9 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
             }
 
             lastY = currentY;
-        });
+        }
 
-        $('.app-modal, .app-content').bind('touchend', function (e) {
+        function touchend (e) {
             
             lastY = 0;
             baseHeight = 0;
@@ -367,6 +367,16 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
                 $window.location.reload();
             } else {
                 pullToRefresh = 0;
+            }
+        }
+
+        $rootScope.$watch('isGame', function (value) {
+            if (value) {
+                $('.app-layout').bind('touchmove', touchmove).bind('touchend', touchend);
+                $('.app-content, .app-modal').unbind('touchmove').unbind('touchend');
+            } else {
+                $('.app-layout').unbind('touchmove').unbind('touchend');
+                $('.app-content, .app-modal').bind('touchmove', touchmove).bind('touchend', touchend);
             }
         });
 
