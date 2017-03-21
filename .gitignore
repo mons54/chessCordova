@@ -5,3 +5,5 @@ CONTRIBUTING.md
 plugins/
 hooks/
 npm-debug.log
+node_modules/
+res/
