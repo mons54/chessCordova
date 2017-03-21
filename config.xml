@@ -10,6 +10,7 @@
     <content src="index.html" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="android-minSdkVersion" value="15" />
+    <preference name="HeaderColor" value="#795548" />
     <platform name="android">
         <icon density="ldpi" src="www/res/icon/android/drawable-ldpi-icon.png" />
         <icon density="mdpi" src="www/res/icon/android/drawable-mdpi-icon.png" />
@@ -101,4 +102,5 @@
     </plugin>
     <plugin name="cordova-plugin-googleplus" spec="~5.1.1">
     </plugin>
+    <plugin name="cordova-plugin-headercolor" spec="~1.0" />
 </widget>
