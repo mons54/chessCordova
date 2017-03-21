@@ -4,3 +4,4 @@ platforms/
 CONTRIBUTING.md
 plugins/
 hooks/
+npm-debug.log
