@@ -143,8 +143,11 @@ controller('profileCtrl', ['$rootScope', '$scope', '$routeParams', '$window', '$
             $scope.activeMenu = $location.hash();
         });
 
-        
         $scope.activeMenu = $location.hash();
+
+        if ($scope.games[$scope.activeMenu]) {
+            $scope.games[$scope.activeMenu].load = true;
+        }
 
         $scope.goGame = function (id) {
             $location.path('/game/' + id);
