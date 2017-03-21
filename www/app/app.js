@@ -321,6 +321,55 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
             closeDrawer();
         };
 
+        var lastY = 0,
+            pullToRefresh = 0,
+            baseHeight = 0;
+
+        $('.app-modal, .app-content').bind('touchmove', function (e) {
+            
+            if ($(this).scrollTop() !== 0) {
+                return;
+            }
+
+            var currentY = e.originalEvent.touches[0].clientY;
+
+            pullToRefresh = lastY ? pullToRefresh + currentY - lastY : false;
+
+            if (lastY && currentY > lastY && !$(this).hasClass('no-scroll')) {
+                $(this).addClass('no-scroll');
+                $('[data-pull-refresh]').removeClass('ng-hide');
+                if ($(this).hasClass('app-modal')) {
+                    $('[data-pull-refresh]').height(0).css('z-index', $(this).css('z-index') + 1);
+                } else {
+                    baseHeight = $('header').height();
+                    $('[data-pull-refresh]').height(baseHeight).css('z-index', $('header').css('z-index') - 1);
+                }
+            }
+
+            if ($(this).hasClass('no-scroll')) {
+                $('[data-pull-refresh]').
+                height($('[data-pull-refresh]').height() + (currentY - lastY));
+                $('[data-pull-refresh-content]').css('opacity', ($('[data-pull-refresh]').height() - baseHeight) / 150);
+            }
+
+            lastY = currentY;
+        });
+
+        $('.app-modal, .app-content').bind('touchend', function (e) {
+            
+            lastY = 0;
+            baseHeight = 0;
+
+            $(this).removeClass('no-scroll');
+            $('[data-pull-refresh]').addClass('ng-hide').height(0);
+
+            if (pullToRefresh >= 150) {
+                $window.location.reload();
+            } else {
+                pullToRefresh = 0;
+            }
+        });
+
         setLoginStatus();
 
         var modalConnect = modal('#modal-connect');

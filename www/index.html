@@ -20,8 +20,20 @@
 </head>
 
 <body>
+
+    <div data-pull-refresh
+         class="app-refresh"
+         ng-hide="true">
+        <div data-pull-refresh-content
+             class="app-refresh__content">
+            <div data-pull-to-resfreh class="mdl-spinner mdl-js-spinner is-active"></div>
+        </div>
+    </div>
+
     <div ng-show="loading" class="app-loading">
-        <div ng-hide="disconnectMultiSocket || unauthorized" class="app-loader mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+        <div ng-hide="disconnectMultiSocket || unauthorized" 
+             class="app-loader mdl-progress mdl-js-progress mdl-progress__indeterminate">
+        </div>
         <i ng-show="disconnectMultiSocket" 
             ng-click="reconnect()"
             ng-bind="'play_arrow'"
