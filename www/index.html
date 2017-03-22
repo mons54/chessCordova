@@ -30,7 +30,7 @@
 
     <div ng-show="loading" class="app-loading">
         <div ng-hide="disconnectMultiSocket || unauthorized || !ready" 
-             class="app-loader mdl-progress mdl-js-progress mdl-progress__indeterminate">
+             class="app-loader mdl-progress mdl-js-progress mdl-progress__indeterminate ng-hide">
         </div>
         <div ng-show="!ready" class="app-init"></div>
         <i ng-show="disconnectMultiSocket" 
