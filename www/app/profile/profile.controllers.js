@@ -143,6 +143,7 @@ controller('profileCtrl', ['$rootScope', '$scope', '$routeParams', '$window', '$
             $scope.activeMenu = $location.hash();
         });
 
+        
         $scope.activeMenu = $location.hash();
 
         if ($scope.games[$scope.activeMenu]) {
@@ -179,7 +180,6 @@ controller('profileCtrl', ['$rootScope', '$scope', '$routeParams', '$window', '$
 
             if (!games ||
                 !games.offset ||
-                game.offset >= 200 ||
                 games.offset >= games.count ||
                 games.load ||
                 this.scrollTop + this.offsetHeight + $('.app-footer').height() < this.scrollHeight) {

@@ -14,7 +14,7 @@ controller('rankingCtrl', ['$rootScope', '$scope', '$routeParams', '$location', 
 
         componentHandler.upgradeElement($('[data-spinner]')[0]);
 
-        $rootScope.loadPage = true;
+        $rootScope.loadRanking = true;
 
         if ($routeParams.type === 'blitz-100') {
             $scope.type = 'blitzTop100';
@@ -41,10 +41,10 @@ controller('rankingCtrl', ['$rootScope', '$scope', '$routeParams', '$location', 
 
         socket.on('ranking', function (data) {
 
-            $rootScope.loadPage = false;
+            $rootScope.loadRanking = false;
 
             if (!data) {
-                $location.path('/ranking/' + $routeParams.type);
+                $location.path('ranking/' + $routeParams.type);
                 return;
             }
 
