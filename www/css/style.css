@@ -117,7 +117,7 @@ a {
 .app-init {
   width: 120px;
   height: 120px;
-  background-image: url(/images/logo.png);
+  background-image: url(../images/logo.png);
   background-size: cover;
   border-radius: 50%;
 }
