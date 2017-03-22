@@ -479,7 +479,7 @@ service('user', ['$rootScope', '$window', function ($rootScope, $window) {
          * @returns {bool} Sound
          */
         getSound: function () {
-            return $rootScope.user.sound;
+            return this.get('sound');
         },
         /**
          * @ngdoc function
@@ -491,6 +491,7 @@ service('user', ['$rootScope', '$window', function ($rootScope, $window) {
          */
         setSound: function (value) {
             $rootScope.user.sound = value;
+            this.set('sound', value);
         },
         /**
          * @ngdoc function
@@ -501,7 +502,7 @@ service('user', ['$rootScope', '$window', function ($rootScope, $window) {
          * @returns {string} Color
          */
         getColorGame: function () {
-            return $rootScope.user.colorGame;
+            return this.get('colorGame');
         },
         /**
          * @ngdoc function
@@ -513,6 +514,7 @@ service('user', ['$rootScope', '$window', function ($rootScope, $window) {
          */
         setColorGame: function (value) {
             $rootScope.user.colorGame = value;
+            this.set('colorGame', value);
         },
         /**
          * @ngdoc function
@@ -523,7 +525,7 @@ service('user', ['$rootScope', '$window', function ($rootScope, $window) {
          * @returns {object} Data Game
          */
         getDataGame: function () {
-            return $rootScope.dataGame;
+            return this.get('dataGame');
         },
         /**
          * @ngdoc function
@@ -535,6 +537,7 @@ service('user', ['$rootScope', '$window', function ($rootScope, $window) {
          */
         setDataGame: function (value) {
             $rootScope.dataGame = value;
+            this.set('dataGame', value);
         }
     };
 }]).
