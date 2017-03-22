@@ -79,7 +79,6 @@ service('google', ['$rootScope', 'googleClientId', 'user', 'socket', 'translator
                     webClientId: googleClientId,
                     scope: 'profile'
                 }, function (response) {
-                    alert('loginGoogle')
                     this.status = 'connected';
                     setAuth(response);
                     this.handleLogin();
@@ -97,7 +96,6 @@ service('google', ['$rootScope', 'googleClientId', 'user', 'socket', 'translator
          * Set user data from google.
          */
         this.handleLogin = function () {
-            alert('handleLoginGoogle')
             user.setLogin(self.name);
             socket.connect();
         };

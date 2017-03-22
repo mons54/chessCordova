@@ -164,8 +164,6 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
 
             var login = user.getLogin();
 
-            alert(service.name, login);
-
             if (!login || login === service.name && service.status !== 'connected') {
                 modalConnect.show();
                 return;
