@@ -332,10 +332,13 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
         };
         
         document.addEventListener('pause', function() {
-            $rootScope.$emit('unload');
-            if ($rootScope.disconnectMultiSocket) {
+
+            if (!socket.isConnected()) {
                 return;
             }
+
+            $rootScope.$emit('unload');
+            
             socket.emit('updateUser', {
                 dataGame: user.getDataGame(),
                 colorGame: user.getColorGame(),
