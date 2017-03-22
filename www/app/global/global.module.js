@@ -202,7 +202,7 @@ factory('socket', ['$timeout', function ($timeout) {
         isConnected: function () {
             return socket && socket.connected;
         },
-        
+
         /**
          * @ngdoc function
          * @name #connect
@@ -331,7 +331,7 @@ factory('socket', ['$timeout', function ($timeout) {
  * @description 
  * Socket management.
  */
-service('user', ['$rootScope', '$cookies', function ($rootScope, $cookies) {
+service('user', ['$rootScope', '$window', function ($rootScope, $window) {
 
     return {
         /**
@@ -339,12 +339,37 @@ service('user', ['$rootScope', '$cookies', function ($rootScope, $cookies) {
          * @name #has
          * @methodOf global.service:user
          * @description 
-         * Has cookies name
-         * @param {string} name Cookies name
+         * Has data name
+         * @param {string} name Name
          * @returns {boolean} response
          */
         has: function (name) {
-            return typeof $cookies.get(name) !== 'undefined';
+            return !!$window.localStorage.getItem(name);
+        },
+        /**
+         * @ngdoc function
+         * @name #get
+         * @methodOf global.service:user
+         * @description 
+         * Get data name
+         * @param {string} name Name
+         * @returns {boolean} response
+         */
+        get: function (name) {
+            return angular.fromJson($window.localStorage.getItem(name));
+        },
+        /**
+         * @ngdoc function
+         * @name #set
+         * @methodOf global.service:user
+         * @description 
+         * Set data name
+         * @param {string} name Name
+         * @param {string|object} data Data
+         * @returns {boolean} response
+         */
+        set: function (name, data) {
+            $window.localStorage.setItem(name, angular.toJson(data));
         },
         /**
          * @ngdoc function
@@ -356,7 +381,7 @@ service('user', ['$rootScope', '$cookies', function ($rootScope, $cookies) {
          * @returns {object} Value
          */
         getUser: function (name) {
-            var user = $cookies.getObject('user') || {};
+            var user = this.get('user') || {};
             if (name) {
                 return user[name];
             }
@@ -373,16 +398,11 @@ service('user', ['$rootScope', '$cookies', function ($rootScope, $cookies) {
          */
         setUser: function (name, value) {
 
-            var data = this.getUser(),
-                expires = new Date();
+            var data = this.getUser();
 
             data[name] = value;
 
-            expires.setDate(expires.getDate() + 365);
-
-            $cookies.putObject('user', data, {
-                expires: expires
-            });
+            this.set('user', data);
         },
         /**
          * @ngdoc function
@@ -459,7 +479,7 @@ service('user', ['$rootScope', '$cookies', function ($rootScope, $cookies) {
          * @returns {bool} Sound
          */
         getSound: function () {
-            return $cookies.getObject('sound');
+            return this.get('sound');
         },
         /**
          * @ngdoc function
@@ -471,7 +491,7 @@ service('user', ['$rootScope', '$cookies', function ($rootScope, $cookies) {
          */
         setSound: function (value) {
             $rootScope.user.sound = value;
-            $cookies.putObject('sound', value);
+            this.set('sound', value);
         },
         /**
          * @ngdoc function
@@ -482,7 +502,7 @@ service('user', ['$rootScope', '$cookies', function ($rootScope, $cookies) {
          * @returns {string} Color
          */
         getColorGame: function () {
-            return $cookies.get('colorGame');
+            return this.get('colorGame');
         },
         /**
          * @ngdoc function
@@ -494,7 +514,7 @@ service('user', ['$rootScope', '$cookies', function ($rootScope, $cookies) {
          */
         setColorGame: function (value) {
             $rootScope.user.colorGame = value;
-            $cookies.put('colorGame', value);
+            this.set('colorGame', value);
         },
         /**
          * @ngdoc function
@@ -505,7 +525,7 @@ service('user', ['$rootScope', '$cookies', function ($rootScope, $cookies) {
          * @returns {object} Data Game
          */
         getDataGame: function () {
-            return $cookies.getObject('dataGame');
+            return this.get('dataGame');
         },
         /**
          * @ngdoc function
@@ -517,7 +537,7 @@ service('user', ['$rootScope', '$cookies', function ($rootScope, $cookies) {
          */
         setDataGame: function (value) {
             $rootScope.dataGame = value;
-            $cookies.putObject('dataGame', value);
+            this.set('dataGame', value);
         }
     };
 }]).
