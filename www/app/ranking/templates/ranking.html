@@ -1,28 +1,28 @@
 <div class="app-ranking mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col">
     <div class="app-ranking__toggle">
         <span class="app-ranking__toggle-content">
-            <button ng-click="setType('blitz')"
-                    ng-class="{'checked': type === 'blitz'}"
-                    class="app-button mdl-button mdl-js-button mdl-js-ripple-effect">
+            <a href="#!/ranking/blitz"
+               ng-class="{'checked': type === 'blitz'}"
+               class="app-button mdl-button mdl-js-button mdl-js-ripple-effect">
                 {{ 'blitz' | translate }}
-            </button>
-            <button ng-click="top100('blitz')"
-                    ng-class="{'checked': type === 'blitzTop100'}"
-                    class="app-button mdl-button mdl-js-button mdl-js-ripple-effect">
+            </a>
+            <a href="#!/ranking/blitz-100"
+               ng-class="{'checked': type === 'blitzTop100'}"
+               class="app-button mdl-button mdl-js-button mdl-js-ripple-effect">
                 {{ 'blitz' | translate }} {{ 'top100'|translate }}
-            </button>
+            </a>
         </span>
         <span class="app-ranking__toggle-content">
-            <button ng-click="setType('rapid')"
-                    ng-class="{'checked': type === 'rapid'}"
-                    class="app-button mdl-button mdl-js-button mdl-js-ripple-effect">
+            <a href="#!/ranking/rapid"
+               ng-class="{'checked': type === 'rapid'}"
+               class="app-button mdl-button mdl-js-button mdl-js-ripple-effect">
                 {{ 'rapid' | translate }}
-            </button>
-            <button ng-click="top100('rapid')"
-                    ng-class="{'checked': type === 'rapidTop100'}"
-                    class="app-button mdl-button mdl-js-button mdl-js-ripple-effect">
+            </a>
+            <a href="#!/ranking/rapid-100"
+               ng-class="{'checked': type === 'rapidTop100'}"
+               class="app-button mdl-button mdl-js-button mdl-js-ripple-effect">
                 {{ 'rapid' | translate }} {{ 'top100'|translate }}
-            </button>
+            </a>
         </span>
     </div>
     <div ng-show="loadRanking" class="app-ranking__spinner">
