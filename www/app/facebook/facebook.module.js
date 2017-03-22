@@ -71,8 +71,10 @@ service('facebook', ['$rootScope', 'user', 'socket', 'facebookAppId',
             } else {
                 facebookConnectPlugin.login(['user_friends'], function (response) {
                     setLoginStatus(response);
-                    self.handleLogin();
-                });
+                    if (response.status === 'connected') {
+                        this.handleLogin();
+                    }
+                }.bind(this));
             }
         };
 
