@@ -70,9 +70,8 @@
 
     <div id="modal-container"></div>
 
-    <div class="app-layout mdl-layout mdl-js-layout mdl-layout--fixed-header" 
-         ng-if="ready"
-         ng-show="!loading" 
+    <div class="app-layout mdl-layout mdl-js-layout mdl-layout--fixed-header"
+         ng-show="ready && !loading" 
          ng-class="{'is-user-game': user.gid, 'is-game': isGame, 'is-toggle': isToggle }"
          data-layout>
          
