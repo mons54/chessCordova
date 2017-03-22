@@ -81,10 +81,9 @@ service('google', ['$rootScope', 'googleClientId', 'user', 'socket', 'translator
                 }, function (response) {
                     this.status = 'connected';
                     setAuth(response);
-                    callback(this);
+                    this.handleLogin();
                 }.bind(this), function (error) {
                     this.status = 'unknown';
-                    callback(this);
                 }.bind(this));
             }
         };
