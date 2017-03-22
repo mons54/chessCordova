@@ -129,7 +129,7 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
 
         function logout() {
             $rootScope.loading = true;
-            delete $rootScope.ready;
+            delete $rootScope.connected;
             user.setLogin(false);
             socket.disconnect();
             initUser();
@@ -186,14 +186,26 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
         }
 
         socket.on('connect', function () {
-            var login = user.getLogin();
+
+            var success = false,
+                login = user.getLogin();
+
+            if (!login) {
+                logout();
+                return;
+            }
 
             if (login === 'facebook' && facebook.auth) {
                 socket.emit('facebookConnect', facebook.auth);
+                success = true;
             } else if (login === 'google' && google.auth) {
                 socket.emit('googleConnect', google.auth);
-            } else if (!login) {
-                logout();
+                success = true;
+            }
+
+            if (success) {
+                modalConnect.hide();
+                $rootScope.connected = true;
             }
         });
 
@@ -211,6 +223,7 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
         });
 
         socket.on('disconnect', function (data) {
+            delete $rootScope.ready;
             $rootScope.loading = true;
             $rootScope.isDisconnected = true;
             if (data === 'io server disconnect') {
@@ -234,8 +247,6 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
         });
 
         socket.on('connected', function (data) {
-
-            modalConnect.hide();
 
             translator.use(data.lang);
 
