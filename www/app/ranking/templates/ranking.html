@@ -28,23 +28,27 @@
     <div ng-show="loadRanking" class="app-ranking__spinner">
         <div data-spinner class="mdl-spinner mdl-js-spinner is-active"></div>
     </div>
-    <table class="app-table app-table--ranking mdl-data-table mdl-js-data-table">
-        <tbody>
-            <tr ng-repeat="rank in ranking" 
-                ng-class="{'is-user': rank.uid === user.uid }">
-                <td class="app-table__rank mdl-data-table__cell--non-numeric">{{ rank.position }}</td>
-                <td class="app-table__user mdl-data-table__cell--non-numeric">
-                    <a href
-                       show-profile="rank.uid">
-                        <img avatar
-                             class="app-table__avatar" 
-                             ng-src="{{rank.avatar}}">
-                        <span class="app-table__name">{{ rank.name }}</span>
-                    </a>
-                </td>
-                <td class="app-table__points">{{ rank.points }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="app-ranking__content">
+        <table class="app-table app-table--ranking mdl-data-table mdl-js-data-table">
+            <tbody>
+                <tr ng-repeat="rank in ranking" 
+                    ng-class="{'is-user': rank.uid === user.uid }">
+                    <td class="app-table__rank mdl-data-table__cell--non-numeric">{{ rank.position }}</td>
+                    <td class="app-table__avatar mdl-data-table__cell--non-numeric">
+                        <a href show-profile="rank.uid">
+                            <img avatar class="app-avatar" ng-src="{{ rank.avatar }}">
+                        </a>
+                    </td>
+                    <td class="app-table__user mdl-data-table__cell--non-numeric">
+                        <a href show-profile="rank.uid">
+                            <span class="app-table__name">{{ rank.name }}</span>
+                        </a>
+                    </td>
+                    <td class="app-table__points">{{ rank.points }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
     <div class="app-pagination" pagination></div>
 </div>
+<div ng-if="count" class="app-ranking__count">{{ count }} {{ 'players'|translate }}</div>
