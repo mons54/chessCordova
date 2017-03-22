@@ -128,7 +128,6 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
         }
 
         function logout() {
-            $rootScope.loading = true;
             delete $rootScope.connected;
             user.setLogin(false);
             socket.disconnect();
@@ -170,7 +169,7 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
             }
 
             if (login === service.name && service.status === 'connected') {
-                service.handleLogin();
+                    service.handleLogin();
             }
         }
 
@@ -187,13 +186,16 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
 
         socket.on('connect', function () {
 
-            var success = false,
-                login = user.getLogin();
+            delete $rootScope.disconnectMultiSocket;
+
+            var login = user.getLogin();
 
             if (!login) {
                 logout();
                 return;
             }
+
+            var success = false
 
             if (login === 'facebook' && facebook.auth) {
                 socket.emit('facebookConnect', facebook.auth);
@@ -205,6 +207,7 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
 
             if (success) {
                 modalConnect.hide();
+                $rootScope.loading = true;
                 $rootScope.connected = true;
             }
         });
@@ -224,7 +227,6 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
 
         socket.on('disconnect', function (data) {
             delete $rootScope.ready;
-            $rootScope.loading = true;
             $rootScope.isDisconnected = true;
             if (data === 'io server disconnect') {
                 hideModal();
@@ -281,10 +283,9 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
 
             delete $rootScope.refreshAccessToken;
             delete $rootScope.isDisconnected;
-            delete $rootScope.disconnectMultiSocket;
             delete $rootScope.loadModalProfile;
             delete $rootScope.loading;
-            
+
             $rootScope.ready = true;
         });
 
@@ -327,7 +328,7 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
         $rootScope.isFavorite = function (uid) {
             return $rootScope.user.favorites && $rootScope.user.favorites.indexOf(uid) !== -1;
         };
-
+        
         document.addEventListener('pause', function() {
             $rootScope.$emit('unload');
             if ($rootScope.disconnectMultiSocket) {
@@ -425,8 +426,6 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
         setLoginStatus();
 
         var modalConnect = modal('#modal-connect');
-
-        $rootScope.loading = true;
 
         initUser();
 
