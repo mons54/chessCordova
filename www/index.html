@@ -29,9 +29,10 @@
     </div>
 
     <div ng-show="loading" class="app-loading">
-        <div ng-hide="disconnectMultiSocket || unauthorized" 
+        <div ng-hide="disconnectMultiSocket || unauthorized || !ready" 
              class="app-loader mdl-progress mdl-js-progress mdl-progress__indeterminate">
         </div>
+        <div ng-show="!ready" class="app-init"></div>
         <i ng-show="disconnectMultiSocket" 
             ng-click="reconnect()"
             ng-bind="'play_arrow'"
