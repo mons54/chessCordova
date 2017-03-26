@@ -117,6 +117,8 @@ service('sound', ['$rootScope', 'user', function ($rootScope, user) {
 
         this.stop = function () {
             if (this.sound) {
+                alert('stop');
+                alert(this.sound)
                 this.sound.stop();
             }
             return this;
