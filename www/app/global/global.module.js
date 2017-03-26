@@ -125,6 +125,7 @@ service('sound', ['$rootScope', 'user', function ($rootScope, user) {
         };
 
         this.stop = function () {
+            alert(this.isPlayed());
             if (this.isPlayed()) {
                 this.sound.stop();
             }
