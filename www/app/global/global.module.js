@@ -115,6 +115,13 @@ service('sound', ['$rootScope', 'user', function ($rootScope, user) {
             return this;
         };
 
+        this.pause = function () {
+            if (this.sound) {
+                this.sound.pause();
+            }
+            return this;
+        };
+
         this.stop = function () {
             if (this.sound) {
                 this.sound.pause();
