@@ -105,13 +105,7 @@ service('sound', ['$rootScope', 'user', function ($rootScope, user) {
 
         if (sounds &&
             sounds[name]) {
-            this.sound = new Audio(sounds[name], null, null, function () {
-                if (status === Media.MEDIA_STARTING || status === Media.MEDIA_RUNNING) {
-                    this.played = true;
-                } else {
-                    this.played = false;
-                }
-            });
+            this.sound = new Audio(sounds[name]);
         }
 
         this.play = function () {
@@ -121,15 +115,8 @@ service('sound', ['$rootScope', 'user', function ($rootScope, user) {
             return this;
         };
 
-        this.pause = function () {
-            if (this.isPlayed()) {
-                this.sound.pause();
-            }
-            return this;
-        };
-
         this.stop = function () {
-            if (this.isPlayed()) {
+            if (this.sound) {
                 this.sound.stop();
             }
             return this;
