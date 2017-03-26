@@ -105,7 +105,9 @@ service('sound', ['$rootScope', 'user', function ($rootScope, user) {
 
         if (sounds &&
             sounds[name]) {
-            this.sound = new Audio(sounds[name]);
+            this.sound = new Audio(sounds[name], null, null, function () {
+                this.played = status === Media.MEDIA_STARTING || status === Media.MEDIA_RUNNING;
+            });
         }
 
         this.play = function () {
@@ -144,9 +146,9 @@ service('sound', ['$rootScope', 'user', function ($rootScope, user) {
         sound = user.getSound();
 
     sounds = {
-        timer: new Media('https://worldofchess.online/sounds/timer.mp3', null, null, setStatus),
-        deplace: new Media('https://worldofchess.online/sounds/deplace.mp3', null, null, setStatus),
-        capture: new Media('https://worldofchess.online/sounds/capture.mp3', null, null, setStatus)
+        timer: 'https://worldofchess.online/sounds/timer.mp3',
+        deplace: 'https://worldofchess.online/sounds/deplace.mp3',
+        capture: 'https://worldofchess.online/sounds/capture.mp3'
     };
 
     return Sound;
