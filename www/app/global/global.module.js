@@ -117,22 +117,12 @@ service('sound', ['$rootScope', 'user', function ($rootScope, user) {
 
         this.stop = function () {
             if (this.sound) {
-                alert('stop');
-                alert(this.sound)
                 this.sound.stop();
             }
             return this;
         };
 
-        this.isPlayed = function () {
-            return this.sound && this.sound.played;
-        };
-
         return this;
-    }
-
-    function setStatus(status) {
-        this.played = status === Media.MEDIA_STARTING || status === Media.MEDIA_RUNNING;
     }
 
     var sounds,
