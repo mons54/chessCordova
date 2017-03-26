@@ -3567,7 +3567,7 @@ a {
   }
 
   .app-game__played--phone-notation:nth-child(2n + 1) {
-    margin: 0 6px;
+    margin: 0 4px;
   }
 
   .app-game__played--phone-notation.is-active {
@@ -3581,7 +3581,8 @@ a {
   }
 
   .app-game__played--phone .app-table--game tr td {
-    padding-left: 12px;
+    padding: 0;
+    padding-right: 8px;
   }
 
   .app-game__toggle .app-game__toggle-content {
