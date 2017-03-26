@@ -106,7 +106,11 @@ service('sound', ['$rootScope', 'user', function ($rootScope, user) {
         if (sounds &&
             sounds[name]) {
             this.sound = new Audio(sounds[name], null, null, function () {
-                this.played = status === Media.MEDIA_STARTING || status === Media.MEDIA_RUNNING;
+                if (status === Media.MEDIA_STARTING || status === Media.MEDIA_RUNNING) {
+                    this.played = true;
+                } else {
+                    this.played = false;
+                }
             });
         }
 
@@ -125,7 +129,6 @@ service('sound', ['$rootScope', 'user', function ($rootScope, user) {
         };
 
         this.stop = function () {
-            alert(this.isPlayed());
             if (this.isPlayed()) {
                 this.sound.stop();
             }
