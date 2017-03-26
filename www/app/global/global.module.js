@@ -111,14 +111,13 @@ service('sound', ['$rootScope', 'user', function ($rootScope, user) {
         this.play = function () {
             if (sound) {
                 this.sound.play();
+                this.sound.stop();
             }
             return this;
         };
 
         this.stop = function () {
-            if (this.sound) {
-                this.sound.stop();
-            }
+            
             return this;
         };
 
