@@ -579,7 +579,7 @@ controller('gameCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$f
 
             if (!$scope.isPlayerTurn()) {
                 timerSound.pause();
-            } else if (player.time < 10000 || player.timeTurn < 10000) {
+            } else {
                 timerSound.play();
             }
 
