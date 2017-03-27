@@ -552,7 +552,9 @@ controller('gameCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$f
 
         function cancelInterval() {
             $interval.cancel($interval.stopTimeGame);
-            timerSound.stop();
+            if (timerSound) {
+                timerSound.stop();
+            }
         }
 
         var interval = 100;
