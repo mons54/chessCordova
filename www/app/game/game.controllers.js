@@ -126,8 +126,11 @@ controller('gameCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$f
                 $scope.game &&
                 game.played.length !== $scope.game.played.length &&
                 game.played[game.played.length - 1]) {
-
-                new sound($scope.game.pieces[game.played[game.played.length - 1].end] ? 'capture' : 'deplace').play();
+                try {
+                    new sound($scope.game.pieces[game.played[game.played.length - 1].end] ? 'capture' : 'deplace').play();
+                } catch(e) {
+                    alert(e);
+                }
             }
 
             setLostPieces(game);
@@ -286,7 +289,11 @@ controller('gameCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$f
 
         $scope.move = function (start, end, promotion) {
 
-            new sound($scope.game.pieces[end] ? 'capture' : 'deplace').play();
+            try {
+                new sound($scope.game.pieces[end] ? 'capture' : 'deplace').play();
+            } catch(e) {
+                alert(e);
+            }
 
             socket.emit('moveGame', {
                 id: $scope.game.id,
@@ -429,7 +436,11 @@ controller('gameCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$f
         $scope.setSound = function () {
             $scope.sound = !$scope.sound;
             user.setSound($scope.sound);
-            timerSound.stop();
+            try {
+                timerSound.stop();
+            } catch(e) {
+                alert(e);
+            }
         };
 
         $scope.setColorGame = function (color) {
@@ -552,8 +563,10 @@ controller('gameCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$f
 
         function cancelInterval() {
             $interval.cancel($interval.stopTimeGame);
-            if (timerSound) {
+            try {
                 timerSound.stop();
+            } catch(e) {
+                alert(e);
             }
         }
 
@@ -564,7 +577,11 @@ controller('gameCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$f
             var game = $scope.game;
 
             if (!game || game.finish) {
-                timerSound.stop();
+                try {
+                    timerSound.stop();
+                } catch(e) {
+                    alert(e);
+                }
                 return;
             }
 
@@ -580,9 +597,17 @@ controller('gameCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$f
             }
 
             if (!$scope.isPlayerTurn()) {
-                timerSound.stop();
+                try {
+                    timerSound.stop();
+                } catch(e) {
+                    alert(e);
+                }
             } else if (player.time < 10000 || player.timeTurn < 10000) {
-                timerSound.play();
+                try {
+                    timerSound.play();
+                } catch(e) {
+                    alert(e);
+                }
             }
 
         }, interval);
