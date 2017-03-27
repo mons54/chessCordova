@@ -106,7 +106,7 @@ service('sound', ['$rootScope', 'user', function ($rootScope, user) {
         if (sounds &&
             sounds[name]) {
             this.sound = new Audio(sounds[name], function () {
-                //this.release();
+                this.release();
             });
         }
 
