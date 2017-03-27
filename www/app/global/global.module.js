@@ -105,7 +105,9 @@ service('sound', ['$rootScope', 'user', function ($rootScope, user) {
 
         if (sounds &&
             sounds[name]) {
-            this.sound = new Audio(sounds[name]);
+            this.sound = new Audio(sounds[name], function () {
+                this.release();
+            });
         }
 
         this.play = function () {
@@ -118,14 +120,6 @@ service('sound', ['$rootScope', 'user', function ($rootScope, user) {
         this.pause = function () {
             if (this.sound) {
                 this.sound.pause();
-            }
-            return this;
-        };
-
-        this.stop = function () {
-            if (this.sound) {
-                this.sound.pause();
-                this.sound.seekTo(0);
             }
             return this;
         };

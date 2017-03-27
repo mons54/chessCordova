@@ -429,7 +429,7 @@ controller('gameCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$f
         $scope.setSound = function () {
             $scope.sound = !$scope.sound;
             user.setSound($scope.sound);
-            timerSound.stop();
+            timerSound.pause();
         };
 
         $scope.setColorGame = function (color) {
@@ -552,7 +552,7 @@ controller('gameCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$f
 
         function cancelInterval() {
             $interval.cancel($interval.stopTimeGame);
-            timerSound.stop();
+            timerSound.pause();
         }
 
         var interval = 100;
@@ -562,7 +562,7 @@ controller('gameCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$f
             var game = $scope.game;
 
             if (!game || game.finish) {
-                timerSound.stop();
+                timerSound.pause();
                 return;
             }
 
@@ -578,7 +578,7 @@ controller('gameCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$f
             }
 
             if (!$scope.isPlayerTurn()) {
-                timerSound.stop();
+                timerSound.pause();
             } else if (player.time < 10000 || player.timeTurn < 10000) {
                 timerSound.play();
             }
