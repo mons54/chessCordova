@@ -6,4 +6,4 @@ plugins/
 hooks/
 npm-debug.log
 node_modules/
-res/
+/res/
