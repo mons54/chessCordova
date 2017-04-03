@@ -322,18 +322,18 @@
             ng-repeat="color in colorsGame"
             ng-click="setColorGame(color)"
             ng-class="{'app-button--show': !$index }"
-            class="app-button app-button--color app-button--color-{{ color }} mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+            class="app-button app-button--color app-button--color-{{ color }} mdl-button mdl-js-button mdl-button--fab">
     </button>
 </div>
 
 <div ng-hide="hideFixedButton"
      class="app-button__fixed app-button__fixed--game app-button__fixed--action">
-    <button class="app-button app-button--show mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"
+    <button class="app-button app-button--show mdl-button mdl-js-button mdl-button--fab mdl-button--colored"
             ng-hide="game.finish"
             ng-click="setSound();">
         <i class="material-icons">{{ sound ? 'volume_up' : 'volume_off'}}</i>
     </button>
-    <button class="app-button app-button--show mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"
+    <button class="app-button app-button--show mdl-button mdl-js-button mdl-button--fab mdl-button--colored"
             ng-hide="!game.finish"
             show-modal="#modal-finish-game">
         <i class="material-icons">flag</i>
@@ -534,11 +534,11 @@
                 <button modal-close
                         ng-if="!game.archived && isPlayer()"
                         ng-click="rematch()"
-                        class="app-button mdl-button mdl-button--colored mdl-button--raised mdl-js-button mdl-js-ripple-effect">
+                        class="app-button mdl-button mdl-button--colored mdl-button--raised mdl-js-button">
                     {{ 'rematch' | translate }}
                 </button>
                 <button modal-close show-modal="#modal-create-game"
-                        class="app-button mdl-button mdl-button--colored mdl-button--raised mdl-js-button mdl-js-ripple-effect">
+                        class="app-button mdl-button mdl-button--colored mdl-button--raised mdl-js-button">
                     {{ 'create_game' | translate }}
                 </button>
             </div>

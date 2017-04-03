@@ -242,7 +242,7 @@
              <button show-button 
                     type="button"
                     ng-click="showMore = true"
-                    class="app-button app-button--show mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+                    class="app-button app-button--show mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
                 <i class="material-icons">add</i>
             </button>
             <button type="button"
@@ -268,7 +268,7 @@
             <button hide-button 
                     type="button"
                     ng-click="showMore = false"
-                    class="app-button app-button--hide mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+                    class="app-button app-button--hide mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
                 <i class="material-icons">clear</i>
             </button>
         </div>
@@ -276,7 +276,7 @@
         <div class="app-button__fixed app-button__fixed--mobile" 
              ng-hide="isGame"
              ng-class="{'app-button__fixed--pagination': pages}">
-            <button class="app-button app-button--show mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"
+            <button class="app-button app-button--show mdl-button mdl-js-button mdl-button--fab mdl-button--colored"
                     ng-click="closeDrawer()"
                     show-modal="#modal-create-game">
                 <i class="material-icons">games</i>
@@ -454,11 +454,11 @@
                                             <td class="app-table__actions">
                                                 <button ng-if="!challenge.create" 
                                                         ng-click="$event.stopPropagation(); startChallenge(challenge.uid)" 
-                                                        class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-button--colored">
+                                                        class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
                                                     <i class="app-icon material-icons">check</i>
                                                 </button>
                                                 <button ng-click="$event.stopPropagation(); removeChallenge(challenge.uid)" 
-                                                        class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+                                                        class="mdl-button mdl-js-button mdl-button--icon">
                                                     <i class="app-icon material-icons">close</i>
                                                 </button>
                                             </td>
@@ -529,7 +529,7 @@
                                             ng-repeat="color in colorsGame"
                                             ng-click="settings.colorGame = color"
                                             ng-class="{'checked': settings.colorGame === color }"
-                                            class="app-button app-button--color app-button--color-{{ color }} mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect">
+                                            class="app-button app-button--color app-button--color-{{ color }} mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab">
                                     </button>
                                 </div>
                             </div>
@@ -538,7 +538,7 @@
                                 <span class="app-modal__settings-icon">
                                     <i class="material-icons">volume_up</i>
                                 </span>
-                                <label class="app-modal__settings-field mdl-switch mdl-js-switch mdl-js-ripple-effect" for="settings-sound">
+                                <label class="app-modal__settings-field mdl-switch mdl-js-switch" for="settings-sound">
                                     <input ng-model="settings.sound" type="checkbox" id="settings-sound" class="mdl-switch__input">
                                     <span class="mdl-switch__label"></span>
                                 </label>
