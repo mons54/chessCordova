@@ -63,7 +63,7 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
             hideModal();
             closeDrawer();
 
-            //$('[autoscroll]').scrollTop(0);
+            $('[autoscroll]').scrollTop(0);
             
             // Used for refresh user when join home if true
             if (fromState && $rootScope.user && !$rootScope.user.refresh) {
