@@ -73,7 +73,18 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
 
         
         function closeDrawer () {
-            $('.mdl-drawer, .mdl-layout__obfuscator').removeClass('is-visible');
+
+            var drawer = angular.element('.mdl-layout__drawer');
+            if (!drawer || !drawer.hasClass('is-visible')) {
+                return;
+            }
+
+            var layout = document.querySelector('.mdl-layout.is-small-screen').MaterialLayout;
+            if (!layout) {
+                return;
+            }
+
+            layout.toggleDrawer();
         }
 
         $rootScope.closeDrawer = closeDrawer;
