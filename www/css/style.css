@@ -357,8 +357,8 @@ a {
 }
 
 .app-done.hide {
+  transition: all 1s ease-out;
   -webkit-transition: all 1s ease-in;
-          transition: all 1s ease-out;
   opacity: 0;
 }
 
@@ -765,8 +765,7 @@ a {
   -ms-flex-order: 1;
   order: 1;
   width: 500px;
-  -webkit-transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-          transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),
   width 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -830,17 +829,8 @@ a {
 }
  
 .app-drawer {
-  z-index: 10;
+  z-index:  10;
   border-right: none;
-  transform: initial;
-  left: -240px;
-  -webkit-transition: 0.5s ease;
-          transition: 0.5s ease;
-}
-
-.app-drawer.is-visible {
-  transform: initial;
-  left: 0;
 }
 
 .app-drawer .mdl-navigation__link.mdl-navigation__link {
@@ -2947,8 +2937,7 @@ a {
     left: 56px;
     right: 60px;
     top: 10px;
-    -webkit-transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .app-navigation__profile {
