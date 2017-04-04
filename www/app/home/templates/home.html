@@ -1,4 +1,4 @@
-<div element class="app-element app-element--created-games mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col">
+<div ng-if="createdGames" element class="app-element app-element--created-games mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col">
     <element-toggle name="'games'" collection="createdGames"></element-toggle>
     <div element-content 
          class="app-element__body">
@@ -131,7 +131,7 @@
     </div>
 </div>
 
-<div element class="app-element mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col">
+<div ng-if="challengers" element class="app-element mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col">
     <element-toggle name="'challengers'" collection="challengers"></element-toggle>
     <div element-content 
          ng-show="challengers.length"
