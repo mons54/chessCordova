@@ -73,7 +73,7 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
 
         
         function closeDrawer () {
-            $('.mdl-drawer, .mdl-layout__obfuscator').removeClass('is-visible');
+            $('.mdl-layout__drawer, .mdl-layout__obfuscator').removeClass('is-visible');
         }
 
         $rootScope.closeDrawer = closeDrawer;
