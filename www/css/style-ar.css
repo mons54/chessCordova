@@ -388,15 +388,14 @@
   right: 0;
 }
 
-.mdl-layout__drawer {
-  right: 0;
-  -webkit-transform: translateX(250px);
-  transform: translateX(250px);
+.app-drawer {
+  left: initial;
+  right: -240px;
 }
 
-.mdl-layout__drawer.is-visible {
-  -webkit-transform: translateX(0);
-  transform: translateX(0);
+.app-drawer.is-visible {
+  left: initial;
+  right: 0;
 }
 
 .app-modal__actions button {
