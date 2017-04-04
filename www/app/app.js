@@ -51,6 +51,8 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
                 if (toState.name !== 'game' || toState.params.id === $rootScope.user.gid) {
                     redirectToGame();
                 }
+            } else {
+                closeDrawer();
             }
         });
 
@@ -61,7 +63,6 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
             $rootScope.currentRoute = toState.name;
 
             hideModal();
-            closeDrawer();
 
             $('[autoscroll]').scrollTop(0);
             
