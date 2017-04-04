@@ -119,6 +119,11 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
         $rootScope.inviteFriends = utils.inviteFriends;
 
         function setTitle(title) {
+
+            if (title === false) {
+                return;
+            }
+
             if (typeof title !== 'string') {
                 title = 'title';
             }
@@ -496,6 +501,7 @@ config(['$routeProvider', '$locationProvider',
         })
         .when('/profile/:id', {
             name : 'profile',
+            title: false,
             templateUrl: 'app/profile/templates/profile.html',
             controller: 'profileCtrl',
             reloadOnSearch: false
