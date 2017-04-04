@@ -56,14 +56,14 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
 
         $rootScope.$on('$routeChangeSuccess', function(event, toState, fromState) {
 
-            $('[autoscroll]').scrollTop(0);
-
             setTitle(toState.title);
 
             $rootScope.currentRoute = toState.name;
 
             hideModal();
             closeDrawer();
+
+            $('[autoscroll]').scrollTop(0);
             
             // Used for refresh user when join home if true
             if (fromState && $rootScope.user && !$rootScope.user.refresh) {
