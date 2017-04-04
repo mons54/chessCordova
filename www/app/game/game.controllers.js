@@ -32,12 +32,12 @@ controller('gameCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$f
         socket.emit('initGame', $routeParams.id);
 
         $scope.$on('$destroy', function() {
+            delete $rootScope.loadingContent;
+            delete $rootScope.isGame;
             if ($scope.game && !$scope.game.archived) {
                 socket.emit('leaveGame', $scope.game.id);
             }
             cancelInterval();
-            delete $rootScope.loadingContent;
-            delete $rootScope.isGame;
         });
 
         $rootScope.$watch('disconnectMultiSocket', function (value) {
