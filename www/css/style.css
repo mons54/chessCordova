@@ -827,7 +827,16 @@ a {
   display: inline-block;
   margin-left: 8px;
 }
- 
+
+.mdl-layout__drawer {
+  -webkit-transform: translate3d(-250px, 0, 0);
+  transform: translate3d(-250px, 0, 0);
+}
+.mdl-layout__drawer.is-visible {
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
 .app-drawer {
   z-index:  10;
   border-right: none;
