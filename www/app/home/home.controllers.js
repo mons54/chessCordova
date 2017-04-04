@@ -14,10 +14,10 @@ controller('homeCtrl', ['$rootScope', '$scope', '$sce', '$timeout', 'socket', 't
     
     function ($rootScope, $scope, $sce, $timeout, socket, translator, utils, paramsGame, orderByFilter) {
 
-        $rootScope.loading = true;
+        $rootScope.loadingContent = true;
 
         $scope.$on('$destroy', function() {
-            delete $rootScope.loading;
+            delete $rootScope.loadingContent;
             socket.emit('leaveHome');
         });
 
@@ -42,7 +42,7 @@ controller('homeCtrl', ['$rootScope', '$scope', '$sce', '$timeout', 'socket', 't
         
         socket.on('listGames', function (data) {
 
-            delete $rootScope.loading;
+            delete $rootScope.loadingContent;
 
             var userGame;
 

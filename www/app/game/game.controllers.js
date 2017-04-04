@@ -26,7 +26,7 @@ controller('gameCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$f
             return;
         }
 
-        $rootScope.loading = true;
+        $rootScope.loadingContent = true;
         $rootScope.isGame = true;
 
         socket.emit('initGame', $routeParams.id);
@@ -36,6 +36,7 @@ controller('gameCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$f
                 socket.emit('leaveGame', $scope.game.id);
             }
             cancelInterval();
+            delete $rootScope.loadingContent;
             delete $rootScope.isGame;
         });
 
@@ -65,7 +66,7 @@ controller('gameCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$f
 
             var gameCopy;
 
-            $rootScope.loading = false;
+            delete $rootScope.loadingContent;
 
             if (!game) {
                 delete $rootScope.user.gid;
