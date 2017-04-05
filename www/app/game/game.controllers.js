@@ -289,6 +289,13 @@ controller('gameCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$f
 
             new sound($scope.game.pieces[end] ? 'capture' : 'deplace').play();
 
+            var game = angular.copy($scope.game);
+
+            new $window.chess.engine(game, start, end, promotion);
+
+            $scope.game.turn = game.turn;
+            $scope.game.pieces = game.pieces;
+
             socket.emit('moveGame', {
                 id: $scope.game.id,
                 start: start,
