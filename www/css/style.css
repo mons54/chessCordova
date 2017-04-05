@@ -3454,8 +3454,9 @@ a {
   .app-modal__content {
     padding: 16px 8px;
   }
-
+  
   .app-modal__head {
+    height: 24px;
     line-height: 24px;
     font-size: 20px;
     padding-right: 40px;
