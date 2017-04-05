@@ -283,6 +283,13 @@ controller('gameCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$f
 
         $scope.move = function (start, end, promotion) {
 
+            socket.emit('moveGame', {
+                id: $scope.game.id,
+                start: start,
+                end: end,
+                promotion: promotion
+            });
+
             new sound($scope.game.pieces[end] ? 'capture' : 'deplace').play();
 
             var game = angular.copy($scope.game);
@@ -291,13 +298,6 @@ controller('gameCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$f
 
             $scope.game.turn = game.turn;
             $scope.game.pieces = game.pieces;
-
-            socket.emit('moveGame', {
-                id: $scope.game.id,
-                start: start,
-                end: end,
-                promotion: promotion
-            });
         };
 
         $scope.isPlayerTurn = function() {
