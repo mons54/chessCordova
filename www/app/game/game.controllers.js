@@ -121,7 +121,6 @@ controller('gameCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$f
                 numbers = ['8', '7', '6', '5', '4', '3', '2', '1'];
 
             if ($scope.game &&
-                game[game.turn].uid === $rootScope.user.uid &&
                 game.played.length !== $scope.game.played.length &&
                 game.played[game.played.length - 1]) {
                 new sound($scope.game.pieces[game.played[game.played.length - 1].end] ? 'capture' : 'deplace').play();
@@ -279,25 +278,6 @@ controller('gameCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$f
                 return false;
             }
             return piece.color === $scope.game.turn && piece.name === 'king';
-        };
-
-        $scope.move = function (start, end, promotion) {
-
-            socket.emit('moveGame', {
-                id: $scope.game.id,
-                start: start,
-                end: end,
-                promotion: promotion
-            });
-
-            new sound($scope.game.pieces[end] ? 'capture' : 'deplace').play();
-
-            var game = angular.copy($scope.game);
-
-            new $window.chess.engine(game, start, end, promotion);
-
-            $scope.game.turn = game.turn;
-            $scope.game.pieces = game.pieces;
         };
 
         $scope.isPlayerTurn = function() {
