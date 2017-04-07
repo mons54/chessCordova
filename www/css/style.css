@@ -3382,7 +3382,7 @@ a {
   .app-profile__game-points {
     margin-top: 0;
     font-size: 14px;
-}
+  }
   
   .app-table.app-table--game {
     font-size: 12px;
@@ -3454,7 +3454,7 @@ a {
   .app-modal__content {
     padding: 16px 8px;
   }
-  
+
   .app-modal__head {
     height: 24px;
     line-height: 24px;
@@ -3523,21 +3523,30 @@ a {
     left: 40px;
   }
 
+  .app-game__toggle-head--phone .app-game__toggle-icon--phone:nth-of-type(3) {
+    border-left: 0;
+    left: 80px;
+  }
+
   .app-game__toggle--phone-archived .app-game__toggle-head--phone .app-game__toggle-icon--phone:nth-of-type(2) {
     left: 0;
   }
 
-  .app-game__toggle-head--phone .app-game__toggle-icon--phone:nth-of-type(3) {
-    border-right: 0;
-    right: 80px;
+  .app-game__toggle--phone-archived .app-game__toggle-head--phone .app-game__toggle-icon--phone:nth-of-type(3) {
+    left: 40px;
   }
 
   .app-game__toggle-head--phone .app-game__toggle-icon--phone:nth-of-type(4) {
     border-right: 0;
-    right: 40px;
+    right: 80px;
   }
 
   .app-game__toggle-head--phone .app-game__toggle-icon--phone:nth-of-type(5) {
+    border-right: 0;
+    right: 40px;
+  }
+
+  .app-game__toggle-head--phone .app-game__toggle-icon--phone:nth-of-type(6) {
     border-right: 0;
     right: 0;
   }

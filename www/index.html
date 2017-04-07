@@ -109,10 +109,6 @@
                                ng-class="{'app-badge mdl-badge mdl-badge--overlap': !!challenges.length}"
                                data-badge="{{ challenges.length }}">games</i>
                         </a>
-                        <span ng-if="isGame">
-                            <i ng-if="online" class="material-icons">network_wifi</i>
-                            <i ng-if="!online" class="material-icons">signal_wifi_off</i>
-                        </span>
                         <div class="app-header-spacer app-header-spacer--1024 mdl-layout-spacer"></div>
                         <button type="button"
                                 class="app-button app-button--create-game mdl-button"
