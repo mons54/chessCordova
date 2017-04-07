@@ -116,10 +116,6 @@ directive('pieceDraggable', ['socket', 'modal', 'utils', function (socket, modal
 
                 function move(elementBox, position) {
 
-                    if (!online) {
-                        return false;
-                    }
-
                     if (isPromotion(position)) {
                         modalPromotion.show();
                         modalPromotion.find('[data-icon]').click(function() {
