@@ -464,7 +464,7 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
         });
 
         $rootScope.$watch(function () {
-            return navigator.onLine;
+            return $window.navigator.onLine;
         }, function (value) {
             alert(value);
             $rootScope.online = value;
