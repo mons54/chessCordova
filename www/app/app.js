@@ -463,18 +463,13 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
             }
         });
 
-        $window.$watch('navigator.onLine', function (value) {
-            alert(value);
-            $rootScope.online = value;
-        });
-
         $rootScope.$watch(function () {
             return navigator.onLine;
         }, function (value) {
             alert(value);
             $rootScope.online = value;
         });
-        
+
         setLoginStatus();
 
         var modalConnect = modal('#modal-connect');
