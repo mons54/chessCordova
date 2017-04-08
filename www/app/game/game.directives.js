@@ -134,6 +134,7 @@ directive('pieceDraggable', ['socket', 'modal', 'utils', function (socket, modal
                 }
 
                 function sendMove(position, promotion) {
+                    if (!navigator.onLine) alert('offline');
                     socket.emit('moveGame', {
                         id: game.id,
                         start: attr.position,
