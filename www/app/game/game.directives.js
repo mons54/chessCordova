@@ -139,8 +139,6 @@ directive('pieceDraggable', ['socket', 'modal', 'utils', function (socket, modal
                         start: attr.position,
                         end: position,
                         promotion: promotion
-                    }, function () {
-                        alert('ok');
                     });
                 }
 
