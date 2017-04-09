@@ -1,14 +1,17 @@
-'use strict';
-
 var game = {
     options: {
         pointsMin: 1000,
-        pointsMax: 2800,
+        pointsMax: 2000,
         colors: ['white', 'black'],
         games: [{
             type: 'blitz',
             time: 180,
             increment: 2
+        },
+        {
+            type: 'blitz',
+            time: 300,
+            increment: 0
         },
         {
             type: 'blitz',
@@ -33,6 +36,11 @@ var game = {
         {
             type: 'rapid',
             time: 1500,
+            increment: 0
+        },
+        {
+            type: 'rapid',
+            time: 1500,
             increment: 10
         }]
     },
@@ -40,23 +48,15 @@ var game = {
      * @param {string} gid Game Id
      * @param {object} white White data
      * @param {object} black Black data
-     * @param {string} game.type Game type
-     * @param {number} game.time Game time
-     * @param {number} game.increment Game time increment
+     * @param {string} type Game type
      */
-    newGame: function (white, black, game) {
+    newGame: function (white, black, type) {
     
-        var time = game.time,
-            timeTurn = 120,
-            nbPieces = 16;
+        var nbPieces = 16;
 
         return {
-            type: game.type,
+            type: type,
             startTime: new Date().getTime(),
-            time: time,
-            increment: game.increment,
-            timeTurn: timeTurn,
-            timestamp: 0,
             finish: false,
             turn: 'white',
             turn50: 0,
@@ -73,8 +73,6 @@ var game = {
                 points: white.points,
                 ranking: white.ranking,
                 countGame: white.countGame,
-                time: time,
-                timeTurn: timeTurn,
                 possibleDraw: false,
                 king: {
                     position: 'e1',
@@ -90,8 +88,6 @@ var game = {
                 points: black.points,
                 ranking: black.ranking,
                 countGame: black.countGame,
-                time: time,
-                timeTurn: timeTurn,
                 possibleDraw: false,
                 king: {
                     position: 'e8',
@@ -445,14 +441,6 @@ engine.prototype.init = function (start, end, promotion) {
         this.game.turn50++;
     }
 
-    this.game[this.game.turn].time += this.game.increment;
-
-    if (this.game[this.game.turn].time > this.game[this.game.turn].timeTurn) {
-        this.game[this.game.turn].timeTurn = this.game.timeTurn;
-    } else {
-        this.game[this.game.turn].timeTurn = this.game[this.game.turn].time;
-    }
-
     this.game[this.game.turn].possibleDraw = false;
 
     this.game.turn = this.game.turn == 'white' ? 'black' : 'white';
@@ -579,7 +567,7 @@ engine.prototype.init = function (start, end, promotion) {
         if (this.pat == true) {
             this.game.result.name = 'pat';
         } else {
-            this.game.result.name = 'nul';
+            this.game.result.name = 'null';
         }
     }
 
@@ -641,16 +629,12 @@ engine.prototype.setPieceMat = function (piece) {
 };
 
 engine.prototype.setPieceMatCapture = function (piece) {
-
-    if (!this.kingCheckCapture) {
-        return;
-    }
-
     if (this.inArray(this.kingCheckCapture, piece.capture)) {
-
         this.checkmat = false;
-
         this.capture.push(this.kingCheckCapture);
+    } else if (this.inPassing && this.inArray(this.inPassing, piece.capture)) {
+        this.checkmat = false;
+        this.capture.push(this.inPassing);
     }
 };
 
