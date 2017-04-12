@@ -103,12 +103,9 @@ service('sound', ['$rootScope', 'user', function ($rootScope, user) {
 
     function Sound(name) {
 
-        if (sounds &&
-            sounds[name]) {
-            this.sound = new Audio(sounds[name], function () {
-                this.release();
-            });
-        }
+        this.sound = new Audio(sounds[name], function () {
+            this.release();
+        });
 
         this.play = function () {
             if (sound) {
@@ -118,23 +115,19 @@ service('sound', ['$rootScope', 'user', function ($rootScope, user) {
         };
 
         this.pause = function () {
-            if (this.sound) {
-                this.sound.pause();
-            }
+            this.sound.pause();
             return this;
         };
 
         return this;
     }
 
-    var sounds,
-        sound = user.getSound();
-
-    sounds = {
-        timer: 'https://worldofchess.online/sounds/timer.mp3',
-        deplace: 'https://worldofchess.online/sounds/deplace.mp3',
-        capture: 'https://worldofchess.online/sounds/capture.mp3'
-    };
+    var sound = user.getSound(),
+        sounds = {
+            timer: 'https://worldofchess.online/sounds/timer.mp3',
+            deplace: 'https://worldofchess.online/sounds/deplace.mp3',
+            capture: 'https://worldofchess.online/sounds/capture.mp3'
+        };
 
     return Sound;
 }]).
