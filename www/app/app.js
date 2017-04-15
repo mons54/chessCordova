@@ -149,7 +149,6 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
 
         function setLoginStatus() {
             facebookSetLoginStatus();
-            googleSetLoginStatus();
         }
 
         function facebookSetLoginStatus () {
