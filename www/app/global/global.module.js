@@ -108,17 +108,14 @@ service('sound', ['$rootScope', 'user', function ($rootScope, user) {
         });
 
         this.play = function () {
-            if (sound && this.sound && this.sound.play) {
+            if (sound) {
                 this.sound.play();
             }
             return this;
         };
 
         this.pause = function () {
-            
-            if (this.sound && this.sound.pause) {
-                this.sound.pause();
-            } 
+            this.sound.pause();
             return this;
         };
 
