@@ -7,6 +7,7 @@
 angular.module('google', []).
 
 constant('googleClientId', '241448993510-5860ln6qoa9a1iov1t3j6uirsvhlerbb.apps.googleusercontent.com').
+constant('iOSApiKey', '241448993510-tpm610r2sqc7b4242al3tnhibltve3kj.apps.googleusercontent.com').
 
 /**
  * @ngdoc service
@@ -18,9 +19,9 @@ constant('googleClientId', '241448993510-5860ln6qoa9a1iov1t3j6uirsvhlerbb.apps.g
  * @requires global.service:socket
  * @requires global.service:translator
  */
-service('google', ['$rootScope', 'googleClientId', 'user', 'socket', 'translator',
+service('google', ['$rootScope', 'googleClientId', 'iOSApiKey', 'user', 'socket', 'translator',
 
-    function ($rootScope, googleClientId, user, socket, translator) {
+    function ($rootScope, googleClientId, iOSApiKey, user, socket, translator) {
 
         var self = this;
 
@@ -53,6 +54,7 @@ service('google', ['$rootScope', 'googleClientId', 'user', 'socket', 'translator
 
             window.plugins.googleplus.trySilentLogin({
                 webClientId: googleClientId,
+                iOSApiKey: iOSApiKey,
                 scope: 'profile'
             }, function (response) {
                 this.status = 'connected';
@@ -77,13 +79,12 @@ service('google', ['$rootScope', 'googleClientId', 'user', 'socket', 'translator
             } else {
                 window.plugins.googleplus.login({
                     webClientId: googleClientId,
+                    iOSApiKey: iOSApiKey,
                     scope: 'profile'
                 }, function (response) {
                     this.status = 'connected';
                     setAuth(response);
                     this.handleLogin();
-                }.bind(this), function (error) {
-                    this.status = 'unknown';
                 }.bind(this));
             }
         };
