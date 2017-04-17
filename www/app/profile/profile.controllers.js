@@ -59,7 +59,7 @@ controller('profileCtrl', ['$rootScope', '$scope', '$routeParams', '$window', '$
 
             };
 
-            $rootScope.loadingContent = false;
+            delete $rootScope.loadingContent;
 
         }, $scope);
 
