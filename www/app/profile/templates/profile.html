@@ -15,3 +15,10 @@
         </a>
     </div>
 </div>
+
+<div ng-if="profile.blitz && activeMenu === 'blitz'" 
+     class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col">
+    <div class="app-card__profile-stats">
+        <profile-game game-type="'blitz'" game-data="profile.blitz"></profile-game>
+    </div>
+</div>
