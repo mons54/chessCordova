@@ -11,10 +11,6 @@ angular.module('profile').
 controller('profileCtrl', ['$rootScope', '$scope', '$routeParams', '$window', '$location', '$timeout', 'socket', 'user',
     
     function ($rootScope, $scope, $routeParams, $window, $location, $timeout, socket, user) {
-        
-        $scope.test = 'ok';
-        
-        return;
 
         $rootScope.loadingContent = true;
 
@@ -202,5 +198,7 @@ controller('profileCtrl', ['$rootScope', '$scope', '$routeParams', '$window', '$
         });
 
         componentHandler.upgradeElement($('[data-spinner]')[0]);
+        
+        $scope.test = 'ok';
     }
 ]);
