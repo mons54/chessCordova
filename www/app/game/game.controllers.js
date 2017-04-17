@@ -1,6 +1,7 @@
-angular.module('game').
 
 try {
+    angular.module('game').
+
 /**
  * @ngdoc controller
  * @name game.controller:gameCtrl
