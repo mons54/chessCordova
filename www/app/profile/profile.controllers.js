@@ -47,10 +47,6 @@ controller('profileCtrl', ['$rootScope', '$scope', '$routeParams', '$window', '$
             $rootScope.title = data.name;
 
             $scope.profile = data;
-            
-            delete $rootScope.loadingContent;
-            
-            return;
 
             var userTrophies = data.trophies || {};
 
@@ -63,7 +59,7 @@ controller('profileCtrl', ['$rootScope', '$scope', '$routeParams', '$window', '$
 
             };
 
-            delete $rootScope.loadingContent;
+            $rootScope.loadingContent = false;
 
         }, $scope);
 
