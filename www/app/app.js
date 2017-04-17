@@ -1,5 +1,4 @@
-try {
-    /**
+/**
  * @ngdoc overview
  * @name app
  * @description
@@ -512,4 +511,3 @@ config(['$routeProvider', '$locationProvider',
         });
     }
 ]);
-} catch(e) { alert(JSON.stringify(e)); }
