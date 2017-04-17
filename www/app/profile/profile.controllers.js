@@ -41,12 +41,14 @@ controller('profileCtrl', ['$rootScope', '$scope', '$routeParams', '$window', '$
             type: 'rapid',
             offset: 0
         });
-return;
+        
         socket.once('profile', function (data) {
 
             $rootScope.title = data.name;
 
             $scope.profile = data;
+            
+            return;
 
             var userTrophies = data.trophies || {};
 
