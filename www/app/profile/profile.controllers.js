@@ -91,6 +91,8 @@ controller('profileCtrl', ['$rootScope', '$scope', '$routeParams', '$window', '$
             if (!games) {
                 return;
             }
+            
+            return;
 
             angular.forEach(data.games, function (game) {
 
