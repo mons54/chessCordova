@@ -41,7 +41,7 @@ controller('profileCtrl', ['$rootScope', '$scope', '$routeParams', '$window', '$
             type: 'rapid',
             offset: 0
         });
-
+return;
         socket.once('profile', function (data) {
 
             $rootScope.title = data.name;
@@ -130,8 +130,6 @@ controller('profileCtrl', ['$rootScope', '$scope', '$routeParams', '$window', '$
         if ($scope.menu.indexOf($location.hash()) === -1) {
             $location.hash('blitz');
         }
-        
-        return;
 
         $scope.$watch(function () {
             return $location.hash();
