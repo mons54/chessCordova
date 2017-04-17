@@ -63,8 +63,6 @@ controller('profileCtrl', ['$rootScope', '$scope', '$routeParams', '$window', '$
 
         }, $scope);
 
-        $scope.colorGame = user.getColorGame();
-
         $rootScope.$watch('user.colorGame', function (value) {
             if (value) {
                 $scope.colorGame = value;;
