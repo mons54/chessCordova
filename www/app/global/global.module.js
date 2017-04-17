@@ -302,7 +302,11 @@ service('user', ['$rootScope', '$window', function ($rootScope, $window) {
          * @returns {boolean} response
          */
         get: function (name) {
-            return angular.fromJson($window.localStorage.getItem(name));
+            try {
+                return angular.fromJson($window.localStorage.getItem(name));
+            } catch(e) {
+                return null;
+            }
         },
         /**
          * @ngdoc function
