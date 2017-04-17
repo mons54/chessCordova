@@ -68,6 +68,8 @@ controller('profileCtrl', ['$rootScope', '$scope', '$routeParams', '$window', '$
                 $scope.colorGame = value;;
             }
         });
+        
+        $scope.colorGame = user.getColorGame();
 
         $scope.games = {
             blitz: {
