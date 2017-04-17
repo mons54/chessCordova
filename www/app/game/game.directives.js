@@ -9,7 +9,7 @@ angular.module('game').
  * @scope
  * @param {object} player Object with the data of the player.
  */
-directive('profileGame', ['utils',
+directive('playerProfileGame', ['utils',
     function (utils) {
         return {
             restrict: 'A',
