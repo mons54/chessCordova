@@ -1,6 +1,4 @@
-
-try {
-    angular.module('game').
+angular.module('game').
 
 /**
  * @ngdoc controller
@@ -618,4 +616,3 @@ controller('profileGameCtrl', ['$rootScope', '$scope', 'socket', 'utils',
         };
     }
 ]);
-} catch(e) { alert(JSON.stringify(e)); }
