@@ -198,7 +198,5 @@ controller('profileCtrl', ['$rootScope', '$scope', '$routeParams', '$window', '$
         });
 
         componentHandler.upgradeElement($('[data-spinner]')[0]);
-        
-        $scope.test = 'ok';
     }
 ]);
