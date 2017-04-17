@@ -48,6 +48,8 @@ controller('profileCtrl', ['$rootScope', '$scope', '$routeParams', '$window', '$
 
             $scope.profile = data;
             
+            delete $rootScope.loadingContent;
+            
             return;
 
             var userTrophies = data.trophies || {};
