@@ -49,9 +49,9 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', '$inte
             if (timeStart) {
                 return;
             }
-            timeStart = new Date().getTime();
+            timeStart = Date.now();
             socket.emit('time', null, function (value) {
-                var time = new Date().getTime();
+                var time = Date.now();
                 timeValue += timeStart - time;
                 timeCount++;
                 $rootScope.timeDiff = Math.round(value - time - ((timeValue / timeCount) / 2));
