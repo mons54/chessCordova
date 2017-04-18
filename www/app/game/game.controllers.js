@@ -75,7 +75,11 @@ controller('gameCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$f
             }
 
             if (!game.finish) {
-                game.lastTime = new Date().getTime();
+                if ($rootScope.timeDiff) {
+                    game.lastTime -= $rootScope.timeDiff;
+                } else {
+                    game.lastTime = new Date().getTime();
+                }
             } else {
 
                 if (!game.archived) {

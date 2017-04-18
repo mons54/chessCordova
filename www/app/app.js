@@ -41,6 +41,19 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
      */
     function ($rootScope, $route, $http, $location, $window, $timeout, user, socket, modal, facebook, google, translator, utils) {
 
+        var timeValue = 0,
+            timeCount = 0;
+
+        $interval(function () {
+            var startTime = new Date().getTime();
+            socket.emit('time', null, function (value) {
+                var time = new Date().getTime();
+                timeValue += startTime - time;
+                timeCount++;
+                $rootScope.timeDiff = Math.round(value - time - ((timeValue / timeCount) / 2));
+            });
+        }, 2000);
+
         $rootScope.$on('$routeChangeStart', function(event, toState, fromState) {
 
             if ($rootScope.user && $rootScope.user.gid) {
