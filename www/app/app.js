@@ -48,7 +48,7 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', '$inte
         $interval(function () {
             var time = new Date().getTime();
             if (startTime) {
-                $rootScope.online = (startTime - time) < 6000;
+                $rootScope.online = (time -  startTime) < 6000;
             }
             startTime = time;
             socket.emit('time', null, function (value) {
