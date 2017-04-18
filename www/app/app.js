@@ -25,7 +25,7 @@ angular.module('app', [
     'profile'
 ]).
 
-run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user', 'socket', 'modal', 'facebook', 'google', 'translator', 'utils',
+run(['$rootScope', '$route', '$http', '$interval', '$location', '$window', '$timeout', 'user', 'socket', 'modal', 'facebook', 'google', 'translator', 'utils',
 
     /**
      * @param {object} $rootScope Global scope
@@ -39,7 +39,7 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', 'user'
      * @param {object} facebook Facebook service
      * @param {object} google Google service
      */
-    function ($rootScope, $route, $http, $location, $window, $timeout, user, socket, modal, facebook, google, translator, utils) {
+    function ($rootScope, $route, $http, $interval, $location, $window, $timeout, user, socket, modal, facebook, google, translator, utils) {
 
         var timeValue = 0,
             timeCount = 0;
