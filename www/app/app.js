@@ -41,6 +41,8 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', '$inte
      */
     function ($rootScope, $route, $http, $location, $window, $timeout, $interval, user, socket, modal, facebook, google, translator, utils) {
 
+        $rootScope.timeDiff = 0;
+        
         var timeStart = null,
             timeValue = 0,
             timeCount = 0;
@@ -54,7 +56,7 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', '$inte
                 var time = Date.now();
                 timeValue += timeStart - time;
                 timeCount++;
-                $rootScope.timeDiff = Math.round(value - time - ((timeValue / timeCount) / 2));
+                $rootScope.timeDiff = Math.round(value - time - timeValue / timeCount / 2);
                 timeStart = null;
             });
         }, 1000);
