@@ -3483,30 +3483,21 @@ a {
     left: 40px;
   }
 
-  .app-game__toggle-head--phone .app-game__toggle-icon--phone:nth-of-type(3) {
-    border-left: 0;
-    left: 80px;
-  }
-
   .app-game__toggle--phone-archived .app-game__toggle-head--phone .app-game__toggle-icon--phone:nth-of-type(2) {
     left: 0;
   }
 
-  .app-game__toggle--phone-archived .app-game__toggle-head--phone .app-game__toggle-icon--phone:nth-of-type(3) {
-    left: 40px;
-  }
-
-  .app-game__toggle-head--phone .app-game__toggle-icon--phone:nth-of-type(4) {
+  .app-game__toggle-head--phone .app-game__toggle-icon--phone:nth-of-type(3) {
     border-right: 0;
     right: 80px;
   }
 
-  .app-game__toggle-head--phone .app-game__toggle-icon--phone:nth-of-type(5) {
+  .app-game__toggle-head--phone .app-game__toggle-icon--phone:nth-of-type(4) {
     border-right: 0;
     right: 40px;
   }
 
-  .app-game__toggle-head--phone .app-game__toggle-icon--phone:nth-of-type(6) {
+  .app-game__toggle-head--phone .app-game__toggle-icon--phone:nth-of-type(5) {
     border-right: 0;
     right: 0;
   }
