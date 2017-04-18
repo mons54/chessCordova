@@ -541,17 +541,13 @@ controller('gameCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$f
         }
 
         function cancelInterval() {
-            $scope.stopInterval = true;
+            $interval.cancel($interval.stopTimeGame);
             timerSound.pause();
         }
 
-        delete $scope.stopInterval;
+        var interval = 100;
 
-        $rootScope.$on('interval:100', function() {
-
-            if ($scope.stopInterval) {
-                return;
-            }
+        $interval.stopTimeGame = $interval(function () {
 
             var game = $scope.game;
 
@@ -563,7 +559,7 @@ controller('gameCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$f
             var player = game[game.turn],
                 diff = new Date().getTime() - game.lastTime;
 
-            if (player.currentTimeTurn - diff < 100) {
+            if (player.currentTimeTurn - diff < interval) {
                 player.time = 0;
                 player.timeTurn = 0;
             } else {
@@ -576,7 +572,8 @@ controller('gameCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$f
             } else if (player.time < 10000 || player.timeTurn < 10000) {
                 timerSound.play();
             }
-        });
+
+        }, interval);
     }
 ]).
 
