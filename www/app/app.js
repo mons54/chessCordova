@@ -41,16 +41,22 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', '$inte
      */
     function ($rootScope, $route, $http, $location, $window, $timeout, $interval, user, socket, modal, facebook, google, translator, utils) {
 
-        var timeValue = 0,
+        var startTime,
+            timeValue = 0,
             timeCount = 0;
 
         $interval(function () {
-            var startTime = new Date().getTime();
+            var time = new Date().getTime();
+            if (startTime) {
+                $rootScope.online = (startTime - time) < 6000;
+            }
+            startTime = time;
             socket.emit('time', null, function (value) {
                 var time = new Date().getTime();
                 timeValue += startTime - time;
                 timeCount++;
                 $rootScope.timeDiff = Math.round(value - time - ((timeValue / timeCount) / 2));
+                startTime = false;
             });
         }, 2000);
 

@@ -295,6 +295,10 @@
         <div class="app-game__toggle-icon--phone" ng-click="togglePlayed(true)">
             <i class="app-game__toggle-icon material-icons">description</i>
         </div>
+        <div class="app-game__toggle-icon--phone">
+            <i ng-if="online" class="material-icons">network_wifi</i>
+            <i ng-if="!online" class="material-icons">signal_wifi_off</i>
+        </div>
         <div class="app-game__toggle-icon--phone" ng-hide="user.gid" show-modal="#modal-create-game">
             <i class="app-game__toggle-icon material-icons">games</i>
         </div>
