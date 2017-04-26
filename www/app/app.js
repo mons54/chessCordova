@@ -406,16 +406,6 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', '$inte
             closeDrawer();
         };
 
-        $rootScope.$watch('isGame', function (value) {
-            if (value) {
-                $('.app-layout, .app-loading').bind('touchmove', touchmove).bind('touchend', touchend);
-                $('.app-content, .app-loading, #modal-connect').unbind('touchmove').unbind('touchend');
-            } else {
-                $('.app-layout, .app-loading').unbind('touchmove').unbind('touchend');
-                $('.app-content, .app-loading, #modal-connect').bind('touchmove', touchmove).bind('touchend', touchend);
-            }
-        });
-
         setLoginStatus();
 
         var modalConnect = modal('#modal-connect');
