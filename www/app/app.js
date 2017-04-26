@@ -48,7 +48,7 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', '$inte
             timeCount = 0;
 
         $interval(function () {
-            if (timeStart) {
+            if (timeStart || !socket.isConnected()) {
                 return;
             }
             timeStart = Date.now();
