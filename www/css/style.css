@@ -2613,6 +2613,10 @@ a {
   padding-top: 100%;
 }
 
+.app-layout.is-user-game .app-header {
+  display: none;
+}
+
 .app-layout.is-game .app-content {
   overflow: visible;
 }

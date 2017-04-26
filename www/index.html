@@ -74,11 +74,10 @@
 
     <div class="app-layout mdl-layout mdl-js-layout mdl-layout--fixed-header"
          ng-show="ready && !loading" 
-         ng-class="{'is-game': isGame, 'is-toggle': isToggle }"
+         ng-class="{'is-user-game': user.gid, 'is-game': isGame, 'is-toggle': isToggle }"
          data-layout>
          
-        <header ng-show="!user.gid"
-                class="app-header mdl-layout__header">
+        <header class="app-header mdl-layout__header">
             <div class="app-header__row mdl-layout__header-row">
                 <a href="#!/" class="app-title app-logo">
                     <span class="app-logo__icon"></span>
