@@ -34,6 +34,7 @@ controller('gameCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$f
         $scope.$on('$destroy', function() {
             delete $rootScope.loadingContent;
             delete $rootScope.isGame;
+            delete $rootScope.isToggle;
             if ($scope.game && !$scope.game.archived) {
                 socket.emit('leaveGame', $scope.game.id);
             }
