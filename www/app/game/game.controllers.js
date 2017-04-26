@@ -55,8 +55,6 @@ controller('gameCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$f
                 queen: 1
             };
 
-        setShowPlayed(user.getShowPlayed());
-        setShowMessages(user.getShowMessages());
         setColorGame(user.getColorGame());
 
         $scope.colorsGame = colorsGame;
@@ -368,14 +366,15 @@ controller('gameCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$f
         };
 
         $scope.togglePlayed = function (isPhone) {
+
             if (isPhone || $scope.showPlayedPhone) {
                 $scope.showPlayed = $scope.showPlayedPhone;
                 $scope.showPlayedPhone = !$scope.showPlayedPhone;
                 $rootScope.isToggle = $scope.showPlayedPhone;
             }
-            var value = !$scope.showPlayed;
-            setShowPlayed(value);
-            user.setShowPlayed(value);
+
+            $scope.showPlayed = !$scope.showPlayed;
+            $scope.hideFixedButton = !$scope.showPlayed;
         };
 
         $scope.toggleMessages = function (isPhone) {
@@ -389,9 +388,7 @@ controller('gameCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$f
                 showMessages();
             }
 
-            var value = !$scope.showMessages;
-            setShowMessages(value);
-            user.setShowMessages(value);
+            $scope.showMessages = !$scope.showMessages;
 
             if ($scope.showMessages) {
                 $timeout(function () {
@@ -529,15 +526,6 @@ controller('gameCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$f
             $cookies.putObject('gameReadMessages', messages, {
                 expires: expires
             });
-        }
-
-        function setShowPlayed(value) {
-            $scope.showPlayed = value;
-            $scope.hideFixedButton = value;
-        }
-
-        function setShowMessages(value) {
-            $scope.showMessages = value;
         }
 
         function cancelInterval() {
