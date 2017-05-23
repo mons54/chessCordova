@@ -778,9 +778,8 @@
     <script type="text/javascript">
         document.addEventListener('deviceready', function() {
             angular.bootstrap(document, ['app']);
-            admob.requestInterstitialAd({
-                publisherId: 'ca-app-pub-7922409685664362~3906042236',
-                interstitialAdId: 'ca-app-pub-7922409685664362/8336241834'
+            admob.createBannerView({
+                publisherId: 'ca-app-pub-7922409685664362/8336241834',
             });
         }, false);
     </script>
