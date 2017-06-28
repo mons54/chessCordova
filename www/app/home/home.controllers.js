@@ -14,10 +14,7 @@ controller('homeCtrl', ['$rootScope', '$scope', '$sce', '$timeout', 'socket', 't
     
     function ($rootScope, $scope, $sce, $timeout, socket, translator, utils, paramsGame, orderByFilter) {
 
-        $rootScope.loadingContent = true;
-
         $scope.$on('$destroy', function() {
-            delete $rootScope.loadingContent;
             socket.emit('leaveHome');
         });
 
@@ -41,8 +38,6 @@ controller('homeCtrl', ['$rootScope', '$scope', '$sce', '$timeout', 'socket', 't
         var createdGames;
         
         socket.on('listGames', function (data) {
-
-            delete $rootScope.loadingContent;
 
             var userGame;
 
@@ -142,7 +137,10 @@ controller('homeCtrl', ['$rootScope', '$scope', '$sce', '$timeout', 'socket', 't
         };
 
         $scope.startGame = function (uid) {
-            socket.emit('startGame', uid);
+            $rootScope.loadingContent = true;
+            socket.emit('startGame', uid, function () {
+                delete $rootScope.loadingContent;
+            });
         };
 
         $scope.setChallenger = function (challenger) {
