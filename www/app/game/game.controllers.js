@@ -73,13 +73,7 @@ controller('gameCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$f
                 return; 
             }
 
-            if (!game.finish) {
-                if ($rootScope.timeDiff) {
-                    game.lastTime -= $rootScope.timeDiff;
-                } else {
-                    game.lastTime = Date.now();
-                }
-            } else {
+            if (game.finish) {
 
                 if (!game.archived) {
                     $timeout(function () {
@@ -320,7 +314,7 @@ controller('gameCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$f
         };
 
         $scope.possibleResign = function () {
-            return !$scope.game.finish && $scope.game.played.length >= 4 && Date.now() - ($scope.game.startTime - $rootScope.timeDiff) > 30000;
+            return !$scope.game.finish && $scope.game.played.length >= 4 && ($rootScope.ts.now() - $scope.game.startTime) > 30000;
         };
 
         $scope.possibleOfferDraw = function () {
@@ -546,7 +540,7 @@ controller('gameCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$f
             }
 
             var player = game[game.turn],
-                diff = Date.now() - game.lastTime;
+                diff = $rootScope.ts.now() - game.lastTime;
 
             if (player.currentTimeTurn - diff < interval) {
                 player.time = 0;
