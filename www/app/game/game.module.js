@@ -1,16 +1,23 @@
 /**
  * @ngdoc overview
- * @name components
+ * @name game
  * @description 
- * Management of a chess game.
+ * Game Module
  */
 angular.module('game', []).
 
 /**
  * @ngdoc parameters
- * @name global.constant:paramsGame
+ * @name game.constant:paramsGame
  * @description
  * The params games data
  */
 constant('paramsGame', chess.game.options).
+
+/**
+ * @ngdoc parameters
+ * @name game.constant:colorsGame
+ * @description
+ * List of colors name for game
+ */
 constant('colorsGame', ['default', 'green', 'pink', 'grey', 'brown', 'black', 'orange', 'blue']);

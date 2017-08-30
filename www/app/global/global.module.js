@@ -15,7 +15,7 @@ angular.module('global', []).
 constant('host', 'www.worldofchess.online').
 
 /**
- * @ngdoc languages
+ * @ngdoc parameters
  * @name global.constant:languages
  * @description
  * Available languages
@@ -35,6 +35,12 @@ constant('languages', {
     zh: "中文"
 }).
 
+/**
+ * @ngdoc parameters
+ * @name global.constant:patterns
+ * @description
+ * Patterns
+ */
 constant('patterns', window.utils.patterns).
 
 /**

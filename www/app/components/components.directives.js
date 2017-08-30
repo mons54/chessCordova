@@ -40,6 +40,12 @@ directive('showModal', ['modal',
     }
 ]).
 
+/**
+ * @ngdoc directive
+ * @name components.directive:avatar
+ * @description 
+ * Load default avatar if error src.
+ */
 directive('avatar', function() {
     return {
         link: function(scope, element, attrs) {
@@ -50,6 +56,22 @@ directive('avatar', function() {
     };
 }).
 
+/**
+ * @ngdoc directive
+ * @name components.directive:modalSettings
+ * @description 
+ * Modal user settings.
+ * @requires $rootScope
+ * @requires $timeout
+ * @requires global.service:socket
+ * @requires global.service:user
+ * @requires global.service:translator
+ * @requires global.constant:languages
+ * @requires game.constant:languages
+ * @requires game.constant:colorsGame
+ * @restrict E
+ * @scope
+ */
 directive('modalSettings', ['$rootScope', '$timeout', 'socket', 'user', 'translator', 'languages', 'colorsGame', 'patterns',
     function ($rootScope, $timeout, socket, user, translator, languages, colorsGame, patterns) {
         return {
@@ -186,6 +208,19 @@ directive('modalSettings', ['$rootScope', '$timeout', 'socket', 'user', 'transla
     }
 ]).
 
+/**
+ * @ngdoc directive
+ * @name components.directive:modalCreateGame
+ * @description 
+ * Modal create game.
+ * @requires $rootScope
+ * @requires $route
+ * @requires components.service:modal
+ * @requires global.service:socket
+ * @requires game.constant:paramsGame
+ * @restrict E
+ * @scope
+ */
 directive('modalCreateGame', ['$rootScope', '$route', 'modal', 'socket', 'paramsGame', 
 
     function ($rootScope, $route, modal, socket, paramsGame) {
@@ -270,6 +305,14 @@ directive('modalCreateGame', ['$rootScope', '$route', 'modal', 'socket', 'params
     }
 ]).
 
+/**
+ * @ngdoc directive
+ * @name components.directive:gameChoices
+ * @description 
+ * Type games choices
+ * @restrict E
+ * @scope
+ */
 directive('gameChoices', function () {
     return {
         restrict: 'E',
@@ -407,6 +450,15 @@ directive('elementToggle', [function () {
     };
 }]).
 
+/**
+ * @ngdoc directive
+ * @name components.directive:pagination
+ * @description 
+ * Pagination
+ * @requires $rootScope
+ * @restrict A
+ * @scope
+ */
 directive('pagination', ['$rootScope', function ($rootScope) {
     return {
         restrict: 'A',
@@ -434,6 +486,19 @@ directive('pagination', ['$rootScope', function ($rootScope) {
     };
 }]).
 
+/**
+ * @ngdoc directive
+ * @name components.directive:share
+ * @description 
+ * Share
+ * @requires $window
+ * @requires $filter
+ * @requires global.constant:host
+ * @requires facebook.constant:facebookAppId
+ * @requires google.constant:googleClientId
+ * @restrict A
+ * @scope
+ */
 directive('share', ['$window', '$filter', 'host', 'facebookAppId', 'googleClientId',
     function ($window, $filter, host, facebookAppId, googleClientId) {
         return {
