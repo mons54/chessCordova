@@ -744,6 +744,8 @@
     <script src="cordova.js"></script>
 
     <script src="https://www.worldofchess.online/socket.io/socket.io.js"></script>
+    <script src="https://www.worldofchess.online/timesync/timesync.js"></script>
+    
     <script src="https://www.worldofchess.online/chess.js"></script>
     <script src="https://www.worldofchess.online/utils.js"></script>
 
@@ -777,6 +779,7 @@
 
     <script type="text/javascript">
         document.addEventListener('deviceready', function() {
+            angular.bootstrap(document, ['app']);
             if (AdMob) {
                 AdMob.createBanner({
                     adId: 'ca-app-pub-7922409685664362/8336241834',
