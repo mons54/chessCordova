@@ -12,7 +12,7 @@ angular.module('global', []).
  * @description
  * The host.
  */
-constant('host', 'worldofchess.online').
+constant('host', 'https://worldofchess.online').
 
 /**
  * @ngdoc parameters
@@ -50,11 +50,10 @@ constant('patterns', window.utils.patterns).
  * Utils methods
  * @requires $rootScope
  * @requires $filter
- * @requires global.constant:host
  */
-factory('utils', ['$rootScope', '$filter', '$window', 'host',
+factory('utils', ['$rootScope', '$filter', '$window',
     
-    function ($rootScope, $filter, $window, host) {
+    function ($rootScope, $filter, $window) {
 
         return {
 
@@ -144,7 +143,7 @@ service('sound', ['$rootScope', 'user', function ($rootScope, user) {
  * @description 
  * Socket management.
  */
-factory('socket', ['$timeout', function ($timeout) {
+factory('socket', ['$timeout', 'host', function ($timeout, host) {
 
     var socket,
         deferedEvents = [];
@@ -164,7 +163,7 @@ factory('socket', ['$timeout', function ($timeout) {
          */
         connect: function () {
             if (!socket) {
-                socket = io.connect('https://worldofchess.online/');
+                socket = io.connect(host);
             } else {
                 socket.connect();
             }

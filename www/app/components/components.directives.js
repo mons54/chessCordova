@@ -505,8 +505,6 @@ directive('share', ['$window', '$filter', 'host', 'facebookAppId', 'googleClient
             templateUrl: 'app/components/templates/share.html',
             link: function(scope, element) {
 
-                var url = 'https://' + host;
-
                 scope.$watchCollection('share', function (value) {
 
                     if (value) {
@@ -531,8 +529,8 @@ directive('share', ['$window', '$filter', 'host', 'facebookAppId', 'googleClient
                             value.caption = $filter('translate')('title');
                         }
 
-                        scope.link = url + value.link;
-                        scope.picture = url + '/images' + value.picture;
+                        scope.link = host + value.link;
+                        scope.picture = host + '/images' + value.picture;
                         scope.title = value.title;
                         scope.description = value.description;
                         scope.caption = value.caption;
