@@ -358,11 +358,7 @@ directive('modalChallenges', ['$rootScope', 'socket', 'modal', 'orderByFilter',
                 };
 
                 scope.startChallenge = function (uid) {
-                    $rootScope.loadingContent = true;
-                    modal(element).hide();
-                    socket.emit('startChallenge', uid, function () {
-                        delete $rootScope.loadingContent;
-                    });
+                    socket.emit('startChallenge', uid);
                 };
 
                 socket.on('challenges', function (data) {
