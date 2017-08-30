@@ -12,7 +12,7 @@ angular.module('global', []).
  * @description
  * The host.
  */
-constant('host', 'www.worldofchess.online').
+constant('host', 'worldofchess.online').
 
 /**
  * @ngdoc parameters
@@ -164,7 +164,7 @@ factory('socket', ['$timeout', function ($timeout) {
          */
         connect: function () {
             if (!socket) {
-                socket = io.connect('https://www.worldofchess.online/');
+                socket = io.connect('https://worldofchess.online/');
             } else {
                 socket.connect();
             }
