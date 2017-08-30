@@ -46,6 +46,10 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', '$inte
             interval: 1000
         });
 
+        $interval(function () { 
+            alert($rootScope.ts.now());
+        }, 1000);
+
         $rootScope.$on('$routeChangeStart', function(event, toState, fromState) {
 
             if ($rootScope.user && $rootScope.user.gid) {
