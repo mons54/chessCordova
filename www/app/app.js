@@ -25,7 +25,7 @@ angular.module('app', [
     'profile'
 ]).
 
-run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', '$interval', 'user', 'socket', 'modal', 'facebook', 'google', 'translator', 'utils',
+run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', '$interval', 'user', 'socket', 'modal', 'facebook', 'google', 'translator', 'utils', 'host',
 
     /**
      * @param {object} $rootScope Global scope
@@ -39,11 +39,11 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', '$inte
      * @param {object} facebook Facebook service
      * @param {object} google Google service
      */
-    function ($rootScope, $route, $http, $location, $window, $timeout, $interval, user, socket, modal, facebook, google, translator, utils) {
+    function ($rootScope, $route, $http, $location, $window, $timeout, $interval, user, socket, modal, facebook, google, translator, utils, host) {
 
         $rootScope.ts = timesync.create({
-            server: '/timesync',
-            interval: 10000
+            server: host + '/timesync',
+            interval: 1000
         });
 
         $rootScope.$on('$routeChangeStart', function(event, toState, fromState) {
