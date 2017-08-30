@@ -43,12 +43,8 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', '$inte
 
         $rootScope.ts = timesync.create({
             server: '/timesync',
-            interval: 1000
+            interval: 10000
         });
-
-        $interval(function () { 
-            alert($rootScope.ts.now());
-        }, 1000);
 
         $rootScope.$on('$routeChangeStart', function(event, toState, fromState) {
 
