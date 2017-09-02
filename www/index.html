@@ -502,19 +502,6 @@
                         <form ng-submit="settingsForm.$valid && updateUser()"
                               name="settingsForm"
                               role="form">
-                            <div class="app-form__textfield">
-                                <label for="settings-avatar" class="app-modal__settings-icon">
-                                    <i class="material-icons">photo_camera</i>
-                                </label>
-                                <input class="app-modal__settings-field" 
-                                       id="settings-avatar" 
-                                       type="text"
-                                       name="avatar"
-                                       ng-blur="checkAvatar()"
-                                       ng-model="settings.avatar" 
-                                       ng-pattern="patternAvatar" 
-                                       required>
-                            </div>
                             <div class="app-form__select">
                                 <label for="settings-lang" class="app-modal__settings-icon">
                                     <i class="material-icons">language</i>
@@ -747,7 +734,6 @@
     <script src="https://worldofchess.online/timesync/timesync.js"></script>
     
     <script src="https://worldofchess.online/chess.js"></script>
-    <script src="https://worldofchess.online/utils.js"></script>
 
     <script src="app/app.js"></script>
 

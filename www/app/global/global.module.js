@@ -36,14 +36,6 @@ constant('languages', {
 }).
 
 /**
- * @ngdoc parameters
- * @name global.constant:patterns
- * @description
- * Patterns
- */
-constant('patterns', window.utils.patterns).
-
-/**
  * @ngdoc service
  * @name global.service:utils
  * @description
