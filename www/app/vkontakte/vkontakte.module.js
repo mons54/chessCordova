@@ -51,7 +51,7 @@ service('vkontakte', ['$rootScope', 'user', 'socket', 'vkontakteAppId',
                 return;
             }
             SocialVk.init(vkontakteAppId, function () {
-                SocialVk.login(null, function (success) {
+                SocialVk.login([], function (success) {
                     alert(JSON.stringify(success));
                 }, function (error) {
                     alert(JSON.stringify(error));
