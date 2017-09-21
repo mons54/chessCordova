@@ -91,6 +91,11 @@ service('vkontakte', ['$rootScope', 'user', 'socket', 'vkontakteAppId',
          */
         this.setLoginStatus = function (callback) {
             SocialVk.init(vkontakteAppId, function () {
+                SocialVk.users_get(null, null, null, function (response) {
+                    alert(response);
+                }, function (error) {
+                    alert(error);
+                });
                 callback(self);
             });
         };
