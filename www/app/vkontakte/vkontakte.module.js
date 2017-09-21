@@ -119,9 +119,13 @@ service('vkontakte', ['$rootScope', 'user', 'socket', 'vkontakteAppId',
          */
         this.handleLogin = function () {
 
+            alert('handleLogin');
+
             user.setLogin(this.name);
             
             socket.connect();
+
+            alert('connect');
         };
 
         return this;
