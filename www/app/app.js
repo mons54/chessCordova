@@ -17,6 +17,7 @@ angular.module('app', [
     'global',
     'facebook',
     'google',
+    'vkontakte',
     'components',
     'game',
     'home',
@@ -25,7 +26,7 @@ angular.module('app', [
     'profile'
 ]).
 
-run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', '$interval', 'user', 'socket', 'modal', 'facebook', 'google', 'translator', 'utils', 'host',
+run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', '$interval', 'user', 'socket', 'modal', 'facebook', 'google', 'vkontakte', 'translator', 'utils', 'host',
 
     /**
      * @param {object} $rootScope Global scope
@@ -38,8 +39,9 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', '$inte
      * @param {object} modal Modal service
      * @param {object} facebook Facebook service
      * @param {object} google Google service
+     * @param {object} vkontakte vkontakte service
      */
-    function ($rootScope, $route, $http, $location, $window, $timeout, $interval, user, socket, modal, facebook, google, translator, utils, host) {
+    function ($rootScope, $route, $http, $location, $window, $timeout, $interval, user, socket, modal, facebook, google, vkontakte, translator, utils, host) {
 
         $rootScope.ts = timesync.create({
             server: host + '/timesync',
@@ -102,6 +104,10 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', '$inte
             google.login();
         };
 
+        $rootScope.vkontakteLogin = function () {
+            vkontakte.login();
+        };
+
         $rootScope.reconnect = function () {
             socket.connect();
         };
@@ -155,6 +161,7 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', '$inte
         function setLoginStatus() {
             facebookSetLoginStatus();
             googleSetLoginStatus();
+            vkontakteSetLoginStatus();
         }
 
         function facebookSetLoginStatus () {
@@ -163,6 +170,10 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', '$inte
 
         function googleSetLoginStatus () {
             google.setLoginStatus(callBackLoginStatus);
+        }
+
+        function vkontakteSetLoginStatus () {
+            vkontakte.setLoginStatus(callBackLoginStatus);
         }
 
         function callBackLoginStatus(service) {
@@ -212,6 +223,9 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', '$inte
                 success = true;
             } else if (login === 'google' && google.auth) {
                 socket.emit('googleConnect', google.auth);
+                success = true;
+            } else if (login === 'vkontakte' && vkontakte.auth) {
+                socket.emit('vkontakteConnect', vkontakte.auth);
                 success = true;
             }
 
