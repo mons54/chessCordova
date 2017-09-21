@@ -496,7 +496,7 @@ service('user', ['$rootScope', '$window', function ($rootScope, $window) {
  * Service translator
  * @requires $http
  */
-service('translator', ['$rootScope', '$http', 'languages', function($rootScope, $http, languages) {
+service('translator', ['$rootScope', '$http', 'host', 'languages', function($rootScope, $http, host, languages) {
     return {
         available: Object.keys(languages),
         lang: null,
@@ -517,7 +517,7 @@ service('translator', ['$rootScope', '$http', 'languages', function($rootScope, 
                 return;
             }
 
-            $http.get('json/dictionaries/' + lang + '.json')
+            $http.get(host + '/json/dictionaries/' + lang + '.json')
             .then(function (response) {
                 this.lang = lang;
                 this.data = response.data;
