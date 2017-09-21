@@ -69,6 +69,8 @@ service('vkontakte', ['$rootScope', 'user', 'socket', 'vkontakteAppId',
 
             var user = response.user[0];
 
+            alert(response.token);
+
             self.auth = {
                 accessToken: response.token,
                 user: {
