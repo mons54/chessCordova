@@ -12,7 +12,7 @@ angular.module('vkontakte', []).
  * @description
  * The redirect uri.
  */
-constant('vkontakteAppId', 6170407).
+constant('vkontakteAppId', 6170421).
 
 /**
  * @ngdoc service
