@@ -107,7 +107,10 @@
     <plugin name="cordova-plugin-whitelist" spec="~1.3.2" />
     <plugin name="cordova-plugin-media" spec="~2.4.1" />
     <plugin name="cordova-plugin-android-resources" spec="https://github.com/mons54/cordova-plugin-android-resources" />
-    <plugin name="cordova-vk" spec="https://github.com/mons54/cordova-vk">
+    <plugin name="cordova-social-vk" spec="~1.0.5">
+        <variable name="VK_APP_ID" value="6170421" />
+    </plugin>
+    <plugin name="com.akveo.cordova-vk" spec="~1.0.1">
         <variable name="VK_APP_ID" value="6170421" />
     </plugin>
 </widget>
