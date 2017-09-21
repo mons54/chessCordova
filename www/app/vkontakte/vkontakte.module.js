@@ -44,11 +44,13 @@ service('vkontakte', ['$rootScope', 'user', 'socket', 'vkontakteAppId',
          * @param {function} callback Callback
          */
         this.setLoginStatus = function (callback) {
-            VK.init(function() {
-                alert('init');
-            }, function() {
-                alert('error');
-            }, '5.60'); 
+            VkSdk.init(vkontakteAppId);
+
+            VkSdk.initiateLogin();
+
+            document.addEventListener('vkSdk.newToken', function(token) {
+              alert(token);
+            });
         };
 
         /**
