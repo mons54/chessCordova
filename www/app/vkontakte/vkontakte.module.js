@@ -65,18 +65,18 @@ service('vkontakte', ['$rootScope', 'user', 'socket', 'vkontakteAppId',
 
             self.status = 'connected';
 
+            alert(response);
+
             response = JSON.parse(response);
 
             self.auth = {
                 accessToken: response.token,
                 user: {
-                    name: response.user.nickname || (response.user.first_name + ' ' + response.user.last_name),
-                    picture: response.user.photo,
+                    name: 'test',
+                    picture: null,
                     lang: getLanguage(response.user.language)
                 }
             };
-
-            alert(JSON.stringify(self.auth));
         }
 
         /**
@@ -104,7 +104,7 @@ service('vkontakte', ['$rootScope', 'user', 'socket', 'vkontakteAppId',
             } else {
                 SocialVk.login([], function (response) {
                     setLoginStatus(response);
-                    this.handleLogin();
+                    //this.handleLogin();
                 }.bind(this));
             }
         };

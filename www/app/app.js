@@ -190,7 +190,8 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', '$inte
             }
 
             if (login === service.name && service.status === 'connected') {
-                    service.handleLogin();
+                alert(service.name);
+                service.handleLogin();
             }
         }
 
@@ -225,6 +226,7 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', '$inte
                 socket.emit('googleConnect', google.auth);
                 success = true;
             } else if (login === 'vkontakte' && vkontakte.auth) {
+                alert(JSON.parse(vkontakte.auth));
                 socket.emit('vkontakteConnect', vkontakte.auth);
                 success = true;
             }
