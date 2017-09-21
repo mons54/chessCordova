@@ -66,10 +66,13 @@ service('vkontakte', ['$rootScope', 'user', 'socket', 'vkontakteAppId',
             self.status = 'connected';
 
             self.auth = {
-                accessToken: response.token
+                accessToken: response.token,
+                user: {
+
+                }
             };
 
-            alert(response.user);
+            alert(response);
         }
 
         /**
