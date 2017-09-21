@@ -1,0 +1,17 @@
+{
+    "name": "worldofchess.online",
+    "description": "Online Chess",
+    "version": "2.1.0",
+    "repository": "https://github.com/mons54/chessCordova",
+    "license": "UNLICENSED",
+    "dependencies": {
+        "cordova-vk": "^1.0.1"
+    },
+    "cordova": {
+        "plugins": {
+            "com.akveo.cordova-vk": {
+                "VK_APP_ID": "6170421"
+            }
+        }
+    }
+}
