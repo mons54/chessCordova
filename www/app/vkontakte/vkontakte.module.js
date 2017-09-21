@@ -45,17 +45,17 @@ service('vkontakte', ['$rootScope', 'user', 'socket', 'vkontakteAppId',
          */
         this.setLoginStatus = function (callback) {
 
-            alert(SocialVk);
+            alert(vkontakteAppId);
 
             if (!SocialVk) {
                 return;
             }
-            SocialVk.init(vkontakteAppId);
-
-            SocialVk.login(null, function (success) {
-                alert(success);
-            }, function (error) {
-                alert(error);
+            SocialVk.init(vkontakteAppId, function () {
+                SocialVk.login(null, function (success) {
+                    alert(JSON.stringify(success));
+                }, function (error) {
+                    alert(JSON.stringify(error));
+                });
             });
         };
 
