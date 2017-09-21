@@ -75,6 +75,8 @@ service('vkontakte', ['$rootScope', 'user', 'socket', 'vkontakteAppId',
                     lang: getLanguage(response.user.language)
                 }
             };
+
+            alert(self.auth);
         }
 
         /**
@@ -102,7 +104,7 @@ service('vkontakte', ['$rootScope', 'user', 'socket', 'vkontakteAppId',
             if (this.status === 'connected') {
                 this.handleLogin();
             } else {
-                SocialVk.login(['language'], function (response) {
+                SocialVk.login([], function (response) {
                     setLoginStatus(response);
                     this.handleLogin();
                 }.bind(this));
