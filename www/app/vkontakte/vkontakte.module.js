@@ -12,7 +12,7 @@ angular.module('vkontakte', []).
  * @description
  * The redirect uri.
  */
-constant('vkontakteAppId', '6170101').
+constant('vkontakteAppId', 6170421).
 
 /**
  * @ngdoc service
@@ -77,8 +77,6 @@ service('vkontakte', ['$rootScope', 'user', 'socket', 'vkontakteAppId',
                     lang: getLanguage(user.language)
                 }
             };
-
-            alert(JSON.stringify(self.auth));
         }
 
         /**
@@ -121,13 +119,9 @@ service('vkontakte', ['$rootScope', 'user', 'socket', 'vkontakteAppId',
          */
         this.handleLogin = function () {
 
-            alert('handleLogin');
-
             user.setLogin(self.name);
             
             socket.connect();
-
-            alert('connect');
         };
 
         return this;

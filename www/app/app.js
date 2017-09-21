@@ -190,7 +190,6 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', '$inte
             }
 
             if (login === service.name && service.status === 'connected') {
-                alert(service.name);
                 service.handleLogin();
             }
         }
@@ -216,6 +215,8 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', '$inte
                 logout();
                 return;
             }
+
+            alert(login);
 
             var success = false
 
