@@ -69,7 +69,7 @@ service('vkontakte', ['$rootScope', 'user', 'socket', 'vkontakteAppId',
                 accessToken: response.token
             };
 
-            alert(self.auth);
+            alert(response.user);
         }
 
         /**
