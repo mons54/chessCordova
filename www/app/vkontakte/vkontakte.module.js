@@ -65,18 +65,20 @@ service('vkontakte', ['$rootScope', 'user', 'socket', 'vkontakteAppId',
 
             self.status = 'connected';
 
-            alert(response);
-
             response = JSON.parse(response);
+
+            var user = response.user[0];
 
             self.auth = {
                 accessToken: response.token,
                 user: {
-                    name: 'test',
-                    picture: null,
-                    lang: getLanguage(response.user.language)
+                    name: user.nickname || (user.first_name + ' ' + user.last_name),
+                    picture: user.photo,
+                    lang: getLanguage(user.language)
                 }
             };
+
+            alert(JSON.stringify(self.auth));
         }
 
         /**
@@ -88,7 +90,7 @@ service('vkontakte', ['$rootScope', 'user', 'socket', 'vkontakteAppId',
          * @param {function} callback Callback
          */
         this.setLoginStatus = function (callback) {
-            SocialVk.init(vkontakteAppId, this.login);
+            SocialVk.init(vkontakteAppId, self.login);
         };
 
         /**
@@ -99,13 +101,13 @@ service('vkontakte', ['$rootScope', 'user', 'socket', 'vkontakteAppId',
          * Facebook login.
          */
         this.login = function () {
-            if (this.status === 'connected') {
-                this.handleLogin();
+            if (self.status === 'connected') {
+                self.handleLogin();
             } else {
                 SocialVk.login([], function (response) {
                     setLoginStatus(response);
-                    this.handleLogin();
-                }.bind(this));
+                    self.handleLogin();
+                });
             }
         };
 
@@ -121,7 +123,7 @@ service('vkontakte', ['$rootScope', 'user', 'socket', 'vkontakteAppId',
 
             alert('handleLogin');
 
-            user.setLogin(this.name);
+            user.setLogin(self.name);
             
             socket.connect();
 
