@@ -75,6 +75,8 @@ service('vkontakte', ['$rootScope', 'user', 'socket', 'vkontakteAppId',
                     lang: getLanguage(response.user.language)
                 }
             };
+
+            alert(JSON.stringify(self.auth));
         }
 
         /**
