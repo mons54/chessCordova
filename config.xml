@@ -110,7 +110,4 @@
     <plugin name="cordova-social-vk" spec="~1.0.5">
         <variable name="VK_APP_ID" value="6170421" />
     </plugin>
-    <plugin name="cordova-vk" spec="~1.0.1">
-        <variable name="VK_APP_ID" value="6170421" />
-    </plugin>
 </widget>
