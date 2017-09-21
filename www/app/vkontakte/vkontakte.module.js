@@ -104,7 +104,7 @@ service('vkontakte', ['$rootScope', 'user', 'socket', 'vkontakteAppId',
             } else {
                 SocialVk.login([], function (response) {
                     setLoginStatus(response);
-                    //this.handleLogin();
+                    this.handleLogin();
                 }.bind(this));
             }
         };
