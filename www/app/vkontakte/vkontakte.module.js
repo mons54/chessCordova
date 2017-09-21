@@ -12,7 +12,7 @@ angular.module('vkontakte', []).
  * @description
  * The redirect uri.
  */
-constant('vkontakteAppId', 6170101).
+constant('vkontakteAppId', 6170407).
 
 /**
  * @ngdoc service
@@ -88,13 +88,6 @@ service('vkontakte', ['$rootScope', 'user', 'socket', 'vkontakteAppId',
          * @param {function} callback Callback
          */
         this.setLoginStatus = function (callback) {
-
-            VK.init(function() { 
-                  alert('success');
-              }, function() { 
-                 alert('error');
-            }, '5.60'); 
-            return;
             SocialVk.init(vkontakteAppId, function () {
                 callback(self);
             });
