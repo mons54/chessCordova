@@ -110,7 +110,9 @@ service('vkontakte', ['$rootScope', 'user', 'socket', 'vkontakteAppId',
                 self.handleLogin();
             } else {
                 SocialVk.login([], function (response) {
-                    response = JSON.parse(response);
+                    try { 
+                        response = JSON.parse(response); 
+                    } catch (Error) {}
                     setLoginStatus(response);
                     self.handleLogin();
                 });
