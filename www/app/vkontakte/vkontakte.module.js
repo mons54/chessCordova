@@ -67,14 +67,16 @@ service('vkontakte', ['$rootScope', 'user', 'socket', 'vkontakteAppId',
 
             user.set('vkontakte', response);
 
-            var user = response.user[0];
+            alert('setLoginStatus');
+
+            var responseUser = response.user[0];
 
             self.auth = {
                 accessToken: response.token,
                 user: {
-                    name: user.nickname || (user.first_name + ' ' + user.last_name),
-                    picture: user.photo,
-                    lang: getLanguage(user.language)
+                    name: responseUser.nickname || (responseUser.first_name + ' ' + responseUser.last_name),
+                    picture: responseUser.photo,
+                    lang: getLanguage(responseUser.language)
                 }
             };
         }
@@ -90,6 +92,7 @@ service('vkontakte', ['$rootScope', 'user', 'socket', 'vkontakteAppId',
         this.setLoginStatus = function (callback) {
             SocialVk.init(vkontakteAppId, function () {
                 var response = user.get('vkontakte');
+                alert(JSON.stringigy(response));
                 if (response) {
                     setLoginStatus(response);
                     callback(self);
