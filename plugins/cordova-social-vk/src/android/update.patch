@@ -1,0 +1,340 @@
+diff --git a/src/android/vksdk_library/src/com/vk/sdk/VKAccessToken.java b/src/android/vksdk_library/src/com/vk/sdk/VKAccessToken.java
+index 6906012..a008891 100644
+--- a/src/android/vksdk_library/src/com/vk/sdk/VKAccessToken.java
++++ b/src/android/vksdk_library/src/com/vk/sdk/VKAccessToken.java
+@@ -25,8 +25,8 @@ import android.content.Context;
+ import android.content.SharedPreferences;
+ import android.os.Build;
+ import android.preference.PreferenceManager;
+-import android.support.annotation.NonNull;
+-import android.support.annotation.Nullable;
++import com.android.annotations.NonNull;
++import com.android.annotations.Nullable;
+ import android.text.TextUtils;
+ 
+ import com.vk.sdk.api.VKParameters;
+@@ -328,4 +328,4 @@ public class VKAccessToken {
+         newTokenParams.putAll(token.tokenParams());
+         return VKAccessToken.tokenFromParameters(newTokenParams);
+     }
+-}
+\ No newline at end of file
++}
+diff --git a/src/android/vksdk_library/src/com/vk/sdk/VKAccessTokenTracker.java b/src/android/vksdk_library/src/com/vk/sdk/VKAccessTokenTracker.java
+index bf21794..628f21d 100644
+--- a/src/android/vksdk_library/src/com/vk/sdk/VKAccessTokenTracker.java
++++ b/src/android/vksdk_library/src/com/vk/sdk/VKAccessTokenTracker.java
+@@ -21,7 +21,7 @@
+ 
+ package com.vk.sdk;
+ 
+-import android.support.annotation.Nullable;
++import com.android.annotations.Nullable;
+ 
+ /**
+  * Use this class for track access token changes.
+@@ -64,4 +64,4 @@ public abstract class VKAccessTokenTracker {
+         VKSdk.removeVKTokenTracker(this);
+         isTracking = false;
+     }
+-}
+\ No newline at end of file
++}
+diff --git a/src/android/vksdk_library/src/com/vk/sdk/VKSdk.java b/src/android/vksdk_library/src/com/vk/sdk/VKSdk.java
+index db6a17a..e6b3a0f 100644
+--- a/src/android/vksdk_library/src/com/vk/sdk/VKSdk.java
++++ b/src/android/vksdk_library/src/com/vk/sdk/VKSdk.java
+@@ -32,8 +32,8 @@ import android.os.Build;
+ import android.os.Handler;
+ import android.os.Looper;
+ import android.preference.PreferenceManager;
+-import android.support.annotation.NonNull;
+-import android.support.annotation.Nullable;
++import com.android.annotations.NonNull;
++import com.android.annotations.Nullable;
+ import android.text.TextUtils;
+ import android.webkit.CookieManager;
+ import android.webkit.CookieSyncManager;
+@@ -173,9 +173,11 @@ public class VKSdk {
+                 throw new RuntimeException("VKSdk.initialize(Context) must be call from Application#onCreate()");
+             }
+         } else {
++            /*
+             if (!hasInStack(Application.class, "onCreate")) {
+                 throw new RuntimeException("VKSdk.initialize(Context) must be call from Application#onCreate()");
+             }
++            */
+         }
+ 
+         int appId = getIntResByName(ctx, SDK_APP_ID);
+diff --git a/src/android/vksdk_library/src/com/vk/sdk/VKServiceActivity.java b/src/android/vksdk_library/src/com/vk/sdk/VKServiceActivity.java
+index 7e367de..5d2a182 100644
+--- a/src/android/vksdk_library/src/com/vk/sdk/VKServiceActivity.java
++++ b/src/android/vksdk_library/src/com/vk/sdk/VKServiceActivity.java
+@@ -30,8 +30,8 @@ import android.content.Intent;
+ import android.net.Uri;
+ import android.os.Build;
+ import android.os.Bundle;
+-import android.support.annotation.NonNull;
+-import android.support.annotation.Nullable;
++import com.android.annotations.NonNull;
++import com.android.annotations.Nullable;
+ import android.text.TextUtils;
+ 
+ import com.vk.sdk.api.VKError;
+@@ -247,4 +247,4 @@ public class VKServiceActivity extends Activity implements DialogInterface.OnDis
+     public void onDismiss(DialogInterface dialog) {
+         finish();
+     }
+-}
+\ No newline at end of file
++}
+diff --git a/src/android/vksdk_library/src/com/vk/sdk/VKUIHelper.java b/src/android/vksdk_library/src/com/vk/sdk/VKUIHelper.java
+index f555f02..16d4cfc 100644
+--- a/src/android/vksdk_library/src/com/vk/sdk/VKUIHelper.java
++++ b/src/android/vksdk_library/src/com/vk/sdk/VKUIHelper.java
+@@ -29,7 +29,7 @@ import android.graphics.PorterDuff;
+ import android.graphics.PorterDuffXfermode;
+ import android.graphics.Rect;
+ import android.graphics.RectF;
+-import android.support.annotation.Nullable;
++import com.android.annotations.Nullable;
+ 
+ /**
+  * Class for VK authorization and dialogs helping
+diff --git a/src/android/vksdk_library/src/com/vk/sdk/api/VKRequest.java b/src/android/vksdk_library/src/com/vk/sdk/api/VKRequest.java
+index 54eded9..98e0ff7 100644
+--- a/src/android/vksdk_library/src/com/vk/sdk/api/VKRequest.java
++++ b/src/android/vksdk_library/src/com/vk/sdk/api/VKRequest.java
+@@ -25,7 +25,7 @@ import android.content.Context;
+ import android.content.res.Resources;
+ import android.os.Handler;
+ import android.os.Looper;
+-import android.support.annotation.Nullable;
++import com.android.annotations.Nullable;
+ import android.util.Log;
+ 
+ import com.vk.sdk.VKAccessToken;
+@@ -678,4 +678,4 @@ public class VKRequest extends VKObject {
+         builder.append("}");
+         return  builder.toString();
+     }
+-}
+\ No newline at end of file
++}
+diff --git a/src/android/vksdk_library/src/com/vk/sdk/api/VKSyncRequestUtil.java b/src/android/vksdk_library/src/com/vk/sdk/api/VKSyncRequestUtil.java
+index 079cdee..23f31c1 100644
+--- a/src/android/vksdk_library/src/com/vk/sdk/api/VKSyncRequestUtil.java
++++ b/src/android/vksdk_library/src/com/vk/sdk/api/VKSyncRequestUtil.java
+@@ -22,7 +22,7 @@
+ 
+ package com.vk.sdk.api;
+ 
+-import android.support.annotation.NonNull;
++import com.android.annotations.NonNull;
+ 
+ import com.vk.sdk.api.VKError;
+ import com.vk.sdk.api.VKRequest;
+@@ -81,4 +81,4 @@ class VKSyncRequestUtil {
+             }
+         }
+     }
+-}
+\ No newline at end of file
++}
+diff --git a/src/android/vksdk_library/src/com/vk/sdk/api/httpClient/VKAbstractOperation.java b/src/android/vksdk_library/src/com/vk/sdk/api/httpClient/VKAbstractOperation.java
+index cbfe595..d8a90d9 100644
+--- a/src/android/vksdk_library/src/com/vk/sdk/api/httpClient/VKAbstractOperation.java
++++ b/src/android/vksdk_library/src/com/vk/sdk/api/httpClient/VKAbstractOperation.java
+@@ -21,7 +21,7 @@
+ 
+ package com.vk.sdk.api.httpClient;
+ 
+-import android.support.annotation.Nullable;
++import com.android.annotations.Nullable;
+ 
+ import com.vk.sdk.api.VKError;
+ 
+diff --git a/src/android/vksdk_library/src/com/vk/sdk/api/httpClient/VKHttpClient.java b/src/android/vksdk_library/src/com/vk/sdk/api/httpClient/VKHttpClient.java
+index 975a444..733e704 100644
+--- a/src/android/vksdk_library/src/com/vk/sdk/api/httpClient/VKHttpClient.java
++++ b/src/android/vksdk_library/src/com/vk/sdk/api/httpClient/VKHttpClient.java
+@@ -25,8 +25,8 @@ import android.content.Context;
+ import android.content.pm.PackageInfo;
+ import android.content.pm.PackageManager;
+ import android.os.Build;
+-import android.support.annotation.NonNull;
+-import android.support.annotation.Nullable;
++import com.android.annotations.NonNull;
++import com.android.annotations.Nullable;
+ import android.text.TextUtils;
+ import android.util.Pair;
+ 
+@@ -379,4 +379,4 @@ public class VKHttpClient {
+     public interface VKHttpProgressCallback {
+         void onProgress(long current, long total);
+     }
+-}
+\ No newline at end of file
++}
+diff --git a/src/android/vksdk_library/src/com/vk/sdk/api/httpClient/VKHttpOperation.java b/src/android/vksdk_library/src/com/vk/sdk/api/httpClient/VKHttpOperation.java
+index 6f20d48..4fb48e7 100644
+--- a/src/android/vksdk_library/src/com/vk/sdk/api/httpClient/VKHttpOperation.java
++++ b/src/android/vksdk_library/src/com/vk/sdk/api/httpClient/VKHttpOperation.java
+@@ -21,7 +21,7 @@
+ 
+ package com.vk.sdk.api.httpClient;
+ 
+-import android.support.annotation.Nullable;
++import com.android.annotations.Nullable;
+ 
+ import com.vk.sdk.api.VKError;
+ 
+@@ -189,4 +189,4 @@ public class VKHttpOperation<ResponseType> extends VKAbstractOperation {
+             }
+         });
+     }
+-}
+\ No newline at end of file
++}
+diff --git a/src/android/vksdk_library/src/com/vk/sdk/api/model/VKList.java b/src/android/vksdk_library/src/com/vk/sdk/api/model/VKList.java
+index 360269b..4ed7d5b 100644
+--- a/src/android/vksdk_library/src/com/vk/sdk/api/model/VKList.java
++++ b/src/android/vksdk_library/src/com/vk/sdk/api/model/VKList.java
+@@ -23,7 +23,7 @@ package com.vk.sdk.api.model;
+ 
+ import android.os.Parcel;
+ import android.os.Parcelable;
+-import android.support.annotation.NonNull;
++import com.android.annotations.NonNull;
+ 
+ import com.vk.sdk.VKSdk;
+ 
+@@ -470,4 +470,4 @@ public class VKList<T extends VKApiModel & Parcelable & Identifiable> extends VK
+     public VKApiModel parse(JSONObject response) throws JSONException {
+         throw new JSONException("Operation is not supported while class is generic");
+     }
+-}
+\ No newline at end of file
++}
+diff --git a/src/android/vksdk_library/src/com/vk/sdk/dialogs/VKCaptchaDialog.java b/src/android/vksdk_library/src/com/vk/sdk/dialogs/VKCaptchaDialog.java
+index ce5b840..22c707c 100644
+--- a/src/android/vksdk_library/src/com/vk/sdk/dialogs/VKCaptchaDialog.java
++++ b/src/android/vksdk_library/src/com/vk/sdk/dialogs/VKCaptchaDialog.java
+@@ -25,8 +25,8 @@ import android.app.AlertDialog;
+ import android.content.Context;
+ import android.content.DialogInterface;
+ import android.graphics.Bitmap;
+-import android.support.annotation.NonNull;
+-import android.support.annotation.Nullable;
++import com.android.annotations.NonNull;
++import com.android.annotations.Nullable;
+ import android.view.KeyEvent;
+ import android.view.View;
+ import android.view.WindowManager;
+@@ -133,4 +133,4 @@ public class VKCaptchaDialog {
+         });
+         VKHttpClient.enqueueOperation(imageOperation);
+     }
+-}
+\ No newline at end of file
++}
+diff --git a/src/android/vksdk_library/src/com/vk/sdk/dialogs/VKOpenAuthDialog.java b/src/android/vksdk_library/src/com/vk/sdk/dialogs/VKOpenAuthDialog.java
+index a13f9a3..7fba34a 100644
+--- a/src/android/vksdk_library/src/com/vk/sdk/dialogs/VKOpenAuthDialog.java
++++ b/src/android/vksdk_library/src/com/vk/sdk/dialogs/VKOpenAuthDialog.java
+@@ -32,8 +32,8 @@ import android.graphics.Color;
+ import android.graphics.drawable.ColorDrawable;
+ import android.os.Build;
+ import android.os.Bundle;
+-import android.support.annotation.NonNull;
+-import android.support.annotation.Nullable;
++import com.android.annotations.NonNull;
++import com.android.annotations.Nullable;
+ import android.view.View;
+ import android.view.Window;
+ import android.webkit.WebSettings;
+@@ -244,4 +244,4 @@ public class VKOpenAuthDialog implements DialogInterface.OnDismissListener {
+ 			mDialog.dismiss();
+ 		}
+ 	}
+-}
+\ No newline at end of file
++}
+diff --git a/src/android/vksdk_library/src/com/vk/sdk/dialogs/VKShareDialog.java b/src/android/vksdk_library/src/com/vk/sdk/dialogs/VKShareDialog.java
+index a805d24..9bb99c2 100644
+--- a/src/android/vksdk_library/src/com/vk/sdk/dialogs/VKShareDialog.java
++++ b/src/android/vksdk_library/src/com/vk/sdk/dialogs/VKShareDialog.java
+@@ -25,8 +25,8 @@ import android.annotation.SuppressLint;
+ import android.app.Dialog;
+ import android.content.DialogInterface;
+ import android.os.Bundle;
+-import android.support.annotation.NonNull;
+-import android.support.v4.app.DialogFragment;
++import com.android.annotations.NonNull;
++import android.app.DialogFragment;
+ 
+ import com.vk.sdk.api.model.VKApiPhoto;
+ import com.vk.sdk.api.model.VKPhotoArray;
+@@ -163,4 +163,4 @@ public class VKShareDialog extends DialogFragment implements VKShareDialogDelega
+ 
+ 	public interface VKShareDialogListener extends VKShareDialogBuilder.VKShareDialogListener {
+ 	}
+-}
+\ No newline at end of file
++}
+diff --git a/src/android/vksdk_library/src/com/vk/sdk/dialogs/VKShareDialogBuilder.java b/src/android/vksdk_library/src/com/vk/sdk/dialogs/VKShareDialogBuilder.java
+index a4f08e1..9be842d 100644
+--- a/src/android/vksdk_library/src/com/vk/sdk/dialogs/VKShareDialogBuilder.java
++++ b/src/android/vksdk_library/src/com/vk/sdk/dialogs/VKShareDialogBuilder.java
+@@ -128,10 +128,6 @@ public class VKShareDialogBuilder {
+ 		new VKShareDialogNative(this).show(manager, tag);
+ 	}
+ 
+-	public void show(android.support.v4.app.FragmentManager manager, String tag) {
+-		new VKShareDialog(this).show(manager, tag);
+-	}
+-
+ 	public interface VKShareDialogListener {
+ 		void onVkShareComplete(int postId);
+ 
+@@ -139,4 +135,4 @@ public class VKShareDialogBuilder {
+ 
+ 		void onVkShareError(VKError error);
+ 	}
+-}
+\ No newline at end of file
++}
+diff --git a/src/android/vksdk_library/src/com/vk/sdk/dialogs/VKShareDialogNative.java b/src/android/vksdk_library/src/com/vk/sdk/dialogs/VKShareDialogNative.java
+index b46120b..beafb5d 100644
+--- a/src/android/vksdk_library/src/com/vk/sdk/dialogs/VKShareDialogNative.java
++++ b/src/android/vksdk_library/src/com/vk/sdk/dialogs/VKShareDialogNative.java
+@@ -28,7 +28,7 @@ import android.app.DialogFragment;
+ import android.content.DialogInterface;
+ import android.os.Build;
+ import android.os.Bundle;
+-import android.support.annotation.NonNull;
++import com.android.annotations.NonNull;
+ 
+ @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+ public class VKShareDialogNative extends DialogFragment implements VKShareDialogDelegate.DialogFragmentI {
+@@ -73,4 +73,4 @@ public class VKShareDialogNative extends DialogFragment implements VKShareDialog
+ 		super.onCancel(dialog);
+ 		mDelegate.onCancel(dialog);
+ 	}
+-}
+\ No newline at end of file
++}
+diff --git a/src/android/vksdk_library/src/com/vk/sdk/util/VKUtil.java b/src/android/vksdk_library/src/com/vk/sdk/util/VKUtil.java
+index d529c90..d6b7b2f 100644
+--- a/src/android/vksdk_library/src/com/vk/sdk/util/VKUtil.java
++++ b/src/android/vksdk_library/src/com/vk/sdk/util/VKUtil.java
+@@ -29,7 +29,7 @@ import android.content.pm.PackageInfo;
+ import android.content.pm.PackageManager;
+ import android.content.pm.ResolveInfo;
+ import android.content.pm.Signature;
+-import android.support.annotation.Nullable;
++import com.android.annotations.Nullable;
+ import android.util.Log;
+ 
+ import com.vk.sdk.VKSdk;

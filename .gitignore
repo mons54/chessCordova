@@ -2,7 +2,6 @@ platforms/android/.gradle/3.3/taskArtifacts/fileHashes.bin
 platforms/
 .bithoundrc
 CONTRIBUTING.md
-plugins/
 hooks/
 npm-debug.log
 node_modules/

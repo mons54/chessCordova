@@ -1,0 +1,58 @@
+{
+  "_from": "cordova-social-vk@~1.0.5",
+  "_id": "cordova-social-vk@1.0.5",
+  "_inBundle": false,
+  "_integrity": "sha1-PQhuE99jYhxheyoT2OupwOcBXDE=",
+  "_location": "/cordova-social-vk",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "cordova-social-vk@~1.0.5",
+    "name": "cordova-social-vk",
+    "escapedName": "cordova-social-vk",
+    "rawSpec": "~1.0.5",
+    "saveSpec": null,
+    "fetchSpec": "~1.0.5"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/cordova-social-vk/-/cordova-social-vk-1.0.5.tgz",
+  "_shasum": "3d086e13df63621c617b2a13d8eba9c0e7015c31",
+  "_spec": "cordova-social-vk@~1.0.5",
+  "_where": "/Users/julien/Documents/projects/chessCordova/node_modules",
+  "author": {
+    "name": "DrMoriarty"
+  },
+  "bugs": {
+    "url": "https://github.com/DrMoriarty/cordova-social-vk/issues"
+  },
+  "bundleDependencies": false,
+  "cordova": {
+    "id": "cordova-social-vk",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "deprecated": false,
+  "description": "Cordova Plugin for Russian social network VKontakte (http://vk.com)",
+  "homepage": "https://github.com/DrMoriarty/cordova-social-vk#readme",
+  "keywords": [
+    "cordova",
+    "vk",
+    "vkontakte",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "license": "MIT License",
+  "name": "cordova-social-vk",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DrMoriarty/cordova-social-vk.git"
+  },
+  "version": "1.0.5"
+}
