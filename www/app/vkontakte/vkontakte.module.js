@@ -65,8 +65,6 @@ service('vkontakte', ['$rootScope', 'user', 'socket', 'vkontakteAppId',
 
             self.status = 'connected';
 
-            response = JSON.parse(response);
-
             user.set('vkontakte', response);
 
             var user = response.user[0];
@@ -111,6 +109,7 @@ service('vkontakte', ['$rootScope', 'user', 'socket', 'vkontakteAppId',
                 self.handleLogin();
             } else {
                 SocialVk.login([null], function (response) {
+                    response = JSON.parse(response);
                     setLoginStatus(response);
                     self.handleLogin();
                 });
