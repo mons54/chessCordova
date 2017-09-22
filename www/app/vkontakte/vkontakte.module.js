@@ -71,6 +71,7 @@ service('vkontakte', ['$rootScope', 'user', 'socket', 'vkontakteAppId',
 
             self.auth = {
                 accessToken: response.token,
+                mobile: true,
                 user: {
                     name: responseUser.nickname || (responseUser.first_name + ' ' + responseUser.last_name),
                     picture: responseUser.photo,
@@ -108,7 +109,7 @@ service('vkontakte', ['$rootScope', 'user', 'socket', 'vkontakteAppId',
             if (self.status === 'connected') {
                 self.handleLogin();
             } else {
-                SocialVk.login([null], function (response) {
+                SocialVk.login([], function (response) {
                     response = JSON.parse(response);
                     setLoginStatus(response);
                     self.handleLogin();
