@@ -92,7 +92,7 @@ service('vkontakte', ['$rootScope', 'user', 'socket', 'vkontakteAppId',
         this.setLoginStatus = function (callback) {
             SocialVk.init(vkontakteAppId, function () {
                 var response = user.get('vkontakte');
-                alert(JSON.stringigy(response));
+                alert(JSON.stringify(response));
                 if (response) {
                     setLoginStatus(response);
                     callback(self);
