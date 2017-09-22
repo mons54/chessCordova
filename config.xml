@@ -108,6 +108,6 @@
     <plugin name="cordova-plugin-media" spec="~2.4.1" />
     <plugin name="cordova-plugin-android-resources" spec="https://github.com/mons54/cordova-plugin-android-resources" />
     <plugin name="cordova-social-vk" spec="~1.0.5">
-        <variable name="VK_APP_ID" value="6170101" />
+        <variable name="VK_APP_ID" value="6170421" />
     </plugin>
 </widget>
