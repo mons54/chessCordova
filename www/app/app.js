@@ -96,6 +96,10 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', '$inte
 
         $rootScope.closeDrawer = closeDrawer;
 
+        $rootScope.getLogin = function () {
+            return user.getLogin();
+        };
+
         $rootScope.facebookLogin = function () {
             facebook.login();
         };
