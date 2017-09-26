@@ -96,8 +96,19 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', '$inte
 
         $rootScope.closeDrawer = closeDrawer;
 
-        $rootScope.getLogin = function () {
-            return user.getLogin();
+        $rootScope.getFanPageLink = function () {
+
+            var login = user.getLogin();
+
+            if (login === vkontakte.name) {
+                return 'https://vk.com/chessonlinegame';
+            }
+
+            return 'https://www.facebook.com/ChessCommunity';
+        };
+
+        $rootScope.isFacebookLogin = function () {
+            return user.getLogin() === facebook.name;
         };
 
         $rootScope.facebookLogin = function () {
