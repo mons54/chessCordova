@@ -14,8 +14,10 @@
         "cordova-plugin-headercolor": "^1.0.0",
         "cordova-plugin-media": "^2.4.1",
         "cordova-plugin-whitelist": "^1.3.2",
+        "cordova-plugin-x-socialsharing": "^5.2.0",
         "cordova-social-vk": "^1.0.5",
-        "cordova-vk": "^1.0.1"
+        "cordova-vk": "^1.0.1",
+        "es6-promise-plugin": "^4.1.0"
     },
     "cordova": {
         "plugins": {
@@ -37,7 +39,8 @@
             "cordova-plugin-whitelist": {},
             "cordova-social-vk": {
                 "VK_APP_ID": "6170421"
-            }
+            },
+            "cordova-plugin-x-socialsharing": {}
         },
         "platforms": [
             "ios"

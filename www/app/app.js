@@ -131,6 +131,14 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', '$inte
             logout();
         };
 
+        $rootScope.share = function () {
+            if (!$window.plugins.socialsharing) {
+                alert(':(');
+                return;
+            }
+            $window.plugins.socialsharing.share(translator.translate('description'), translator.translate('title'), host + '/images/logo.png', host);
+        }
+
         $rootScope.$on('lang', function (event, value) {
             $rootScope.lang = value;
             setTitle($route.current.title);

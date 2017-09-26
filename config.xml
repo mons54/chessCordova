@@ -1,5 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="online.worldofchess.chess" version="2.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="online.worldofchess.chess" 
+        version="2.0.0" xmlns="http://www.w3.org/ns/widgets" 
+        xmlns:gap="http://phonegap.com/ns/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android">
     <name>Chess</name>
     <description>
         Play Chess against players all over the world. Improve your chess and your ranking.
@@ -92,6 +95,11 @@
     <platform name="android">
         <allow-intent href="market:*" />
     </platform>
+    <platform name="android">
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <uses-permission android:name="android.permission.INTERNET"/>
+        </config-file>
+    </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
@@ -111,4 +119,11 @@
         <variable name="VK_APP_ID" value="6170421" />
     </plugin>
     <engine name="ios" spec="~4.4.0" />
+    <plugin name="cordova-plugin-x-socialsharing" spec="^5.2.0" />
+    <feature name="SocialSharing">
+        <param name="ios-package" value="SocialSharing" />
+    </feature>
+    <feature name="SocialSharing">
+        <param name="android-package" value="nl.xservices.plugins.SocialSharing" />
+    </feature>
 </widget>
