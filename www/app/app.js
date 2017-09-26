@@ -133,10 +133,9 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', '$inte
 
         $rootScope.share = function () {
             if (!$window.plugins.socialsharing) {
-                alert(':(');
                 return;
             }
-            $window.plugins.socialsharing.share(translator.translate('description'), translator.translate('title'), host + '/images/logo.png', host);
+            $window.plugins.socialsharing.share(translator.translate('description'), translator.translate('title'), null, host);
         }
 
         $rootScope.$on('lang', function (event, value) {
