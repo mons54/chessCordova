@@ -132,10 +132,17 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', '$inte
         };
 
         $rootScope.share = function () {
+
             if (!$window.plugins.socialsharing) {
                 return;
             }
-            $window.plugins.socialsharing.share(translator.translate('description'), translator.translate('title'), null, 'https://play.google.com/store/apps/details?id=online.worldofchess.chess');
+            
+            $window.plugins.socialsharing.share(
+                translator.translate('description'), 
+                translator.translate('title'), 
+                null, 
+                host
+            );
         }
 
         $rootScope.$on('lang', function (event, value) {
