@@ -111,6 +111,10 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', '$inte
             return user.getLogin() === facebook.name;
         };
 
+        $rootScope.isVkontakteLogin = function () {
+            return user.getLogin() === vkontakte.name;
+        };
+
         $rootScope.facebookLogin = function () {
             facebook.login();
         };

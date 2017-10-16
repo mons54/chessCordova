@@ -223,7 +223,7 @@
                 </a>
                 <a class="mdl-navigation__link" 
                    href
-                   ng-if="isFacebookLogin()"
+                   ng-if="isFacebookLogin() || isVkontakteLogin()"
                    ng-click="closeDrawer(); inviteFriends()">
                     <i class="material-icons">person_add</i>
                     {{ 'invite' | translate }}

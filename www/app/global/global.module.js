@@ -70,11 +70,15 @@ factory('utils', ['$rootScope', '$filter', '$window',
              * Invite friend facebook
              */
             inviteFriends: function () {
-                facebookConnectPlugin.showDialog({
-                    method: 'apprequests',
-                    title: $filter('translate')('title'),
-                    message: $filter('translate')('description')
-                });
+                if ($rootScope.isFacebookLogin()) {
+                    facebookConnectPlugin.showDialog({
+                        method: 'apprequests',
+                        title: $filter('translate')('title'),
+                        message: $filter('translate')('description')
+                    });
+                } else if ($rootScope.isFacebookLogin()) {
+                    SocialVk.callApiMethod('showInviteBox');
+                }
             },
 
             isTouch: function () {
