@@ -486,13 +486,9 @@ directive('share', ['$window', '$filter', 'host', 'facebookAppId', 'googleClient
 
                 scope.facebook = function () {
                     facebookConnectPlugin.showDialog({
-                        method: 'feed',
-                        redirect_uri: 'https://apps.facebook.com/' + facebookAppId,
-                        link: scope.link,
-                        picture: scope.picture,
-                        name: scope.title,
-                        caption: scope.caption,
-                        description: scope.description
+                        method: 'share',
+                        href: scope.link,
+                        hashtag: '#chess'
                     });
                 };
             }

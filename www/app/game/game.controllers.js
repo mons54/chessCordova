@@ -487,7 +487,7 @@ controller('gameCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$f
             $scope.shareResultData = {
                 title: $filter('translate')(game.type) + ' · ' + game.time / 60000 + '+' + game.increment / 1000 + ' · ' + $filter('translate')(game.result.name),
                 description: game.white.name + ' ' + game.white.points + ' · ' + game.result.print + ' · ' + game.black.name + ' ' + game.black.points,
-                link: '/game/' + game.id
+                link: '/' + $rootScope.lang + '/game/' + game.id
             };
         }
 
