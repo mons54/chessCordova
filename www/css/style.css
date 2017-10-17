@@ -4034,6 +4034,10 @@ a {
     height: 218px;
   }
 
+  .app-modal__content .app-element__body {
+    max-height: initial;
+  }
+
   .app-element__body .app-spinner {
     margin-top: 79px;
     width: 30px;
