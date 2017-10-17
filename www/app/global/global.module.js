@@ -43,9 +43,9 @@ constant('languages', {
  * @requires $rootScope
  * @requires $filter
  */
-factory('utils', ['$rootScope', '$filter', '$window', 'vkontakte',
+factory('utils', ['$rootScope', '$filter', '$window',
     
-    function ($rootScope, $filter, $window, vkontakte) {
+    function ($rootScope, $filter, $window) {
 
         return {
 
@@ -78,10 +78,7 @@ factory('utils', ['$rootScope', '$filter', '$window', 'vkontakte',
                         message: $filter('translate')('description')
                     });
                 } else if ($rootScope.isVkontakteLogin()) {
-                    vkontakte.getFriendsList(function (response) {
-                        alert(JSON.stringify(response));
-                        $rootScope.$emit('vkontakteFriendsList', response.items);
-                    });
+                    $rootScope.$emit('vkontakteInviteFriends');
                 }
             },
 

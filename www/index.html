@@ -767,8 +767,9 @@
                                                 </a>
                                             </td>
                                             <td class="app-table__actions">
-                                                <button ng-click="sendInvite(friend.id)" 
-                                                        class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
+                                                <button ng-click="sendInvite(friend)" 
+                                                        class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored"
+                                                        ng-disabled="friend.disabled">
                                                     <i class="app-icon material-icons">check</i>
                                                 </button>
                                             </td>

@@ -142,6 +142,13 @@ service('vkontakte', ['$rootScope', 'user', 'socket', 'vkontakteAppId',
             }, error);
         };
 
+        this.inviteFriend = function (uid, success, error) {
+            return SocialVk.callApiMethod('apps.sendRequest', {
+                user_id: uid,
+                type: 'invite'
+            }, success, error);
+        };
+
         this.getResponse = function (response) {
             try { 
                 return JSON.parse(response); 
@@ -154,19 +161,33 @@ service('vkontakte', ['$rootScope', 'user', 'socket', 'vkontakteAppId',
     }
 ]).
 
-directive('modalVkontakteInvite', ['$rootScope', 'modal',
-    function ($rootScope, modal) {
+directive('modalVkontakteInvite', ['$rootScope', 'modal', 'vkontakte',
+    function ($rootScope, modal, vkontakte) {
         return {
             restrict: 'E',
             replace: true,
+            scope: {
+                friends: null
+            },
             templateUrl: 'modal-vkontakte-invite.html',
             link: function (scope, element) {
 
-                $rootScope.$on('vkontakteFriendsList', function (event, data) {
-                    alert(JSON.stringify(data));
-                    scope.friends = data;
-                    modal(element).show();
+                $rootScope.$on('vkontakteInviteFriends', function (event, data) {
+                    if (!scope.friends) {
+                        vkontakte.getFriendsList(function (response) {
+                            scope.friends = response.items;
+                            modal(element).show();
+                        });
+                    } else {
+                        modal(element).show();
+                    }
                 });
+
+                scope.invite = function (friend) {
+                    vkontakte.inviteFriend(friend.id, function () {
+                        friend.disabled = true;
+                    })
+                };
             }
         };
     }
