@@ -166,9 +166,7 @@ directive('modalVkontakteInvite', ['$rootScope', 'modal', 'vkontakte',
         return {
             restrict: 'E',
             replace: true,
-            scope: {
-                friends: null
-            },
+            scope: true,
             templateUrl: 'modal-vkontakte-invite.html',
             link: function (scope, element) {
 
