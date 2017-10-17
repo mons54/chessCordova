@@ -70,6 +70,7 @@ factory('utils', ['$rootScope', '$filter', '$window',
              * Invite friend facebook
              */
             inviteFriends: function () {
+
                 if ($rootScope.isFacebookLogin()) {
                     facebookConnectPlugin.showDialog({
                         method: 'apprequests',
@@ -77,13 +78,7 @@ factory('utils', ['$rootScope', '$filter', '$window',
                         message: $filter('translate')('description')
                     });
                 } else if ($rootScope.isVkontakteLogin()) {
-                    SocialVk.callApiMethod('apps.getFriendsList', {
-                        count: 500
-                    } function (response) {
-                        alert(JSON.stringify(response));
-                    }, function (error) {
-                        alert(JSON.stringify(error));
-                    });
+                    alert('ok')
                 }
             },
 
