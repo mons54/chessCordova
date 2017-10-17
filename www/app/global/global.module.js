@@ -81,7 +81,7 @@ factory('utils', ['$rootScope', '$filter', '$window',
                     SocialVk.callApiMethod('apps.getFriendsList', {
                         count: 500
                     }, function (response) {
-                        alert(JSON.stringify(response));
+                        alert(JSON.stringify(response.items));
                     }, function (error) {
                         alert(JSON.stringify(error));
                     });
