@@ -136,4 +136,22 @@ service('vkontakte', ['$rootScope', 'user', 'socket', 'vkontakteAppId',
 
         return this;
     }
+]).
+
+directive('modalVkontakteInvite', ['$rootScope', 'modal',
+    function ($rootScope, modal) {
+        return {
+            restrict: 'E',
+            replace: true,
+            templateUrl: 'modal-vkontakte-invite.html',
+            link: function (scope, element) {
+
+                $rootScope.$on('vkontakteFriendsList', function (event, data) {
+                    alert(JSON.stringify(data));
+                    scope.friends = data;
+                    modal(element).show();
+                });
+            }
+        };
+    }
 ]);

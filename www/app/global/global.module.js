@@ -43,9 +43,9 @@ constant('languages', {
  * @requires $rootScope
  * @requires $filter
  */
-factory('utils', ['$rootScope', '$filter', '$window',
+factory('utils', ['$rootScope', '$filter', '$window', 'vkontakte',
     
-    function ($rootScope, $filter, $window) {
+    function ($rootScope, $filter, $window, vkontakte) {
 
         return {
 
@@ -80,11 +80,10 @@ factory('utils', ['$rootScope', '$filter', '$window',
                 } else if ($rootScope.isVkontakteLogin()) {
                     SocialVk.callApiMethod('apps.getFriendsList', {
                         count: 100,
+                        fields: 'photo_50',
                         extended: true
                     }, function (response) {
-                        alert(JSON.stringify(response));
-                    }, function (error) {
-                        alert(JSON.stringify(error));
+                        $rootScope.$emit('vkontakteFriendsList', response.items);
                     });
                 }
             },

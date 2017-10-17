@@ -314,6 +314,7 @@
         <modal-profile></modal-profile>
         <modal-trophy></modal-trophy>
         <modal-create-game></modal-create-game>
+        <modal-vkontakte-invite></modal-vkontakte-invite>
 
         <script type="text/ng-template" id="profile-game.html">
             <div ng-click="goGame(game._id)" class="app-profile__game">
@@ -728,6 +729,52 @@
                             </div>
                             <div>
                                 <button ng-click="removeGame()" modal-close type="button" class="mdl-button mdl-button--raised">{{ 'cancel'|translate }}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </script>
+
+        <script type="text/ng-template" id="modal-vkontakte-invite.html">
+            <div id="modal-vkontakte-invite" 
+                 class="app-modal app-modal--challenges app-modal__bg" 
+                 role="dialog" 
+                 aria-hidden="true"
+                 data-modal
+                 modal-close-bg>
+                <div class="app-modal__dialog app-modal__dialog--head">
+                    <a href modal-close class="app-modal__close">
+                        <i class="material-icons">clear</i>
+                    </a>
+                    <div class="app-modal__head">
+                        {{ 'invite' | translate }}
+                    </div>
+                    <div class="app-modal__content">
+                        <div class="app-element">
+                            <div element-content class="app-element__body">
+                                <table ng-if="friends.length" class="app-table mdl-data-table mdl-js-data-table">
+                                    <tbody>
+                                        <tr ng-repeat="friend in friends">
+                                            <td class="app-table__avatar">
+                                                <a href>
+                                                    <img avatar class="app-avatar" ng-src="{{ friend.photo_50 }}">
+                                                </a>
+                                            </td>
+                                            <td class="app-table__user mdl-data-table__cell--non-numeric">
+                                                <a href show-profile="challenge.uid">
+                                                    <span class="app-table__name">{{ friend.first_name }} {{ friend.last_name }}</span>
+                                                </a>
+                                            </td>
+                                            <td class="app-table__actions">
+                                                <button ng-click="sendInvite(friend.id)" 
+                                                        class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
+                                                    <i class="app-icon material-icons">check</i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
