@@ -83,6 +83,8 @@ factory('utils', ['$rootScope', '$filter', '$window', 'vkontakte',
                         fields: 'photo_50',
                         extended: true
                     }, function (response) {
+                        alert(JSON.stringify(response));
+                        alert(JSON.stringify(response.items));
                         $rootScope.$emit('vkontakteFriendsList', response.items);
                     });
                 }
