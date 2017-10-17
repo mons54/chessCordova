@@ -110,9 +110,7 @@ service('vkontakte', ['$rootScope', 'user', 'socket', 'vkontakteAppId',
                 self.handleLogin();
             } else {
                 SocialVk.login([], function (response) {
-                    try { 
-                        response = JSON.parse(response); 
-                    } catch (Error) {}
+                    response = self.getResponse(response);
                     setLoginStatus(response);
                     self.handleLogin();
                 });
@@ -132,6 +130,24 @@ service('vkontakte', ['$rootScope', 'user', 'socket', 'vkontakteAppId',
             user.setLogin(self.name);
             
             socket.connect();
+        };
+
+        this.getFriendsList = function (success, error) {
+            return SocialVk.callApiMethod('apps.getFriendsList', {
+                count: 100,
+                fields: 'photo_50',
+                extended: true
+            }, function (response) {
+                success(self.getResponse(response));
+            }, error);
+        };
+
+        this.getResponse = function (response) {
+            try { 
+                return JSON.parse(response); 
+            } catch (Error) {
+                return response;
+            }
         };
 
         return this;
