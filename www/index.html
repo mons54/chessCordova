@@ -832,9 +832,21 @@
     <script src="app/profile/profile.controllers.js"></script>
 
     <script type="text/javascript">
+
         document.addEventListener('deviceready', function() {
+
             angular.bootstrap(document, ['app']);
+
+            if (AdMob) {
+                AdMob.createBanner({
+                    adId: 'ca-app-pub-7922409685664362/8336241834',
+                    position: AdMob.AD_POSITION.BOTTOM_CENTER,
+                    autoShow: true 
+                });
+            }
+
         }, false);
+        
     </script>
 </body>
 
