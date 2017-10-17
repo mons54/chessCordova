@@ -181,10 +181,11 @@ directive('modalVkontakteInvite', ['$rootScope', 'modal', 'vkontakte',
                     }
                 });
 
-                scope.invite = function (friend) {
-                    vkontakte.inviteFriend(friend.id, function () {
+                scope.sendInvite = function (friend) {
+                    vkontakte.inviteFriend(friend.id, function (response) {
+                        alert(JSON.stringify(response));
                         friend.disabled = true;
-                    })
+                    });
                 };
             }
         };
