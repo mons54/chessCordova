@@ -173,6 +173,50 @@ directive('modalVkontakteInvite', ['$rootScope', 'modal', 'vkontakte',
                 $rootScope.$on('vkontakteInviteFriends', function (event, data) {
                     if (!scope.friends) {
                         vkontakte.getFriendsList(function (response) {
+
+                            response.items[] = response.items[0];
+                            response.items[] = response.items[0];
+                            response.items[] = response.items[0];
+                            response.items[] = response.items[0];
+                            response.items[] = response.items[0];
+                            response.items[] = response.items[0];
+                            response.items[] = response.items[0];
+                            response.items[] = response.items[0];
+                            response.items[] = response.items[0];
+                            response.items[] = response.items[0];
+                            response.items[] = response.items[0];
+                            response.items[] = response.items[0];
+                            response.items[] = response.items[0];
+                            response.items[] = response.items[0];
+                            response.items[] = response.items[0];
+                            response.items[] = response.items[0];
+                            response.items[] = response.items[0];
+                            response.items[] = response.items[0];
+                            response.items[] = response.items[0];
+                            response.items[] = response.items[0];
+                            response.items[] = response.items[0];
+                            response.items[] = response.items[0];
+                            response.items[] = response.items[0];
+                            response.items[] = response.items[0];
+                            response.items[] = response.items[0];
+                            response.items[] = response.items[0];
+                            response.items[] = response.items[0];
+                            response.items[] = response.items[0];
+                            response.items[] = response.items[0];
+                            response.items[] = response.items[0];
+                            response.items[] = response.items[0];
+                            response.items[] = response.items[0];
+                            response.items[] = response.items[0];
+                            response.items[] = response.items[0];
+                            response.items[] = response.items[0];
+                            response.items[] = response.items[0];
+                            response.items[] = response.items[0];
+                            response.items[] = response.items[0];
+                            response.items[] = response.items[0];
+                            response.items[] = response.items[0];
+                            response.items[] = response.items[0];
+                            response.items[] = response.items[0];
+                            
                             scope.friends = response.items;
                             modal(element).show();
                         });
@@ -182,11 +226,10 @@ directive('modalVkontakteInvite', ['$rootScope', 'modal', 'vkontakte',
                 });
 
                 scope.sendInvite = function (friend) {
-                    vkontakte.inviteFriend(friend.id, function (response) {
+                    vkontakte.inviteFriend(, function (response) {
                         friend.disabled = true;
                     }, function (response) {
-                        alert(JSON.stringify(response));
-                        friend.disabled = true;
+                        alert(response);
                     });
                 };
             }
