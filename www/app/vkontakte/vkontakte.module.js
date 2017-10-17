@@ -226,7 +226,7 @@ directive('modalVkontakteInvite', ['$rootScope', 'modal', 'vkontakte',
                 });
 
                 scope.sendInvite = function (friend) {
-                    vkontakte.inviteFriend(, function (response) {
+                    vkontakte.inviteFriend(friend.id, function (response) {
                         friend.disabled = true;
                     }, function (response) {
                         alert(response);
