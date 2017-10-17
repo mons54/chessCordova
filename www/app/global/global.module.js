@@ -79,9 +79,10 @@ factory('utils', ['$rootScope', '$filter', '$window',
                     });
                 } else if ($rootScope.isVkontakteLogin()) {
                     SocialVk.callApiMethod('apps.getFriendsList', {
-                        count: 500
+                        count: 100,
+                        extended: true
                     }, function (response) {
-                        alert(JSON.stringify(response.items));
+                        alert(JSON.stringify(response));
                     }, function (error) {
                         alert(JSON.stringify(error));
                     });
