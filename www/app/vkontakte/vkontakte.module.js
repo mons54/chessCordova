@@ -143,10 +143,7 @@ service('vkontakte', ['$rootScope', 'user', 'socket', 'vkontakteAppId',
         };
 
         this.inviteFriend = function (uid, success, error) {
-            return SocialVk.callApiMethod('apps.sendRequest', {
-                user_id: uid,
-                type: 'invite'
-            }, success, function (error) {
+            return SocialVk.callApiMethod('showInviteBox', {}, success, function (error) {
                 alert(JSON.stringify(error));
             });
         };
