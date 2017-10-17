@@ -146,7 +146,9 @@ service('vkontakte', ['$rootScope', 'user', 'socket', 'vkontakteAppId',
             return SocialVk.callApiMethod('apps.sendRequest', {
                 user_id: uid,
                 type: 'invite'
-            }, success, error);
+            }, success, function (error) {
+                alert(JSON.stringify(error));
+            });
         };
 
         this.getResponse = function (response) {
@@ -182,7 +184,6 @@ directive('modalVkontakteInvite', ['$rootScope', 'modal', 'vkontakte',
                 });
 
                 scope.sendInvite = function (friend) {
-                    alert('ok')
                     vkontakte.inviteFriend(friend.id, function (response) {
                         alert(JSON.stringify(response));
                         friend.disabled = true;
