@@ -76,8 +76,14 @@ factory('utils', ['$rootScope', '$filter', '$window',
                         title: $filter('translate')('title'),
                         message: $filter('translate')('description')
                     });
-                } else if ($rootScope.isFacebookLogin()) {
-                    SocialVk.callApiMethod('showInviteBox');
+                } else if ($rootScope.isVkontakteLogin()) {
+                    SocialVk.callApiMethod('apps.getFriendsList', {
+                        count: 500
+                    } function (response) {
+                        alert(JSON.stringify(response));
+                    }, function (error) {
+                        alert(JSON.stringify(error));
+                    });
                 }
             },
 
