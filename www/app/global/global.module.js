@@ -78,7 +78,13 @@ factory('utils', ['$rootScope', '$filter', '$window',
                         message: $filter('translate')('description')
                     });
                 } else if ($rootScope.isVkontakteLogin()) {
-                    alert('ok')
+                    SocialVk.callApiMethod('apps.getFriendsList', {
+                        count: 500
+                    }, function (response) {
+                        alert(JSON.stringify(response));
+                    }, function (error) {
+                        alert(JSON.stringify(error));
+                    });
                 }
             },
 
