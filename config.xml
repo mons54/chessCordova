@@ -124,5 +124,5 @@
     </feature>
     <engine name="android" spec="~6.2.3" />
     <engine name="ios" spec="~4.5.1" />
-    <plugin name="admob" spec="~5.5.0" />
+    <plugin name="cordova-plugin-admob" spec="~3.2.4" />
 </widget>
