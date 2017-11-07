@@ -26,14 +26,7 @@ directive('showProfile', ['$rootScope', 'socket',
             },
             link: function (scope, element) {
                 element.bind('click', function () {
-
-                    if ($rootScope.loadModalProfile) {
-                        return;
-                    }
-
-                    $rootScope.loadModalProfile = true;
-
-                    socket.emit('profile', scope.showProfile);
+                    $rootScope.$emit('showProfile', scope.showProfile);
                 });
             } 
         }
