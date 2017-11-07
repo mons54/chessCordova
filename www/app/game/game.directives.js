@@ -9,17 +9,19 @@ angular.module('game').
  * @scope
  * @param {object} player Object with the data of the player.
  */
-directive('playerProfileGame', function () {
-    return {
-        restrict: 'A',
-        scope: { 
-            player: '='
-        },
-        replace: true,
-        templateUrl: 'app/game/templates/profile-game.html',
-        controller: 'profileGameCtrl'
-    };
-}).
+directive('playerProfileGame', ['utils',
+    function (utils) {
+        return {
+            restrict: 'A',
+            scope: { 
+                player: '='
+            },
+            replace: true,
+            templateUrl: 'app/game/templates/profile-game.html',
+            controller: 'profileGameCtrl'
+        };
+    }
+]).
 
 /**
  * @ngdoc directive
@@ -30,18 +32,22 @@ directive('playerProfileGame', function () {
  * @scope
  * @param {string} position The position of the piece.
  */
-directive('pieceDraggable', ['socket', 'modal', function (socket, modal) {
+directive('pieceDraggable', ['socket', 'modal', 'utils', function (socket, modal, utils) {
     return {
         restrict: 'A',
         link: function (scope, element, attr) {
 
-            var selectedClass = 'is-touch',
+            var selectedClass = utils.isTouch() ? 'is-touch' : 'selected',
+                droppableClass =  'ui-droppable',
                 modalPromotion = modal('#modal-promotion');
 
             scope.$watch('game', function (game) {
 
                 if (game.finish) {
-                    element.unbind('click').closest('[data-game-box]').removeClass(selectedClass);
+                    element.draggable({
+                        disabled: true
+                    }).unbind('click').closest('[data-game-box]').removeClass(selectedClass);
+                    $('.' + droppableClass).removeClass(droppableClass);
                     return;
                 }
 
@@ -55,57 +61,76 @@ directive('pieceDraggable', ['socket', 'modal', function (socket, modal) {
                 }
 
                 element.click(function () {
-
                     var isOpen = $(this).data('open');
-
-                    stopClickable($('[piece-draggable]'));
-
-                    $('[piece-draggable]').unbind('click');
-
+                    startMove();
                     if (isOpen) {
-
                         stopClickable($(this));
-
-                        $('[piece-draggable]').unbind('click');
-
+                        $('.' + droppableClass).removeClass(droppableClass).unbind('click');
                     } else {
-
                         $(this).data('open', true).closest('[data-game-box]').addClass(selectedClass);
-
-                        angular.forEach(piece.deplace.concat(piece.capture), function (position) {
-
-                            $('#' + position).click(function () {
-
+                        getMovements(function (position) {
+                            $('#' + position).addClass(droppableClass).click(function () {
                                 stopClickable(element);
-
-                                $('[piece-draggable]').unbind('click');
-
-                                if (isPromotion(position)) {
-
-                                    modalPromotion.show();
-
-                                    modalPromotion.find('[data-icon]').click(function() {
-
-                                        var promotion = $(this).data('icon');
-
-                                        modalPromotion.find('[data-icon]').unbind('click');
-
-                                        sendMove(position, promotion);
-                                    });
-
-                                } else {
-                                    
-                                    sendMove(position);
-                                }
-
-                                $('[piece-draggable]').unbind('click'); 
+                                $('.' + droppableClass).removeClass(droppableClass).unbind('click');
+                                move($(this), position);
                             });
                         });
                     }
                 });
 
+                element.draggable({
+                    disabled: false,
+                    helper: 'clone',
+                    zIndex: '99999',
+                    start: function (event, ui) {
+                        startMove();
+                        element.closest('[data-game-box]').addClass(selectedClass);
+                        getMovements(function (position) {
+                            $('#' + position).droppable({
+                                drop: function (event, ui) {
+                                    move($(this), position);
+                                }
+                            });
+                        });
+                    },
+                    stop: function (event, ui) {
+                        stopClickable(element);
+                        getMovements(function (position) {
+                            $('#' + position).droppable('destroy');
+                        });
+                    }
+                });
+
+                function startMove() {
+                    stopClickable($('[piece-draggable]'));
+                    $('.' + droppableClass).removeClass(droppableClass).unbind('click');
+                }
+
                 function stopClickable (element) {
                     element.data('open', false).closest('[data-game-box]').removeClass(selectedClass);
+                }
+
+                function getMovements (callback) {
+                    angular.forEach(piece.deplace.concat(piece.capture), callback);
+                }
+
+                function move(elementBox, position) {
+
+                    if (isPromotion(position)) {
+                        modalPromotion.show();
+                        modalPromotion.find('[data-icon]').click(function() {
+                            var promotion = $(this).data('icon');
+                            modalPromotion.find('[data-icon]').unbind('click');
+                            sendMove(position, promotion);
+                        });
+                    } else {
+                        sendMove(position);
+                    }
+
+                    $('[piece-draggable]').unbind('click'); 
+                    $('[piece-draggable]').draggable({
+                        disabled: true
+                    });
                 }
 
                 function sendMove(position, promotion) {
