@@ -127,8 +127,8 @@ directive('modalProfile', ['$rootScope', 'socket', 'modal',
                         scope.$apply(function () {
                             delete scope.profile;
                         });
-                        $rootScope.setFavorite(profile.uid, scope.isFavorite);
-                        $rootScope.setBlackList(profile.uid, scope.isBlackList);
+                        $rootScope.setFavorite(value.uid, scope.isFavorite);
+                        $rootScope.setBlackList(value.uid, scope.isBlackList);
                     });
 
                 }, scope);
