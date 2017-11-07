@@ -123,6 +123,8 @@ directive('modalProfile', ['$rootScope', 'socket', 'modal',
 
                     scope.profile = value;
 
+                    scope.profile.ready = true;
+
                     elementModal.one('hide', function () {
                         scope.$apply(function () {
                             delete scope.profile;
