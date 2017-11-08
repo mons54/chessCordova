@@ -63,8 +63,6 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', '$inte
                     redirectToGame();
                 }
             }
-
-            setTitle(toState.title);
         });
 
         $rootScope.$on('$routeChangeSuccess', function(event, toState, fromState) {
@@ -77,6 +75,8 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', '$inte
                     autoShow: false
                 });
             }
+
+            setTitle(toState.title);
 
             $rootScope.currentRoute = toState.name;
 
@@ -184,7 +184,7 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', '$inte
             if (typeof title !== 'string') {
                 title = 'title';
             }
-
+            
             $rootScope.title = title;
         }
 
