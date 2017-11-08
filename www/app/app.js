@@ -50,8 +50,8 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', '$inte
 
         $rootScope.$on('$routeChangeStart', function(event, toState, fromState) {
 
-            if (AdMob && fromState.name === 'game') {
-                AdMob.showInterstitial();
+            if (AdMob) {
+                AdMob.isInterstitialReady(AdMob.showInterstitial());
             }
 
             if ($rootScope.user && $rootScope.user.gid) {
@@ -67,7 +67,9 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', '$inte
 
         $rootScope.$on('$routeChangeSuccess', function(event, toState, fromState) {
 
-            if (AdMob && toState.name === 'game') {
+            if (AdMob &&
+                toState.name === 'game' &&
+                $rootScope.user.gid) {
                 AdMob.prepareInterstitial({
                     adId: 'ca-app-pub-7922409685664362/3789239530', 
                     autoShow: false
