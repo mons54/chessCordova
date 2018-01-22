@@ -80,6 +80,7 @@ controller('gameCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$f
                         modal('[modal-game]').hide();
                         modal('#modal-finish-game').show();
                         delete $rootScope.user.gid;
+                        $rootScope.needInterstitial = true;
                     }, 500);
                 } else {
                     delete $rootScope.user.gid;
