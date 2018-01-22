@@ -67,14 +67,6 @@ run(['$rootScope', '$route', '$http', '$location', '$window', '$timeout', '$inte
 
         $rootScope.$on('$routeChangeSuccess', function(event, toState, fromState) {
 
-            if (AdMob && $rootScope.needInterstitial) {
-                delete $rootScope.needInterstitial;
-                AdMob.prepareInterstitial({
-                    adId: 'ca-app-pub-7922409685664362/3789239530', 
-                    autoShow: false
-                });
-            }
-
             setTitle(toState.title);
 
             $rootScope.currentRoute = toState.name;

@@ -80,7 +80,13 @@ controller('gameCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$f
                         modal('[modal-game]').hide();
                         modal('#modal-finish-game').show();
                         delete $rootScope.user.gid;
-                        $rootScope.needInterstitial = true;
+
+                        if (AdMob) {
+                            AdMob.prepareInterstitial({
+                                adId: 'ca-app-pub-7922409685664362/3789239530', 
+                                autoShow: false
+                            });
+                        }
                     }, 500);
                 } else {
                     delete $rootScope.user.gid;
